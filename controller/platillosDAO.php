@@ -30,8 +30,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     $stmt->bind_param("ssdis", $nombre, $descripcion, $precio, $idCategoria, $rutaSubida);
                     if ($stmt->execute()) {
                         echo "Platillo registrado correctamente.";
+                        header('Location: ../admPlatillo.php?insert=true');
+                        exit;
                     } else {
                         echo "Error al registrar el platillo: " . $stmt->error;
+                        header('Location: ../admPlatillo.php?insert=false');
+                        exit;
                     }
                     $stmt->close();
                 } else {
@@ -61,7 +65,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $stmt->bind_param("i", $idPlatillo);
                 if ($stmt->execute()) {
                     echo "Platillo eliminada correctamente.";
-                    $conn->commit(); 
+                    $conn->commit();
+                    header('Location: ../admPlatillo.php?delete=true');
+                    exit; 
                 } else {
                     throw new Exception("Error al eliminar la Platillo: " . $stmt->error);
                 }
@@ -73,8 +79,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $conn->rollback(); // Revertir la transacción
             if ($conn->errno == 1451) {
                 echo "No se puede eliminar el Platillo porque está siendo referenciada en otra tabla.";
+                header('Location: ../admPlatillo.php?delete=false');
+                exit;
             } else {
                 echo "Esta Platillo no puede ser eliminada ".$e->getMessage();
+                header('Location: ../admPlatillo.php?delete=false');
+                exit;
             }
         }
     }

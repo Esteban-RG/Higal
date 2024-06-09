@@ -17,9 +17,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $stmt->bind_param("i", $asientos);
             if ($stmt->execute()) {
                 echo "Mesa agregada correctamente";
-                exit();
+                header('Location: ../admMesa.php?insert=true');
+                exit;
             } else {
                 echo "Error al ejecutar la consulta: " . $stmt->error;
+                header('Location: ../admMesa.php?insert=false');
+                exit;
             }
             $stmt->close();
         } else {
@@ -42,7 +45,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $stmt->bind_param("i", $idMesa);
                 if ($stmt->execute()) {
                     echo "Mesa eliminada correctamente.";
-                    $conn->commit(); 
+                    $conn->commit();
+                    header('Location: ../admMesa.php?delete=true');
+                    exit; 
                 } else {
                     throw new Exception("Error al eliminar la mesa: " . $stmt->error);
                 }
@@ -54,8 +59,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $conn->rollback(); // Revertir la transacción
             if ($conn->errno == 1451) {
                 echo "No se puede eliminar la mesa porque está siendo referenciada en otra tabla.";
+                header('Location: ../admMesa.php?delete=false');
+                exit;
             } else {
                 echo "Esta mesa no puede ser eliminada ".$e->getMessage();
+                header('Location: ../admMesa.php?delete=false');
+                exit;
             }
         }
     }

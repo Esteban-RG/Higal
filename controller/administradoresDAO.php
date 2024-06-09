@@ -18,8 +18,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $stmt->bind_param("ssss", $nombre, $apPaterno, $apMaterno, $contrasenha);
             if ($stmt->execute()) {
                 echo "Administrador registrado correctamente.";
+                header('Location: ../admAdmin.php?insert=true');
+                exit;
             } else {
                 echo "Error al registrar el administrador: " . $stmt->error;
+                header('Location: ../admAdmin.php?insert=false');
+                exit;
             }
             $stmt->close();
         } else {
@@ -43,6 +47,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 if ($stmt->execute()) {
                     echo "Administrador eliminada correctamente.";
                     $conn->commit(); 
+                    header('Location: ../admAdmin.php?delete=true');
+                    exit;
                 } else {
                     throw new Exception("Error al eliminar la Administrador: " . $stmt->error);
                 }
@@ -54,8 +60,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $conn->rollback(); // Revertir la transacción
             if ($conn->errno == 1451) {
                 echo "No se puede eliminar el Administrador porque está siendo referenciada en otra tabla.";
+                header('Location: ../admAdmin.php?delete=false');
+                exit;
             } else {
                 echo "Esta Administrador no puede ser eliminada ".$e->getMessage();
+                header('Location: ../admAdmin.php?delete=false');
+                exit;
             }
         }
     }

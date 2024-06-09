@@ -15,9 +15,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $stmt->bind_param("s", $nombre);
             if ($stmt->execute()) {
                 echo "Categoria agregada correctamente";
-                exit();
+                header('Location: ../admCategoria.php?insert=true');
+                exit;
             } else {
                 echo "Error al ejecutar la consulta: " . $stmt->error;
+                header('Location: ../admCategoria.php?insert=false');
+                exit;
             }
             $stmt->close();
         } else {
@@ -41,6 +44,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 if ($stmt->execute()) {
                     echo "Categoria eliminada correctamente.";
                     $conn->commit(); 
+                    header('Location: ../admCategoria.php?delete=true');
+                    exit;
                 } else {
                     throw new Exception("Error al eliminar la categoria: " . $stmt->error);
                 }
@@ -52,8 +57,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $conn->rollback(); // Revertir la transacción
             if ($conn->errno == 1451) {
                 echo "No se puede eliminar la categoria porque está siendo referenciada en otra tabla.";
+                header('Location: ../admCategoria.php?delete=false');
+                exit;
             } else {
                 echo "Esta categoria no puede ser eliminada ".$e->getMessage();
+                header('Location: ../admCategoria.php?delete=false');
+                exit;
             }
         }
     }

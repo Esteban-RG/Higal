@@ -9,20 +9,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if($action == 'insert'){
 
         $nombre = $_POST['nombre'];
-        $apPaterno = $_POST['apPaterno'];
-        $apMaterno = $_POST['apMaterno'];
         $correo = $_POST['correo'];
-        $telefono = $_POST['telefono'];
-        $contrasenha = password_hash($_POST['contrasenha'], PASSWORD_DEFAULT); // Encriptar la contraseña
     
         // Preparar y ejecutar la consulta SQL para insertar un nuevo cliente
-        $sql_insert = "INSERT INTO Cliente (nombre, apPaterno, apMaterno, correo, telefono, contrasenha) VALUES (?, ?, ?, ?, ?, ?)";
+        $sql_insert = "INSERT INTO Cliente (nombre, correo) VALUES (?, ?)";
         if ($stmt = $conn->prepare($sql_insert)) {
-            $stmt->bind_param("ssssss", $nombre, $apPaterno, $apMaterno, $correo, $telefono, $contrasenha);
+            $stmt->bind_param("ss", $nombre,$correo);
             if ($stmt->execute()) {
                 echo "Cliente registrado correctamente.";
+                header('Location: ../admCliente.php?insert=true');
+                exit;
             } else {
                 echo "Error al registrar el cliente: " . $stmt->error;
+                header('Location: ../admCliente.php?insert=false');
+                exit;
             }
             $stmt->close();
         } else {
@@ -46,6 +46,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 if ($stmt->execute()) {
                     echo "Cliente eliminada correctamente.";
                     $conn->commit(); 
+                    header('Location: ../admCliente.php?delete=true');
+                    exit;
                 } else {
                     throw new Exception("Error al eliminar la Cliente: " . $stmt->error);
                 }
@@ -57,8 +59,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $conn->rollback(); // Revertir la transacción
             if ($conn->errno == 1451) {
                 echo "No se puede eliminar el Cliente porque está siendo referenciada en otra tabla.";
+                header('Location: ../admCliente.php?delete=false');
+                exit;
             } else {
                 echo "Esta Cliente no puede ser eliminada ".$e->getMessage();
+                header('Location: ../admCliente.php?delete=false');
+                exit;
             }
         }
     }
