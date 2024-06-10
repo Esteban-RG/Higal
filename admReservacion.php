@@ -105,10 +105,10 @@ $result_reservaciones = $conn->query($sql_reservaciones);
                 <form action="controller/reservacionesDAO.php" method="POST">
                     <div class="row mb-5">
                         <div class="col-sm-6 col-md-3 col-xs-12 my-2">
-                            <input type="text" name="name" class="form-control form-control-lg custom-form-control" placeholder="Nombre" required>
+                            <input type="text" name="name" class="form-control form-control-lg custom-form-control" placeholder="Nombre" maxlength="50" required>
                         </div>
                         <div class="col-sm-6 col-md-3 col-xs-12 my-2">
-                            <input type="email" name="email" class="form-control form-control-lg custom-form-control" placeholder="Email" required>
+                            <input type="email" name="email" class="form-control form-control-lg custom-form-control" placeholder="Email" maxlength="30" required>
                         </div>
                         <div class="col-sm-6 col-md-3 col-xs-12 my-2">
                             <input type="number" name="cantPersonas" class="form-control form-control-lg custom-form-control" placeholder="Cantidad de invitados" max="20" min="0" >

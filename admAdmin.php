@@ -93,11 +93,11 @@ $update = isset($_GET['update']) ? $_GET['update'] : 'Desconocido';
             <button onclick="mostrarFormulario()">Nuevo</button>
             <div class="new" style="display:none;">
             <form action="controller/administradoresDAO.php" method="post">
-                <input type="text" id="nombre" name="nombre" placeholder="Nombre" required>
+                <input type="text" id="nombre" name="nombre" placeholder="Nombre" maxlength="30" required>
 
-                <input type="text" id="apPaterno" name="apPaterno" placeholder="Apellido Paterno" required>
+                <input type="text" id="apPaterno" name="apPaterno" placeholder="Apellido Paterno" maxlength="30" required>
 
-                <input type="text" id="apMaterno" name="apMaterno" placeholder="Apellido Materno" required>
+                <input type="text" id="apMaterno" name="apMaterno" placeholder="Apellido Materno" maxlength="30" required>
 
                 <input type="text" id="contrasenha" name="contrasenha" placeholder="Contraseña" required>
 

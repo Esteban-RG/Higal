@@ -93,7 +93,7 @@ $update = isset($_GET['update']) ? $_GET['update'] : 'Desconocido';
             <button onclick="mostrarFormulario()">Nuevo</button>
             <div class="new" style="display:none;">
             <form action="controller/categoriasDAO.php" method="post">
-                <input type="text" id="nombre" name="nombre" placeholder="Nombre" required>
+                <input type="text" id="nombre" name="nombre" placeholder="Nombre" maxlength="30" required>
                 <input type="hidden" id="action" name="action" value="insert">
                 <button type="submit" class="btn btn-lg btn-primary" id="rounded-btn">Agregar Categoria</button>
             </form>

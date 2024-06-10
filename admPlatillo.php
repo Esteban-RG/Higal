@@ -92,10 +92,10 @@ $update = isset($_GET['update']) ? $_GET['update'] : 'Desconocido';
                 <form action="controller/platillosDAO.php" method="post" enctype="multipart/form-data">
                     <div class="row mb-5">
                         <div class="col-sm-6 col-md-3 col-xs-12 my-2">
-                            <input type="text" name="nombre" class="form-control form-control-lg custom-form-control" placeholder="Nombre" required>
+                            <input type="text" name="nombre" class="form-control form-control-lg custom-form-control" placeholder="Nombre" maxlength="50" required>
                         </div>
                         <div class="col-sm-6 col-md-3 col-xs-12 my-2">
-                            <textarea name="descripcion" class="form-control form-control-lg custom-form-control" placeholder="Descripcion" required ></textarea>
+                            <textarea name="descripcion" class="form-control form-control-lg custom-form-control" placeholder="Descripcion" maxlength="255" required ></textarea>
                         </div>
                         <div class="col-sm-6 col-md-3 col-xs-12 my-2">
                             <input type="number" name="precio" class="form-control form-control-lg custom-form-control" placeholder="Precio" required >

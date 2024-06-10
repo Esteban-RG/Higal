@@ -93,9 +93,9 @@ $update = isset($_GET['update']) ? $_GET['update'] : 'Desconocido';
             <button onclick="mostrarFormulario()">Nuevo</button>
             <div class="new" style="display:none;">
             <form action="controller/clientesDAO.php" method="post">
-                <input type="text" id="nombre" name="nombre" placeholder="Nombre" required>
+                <input type="text" id="nombre" name="nombre" placeholder="Nombre"  maxlength="50" required>
 
-                <input type="email" id="correo" name="correo" placeholder="Email" required>
+                <input type="email" id="correo" name="correo" placeholder="Email"  maxlength="50" required>
 
                 <input type="hidden" name="action" value="insert">
                 <button type="submit" class="btn btn-lg btn-primary" id="rounded-btn">Agregar Cliente</button>

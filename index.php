@@ -1,3 +1,6 @@
+<?php
+$reservation = isset($_GET['reservation']) ? $_GET['reservation'] : 'Desconocido';
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,6 +11,8 @@
     <meta name="author" content="Devcrud">
 
     <title>Higal Restaurante Jardin</title>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 
     <!-- Incluye JQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -26,6 +31,19 @@
 </head>
 
 <body data-spy="scroll" data-target=".navbar" data-offset="40" id="home">
+    <script>
+        var reservation = <?php echo json_encode($reservation); ?>;
+
+        if (reservation === 'true') {
+            Swal.fire({
+                icon: "success",
+                title: "Tu reservacion se almaceno correctamente",
+                text: "Recibiras un correo confirmando tu reservacion"
+            }).then(() => {
+                window.location.href='index.php';
+            });
+        }
+    </script>
 
     <!-- Navbar -->
     <nav class="custom-navbar navbar navbar-expand-lg navbar-dark fixed-top" data-spy="affix" data-offset-top="10">
@@ -187,10 +205,10 @@
             <form action="controller/reservacionesDAO.php" method="POST">
                 <div class="row mb-5">
                     <div class="col-sm-6 col-md-3 col-xs-12 my-2">
-                        <input type="text" name="name" class="form-control form-control-lg custom-form-control" placeholder="Nombre" required>
+                        <input type="text" name="name" class="form-control form-control-lg custom-form-control" placeholder="Nombre" maxlength="30" required>
                     </div>
                     <div class="col-sm-6 col-md-3 col-xs-12 my-2">
-                        <input type="email" name="email" class="form-control form-control-lg custom-form-control" placeholder="Email" required>
+                        <input type="email" name="email" class="form-control form-control-lg custom-form-control" placeholder="Email"  maxlength="30" required>
                     </div>
                     <div class="col-sm-6 col-md-3 col-xs-12 my-2">
                         <input type="number" name="cantPersonas" class="form-control form-control-lg custom-form-control" placeholder="Cantidad de invitados" max="20" min="0" >
@@ -198,7 +216,7 @@
                     <div class="col-sm-6 col-md-3 col-xs-12 my-2">
                         <input type="datetime-local" name="fecha" class="form-control form-control-lg custom-form-control" placeholder="Fecha y Hora" >
                     </div>
-                    <input type="hidden" id="action" name="action" value="insert" >
+                    <input type="hidden" id="action" name="action" value="insertClient" >
                 </div>
                 <button type="submit" class="btn btn-lg btn-primary" id="rounded-btn">Agendar cita</button>
             </form>
