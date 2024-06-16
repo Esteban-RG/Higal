@@ -10,6 +10,8 @@ if (!isset($_SESSION['idAdministrador'])) {
 $insert = isset($_GET['insert']) ? $_GET['insert'] : 'Desconocido';
 $delete = isset($_GET['delete']) ? $_GET['delete'] : 'Desconocido';
 $update = isset($_GET['update']) ? $_GET['update'] : 'Desconocido';
+$error = isset($_GET['errors']) ? $_GET['errors'] : 'Desconocido';
+
 
 include 'controller/conexion.php'; 
 
@@ -35,6 +37,7 @@ $result_reservaciones = $conn->query($sql_reservaciones);
         var insert = <?php echo json_encode($insert); ?>;
         var delet = <?php echo json_encode($delete); ?>;
         var update = <?php echo json_encode($update); ?>;
+        var errors = <?php echo json_encode($error); ?>;
 
         if (insert === 'true') {
             Swal.fire({
@@ -43,14 +46,23 @@ $result_reservaciones = $conn->query($sql_reservaciones);
             }).then(() => {
                 window.location.href='admReservacion.php';
             });
-        }else if(insert === 'false'){
-            Swal.fire({
+        }
+
+        if (insert === 'false') {
+            let swalOptions = {
                 icon: "error",
-                text: "Ocurrió un error al insertar el elemento"
-            }).then(() => {
-                window.location.href='admReservacion.php';
+                title: "Error",
+            };
+            
+            if (errors !== 'Desconocido') {
+                swalOptions.text = errors;
+            }
+            
+            Swal.fire(swalOptions).then(() => {
+                window.location.href = 'admReservacion.php';
             });
         }
+
 
         if (delet  === 'true') {
             Swal.fire({
@@ -111,10 +123,10 @@ $result_reservaciones = $conn->query($sql_reservaciones);
                             <input type="email" name="email" class="form-control form-control-lg custom-form-control" placeholder="Email" maxlength="30" required>
                         </div>
                         <div class="col-sm-6 col-md-3 col-xs-12 my-2">
-                            <input type="number" name="cantPersonas" class="form-control form-control-lg custom-form-control" placeholder="Cantidad de invitados" max="20" min="0" >
+                            <input type="number" name="cantPersonas" class="form-control form-control-lg custom-form-control" placeholder="Cantidad de invitados" max="20" min="1" required >
                         </div>
                         <div class="col-sm-6 col-md-3 col-xs-12 my-2">
-                            <input type="datetime-local" name="fecha" class="form-control form-control-lg custom-form-control" placeholder="Fecha y Hora" >
+                            <input type="datetime-local" name="fecha" class="form-control form-control-lg custom-form-control" placeholder="Fecha y Hora" required>
                         </div>
                         <input type="hidden" id="action" name="action" value="insert" >
                     </div>

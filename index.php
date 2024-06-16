@@ -1,5 +1,7 @@
 <?php
 $reservation = isset($_GET['reservation']) ? $_GET['reservation'] : 'Desconocido';
+$error = isset($_GET['errors']) ? $_GET['errors'] : 'Desconocido';
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -33,12 +35,22 @@ $reservation = isset($_GET['reservation']) ? $_GET['reservation'] : 'Desconocido
 <body data-spy="scroll" data-target=".navbar" data-offset="40" id="home">
     <script>
         var reservation = <?php echo json_encode($reservation); ?>;
+        var errors = <?php echo json_encode($error); ?>;
 
         if (reservation === 'true') {
             Swal.fire({
                 icon: "success",
                 title: "Tu reservacion se almaceno correctamente",
                 text: "Recibiras un correo confirmando tu reservacion"
+            }).then(() => {
+                window.location.href='index.php';
+            });
+        }
+
+        if (errors != 'Desconocido') {
+            Swal.fire({
+                icon: "error",
+                text: errors,
             }).then(() => {
                 window.location.href='index.php';
             });
@@ -205,18 +217,20 @@ $reservation = isset($_GET['reservation']) ? $_GET['reservation'] : 'Desconocido
             <form action="controller/reservacionesDAO.php" method="POST">
                 <div class="row mb-5">
                     <div class="col-sm-6 col-md-3 col-xs-12 my-2">
-                        <input type="text" name="name" class="form-control form-control-lg custom-form-control" placeholder="Nombre" maxlength="30" required>
+                        <input type="text" name="name" class="form-control form-control-lg custom-form-control" placeholder="Nombre" maxlength="50" required>
                     </div>
                     <div class="col-sm-6 col-md-3 col-xs-12 my-2">
                         <input type="email" name="email" class="form-control form-control-lg custom-form-control" placeholder="Email"  maxlength="30" required>
                     </div>
                     <div class="col-sm-6 col-md-3 col-xs-12 my-2">
-                        <input type="number" name="cantPersonas" class="form-control form-control-lg custom-form-control" placeholder="Cantidad de invitados" max="20" min="0" >
+                        <input type="number" name="cantPersonas" class="form-control form-control-lg custom-form-control" placeholder="Cantidad de invitados" max="20" min="1" required>
                     </div>
                     <div class="col-sm-6 col-md-3 col-xs-12 my-2">
-                        <input type="datetime-local" name="fecha" class="form-control form-control-lg custom-form-control" placeholder="Fecha y Hora" >
+                        <input type="datetime-local" name="fecha" class="form-control form-control-lg custom-form-control" placeholder="Fecha y Hora" required >
                     </div>
-                    <input type="hidden" id="action" name="action" value="insertClient" >
+                    <input type="hidden" id="action" name="action" value="insert" >
+                    <input type="hidden" id="source" name="source" value="client" >
+
                 </div>
                 <button type="submit" class="btn btn-lg btn-primary" id="rounded-btn">Agendar cita</button>
             </form>
