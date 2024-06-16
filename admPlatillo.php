@@ -156,7 +156,7 @@ $update = isset($_GET['update']) ? $_GET['update'] : 'Desconocido';
                             <td>" . $row["idPlatillo"]. "</td>
                             <td>" . $row["nombre"]. "</td>
                             <td>" . $row["descripcion"]. "</td>
-                            <td>" . $row["precio"]. "</td>
+                            <td>" ."$". $row["precio"]. "</td>
                             <td>" . $row["categoria"]. "</td>
                             <td>" . $row["administrador"]. "</td>
                             <td><img src='" . $row["imagen"] . "' alt='Imagen de " . $row["nombre"] . "' style='width: 100px;'></td>

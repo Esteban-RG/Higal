@@ -1,6 +1,7 @@
 
 <?php
 include 'conexion.php';
+include 'validaciones.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
@@ -10,21 +11,32 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         $nombre = $_POST['nombre'];
 
-        $sql = "INSERT INTO Categoria (nombre) VALUES (?)";
-        if ($stmt = $conn->prepare($sql)) {
-            $stmt->bind_param("s", $nombre);
-            if ($stmt->execute()) {
-                echo "Categoria agregada correctamente";
-                header('Location: ../admCategoria.php?insert=true');
-                exit;
+        $errores = [];
+
+        if (!validateName($nombre)) {
+            $errores[] = "El nombre no debe contener números.";
+        }
+
+        if (empty($errores)) {
+            $sql = "INSERT INTO Categoria (nombre) VALUES (?)";
+            if ($stmt = $conn->prepare($sql)) {
+                $stmt->bind_param("s", $nombre);
+                if ($stmt->execute()) {
+                    echo "Categoria agregada correctamente";
+                    header('Location: ../admCategoria.php?insert=true');
+                    exit;
+                } else {
+                    echo "Error al ejecutar la consulta: " . $stmt->error;
+                    header('Location: ../admCategoria.php?insert=false');
+                    exit;
+                }
+                $stmt->close();
             } else {
-                echo "Error al ejecutar la consulta: " . $stmt->error;
-                header('Location: ../admCategoria.php?insert=false');
-                exit;
+                echo "Error al preparar la consulta: " . $conn->error;
             }
-            $stmt->close();
         } else {
-            echo "Error al preparar la consulta: " . $conn->error;
+            $errorString = implode(", ", $errores);
+            header("Location: ../admCategoria.php?insert=false&errors=" . urlencode($errorString));
         }
 
     }else if ($action == 'update') {

@@ -9,6 +9,8 @@ if (!isset($_SESSION['idAdministrador'])) {
 $insert = isset($_GET['insert']) ? $_GET['insert'] : 'Desconocido';
 $delete = isset($_GET['delete']) ? $_GET['delete'] : 'Desconocido';
 $update = isset($_GET['update']) ? $_GET['update'] : 'Desconocido';
+$error = isset($_GET['errors']) ? $_GET['errors'] : 'Desconocido';
+
 
 
 ?>
@@ -25,6 +27,7 @@ $update = isset($_GET['update']) ? $_GET['update'] : 'Desconocido';
         var insert = <?php echo json_encode($insert); ?>;
         var delet = <?php echo json_encode($delete); ?>;
         var update = <?php echo json_encode($update); ?>;
+        var errors = <?php echo json_encode($error); ?>;
 
         if (insert === 'true') {
             Swal.fire({
@@ -33,12 +36,20 @@ $update = isset($_GET['update']) ? $_GET['update'] : 'Desconocido';
             }).then(() => {
                 window.location.href='admCategoria.php';
             });
-        }else if(insert === 'false'){
-            Swal.fire({
+        }
+
+        if (insert === 'false') {
+            let swalOptions = {
                 icon: "error",
-                text: "Ocurrió un error al insertar el elemento"
-            }).then(() => {
-                window.location.href='admCategoria.php';
+                title: "Error",
+            };
+            
+            if (errors !== 'Desconocido') {
+                swalOptions.text = errors;
+            }
+            
+            Swal.fire(swalOptions).then(() => {
+                window.location.href = 'admCategoria.php';
             });
         }
 
@@ -147,11 +158,11 @@ $update = isset($_GET['update']) ? $_GET['update'] : 'Desconocido';
 
     <script>
         function mostrarFormulario() {
-            var formulario = document.querySelector('.new'); // Selecciona el primer elemento con la clase 'new'
+            var formulario = document.querySelector('.new');
             if (formulario.style.display === 'none' || formulario.style.display === '') {
-                formulario.style.display = 'block'; // Muestra el formulario
+                formulario.style.display = 'block'; 
             } else {
-                formulario.style.display = 'none'; // Oculta el formulario
+                formulario.style.display = 'none'; 
             }
         }
 

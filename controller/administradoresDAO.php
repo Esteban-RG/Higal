@@ -1,6 +1,7 @@
 
 <?php
 include 'conexion.php';
+include 'validaciones.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
@@ -11,23 +12,40 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $nombre = $_POST['nombre'];
         $apPaterno = $_POST['apPaterno'];
         $apMaterno = $_POST['apMaterno'];
-        $contrasenha = password_hash($_POST['contrasenha'], PASSWORD_DEFAULT); // Encriptar la contraseña
-    
-        $sql_insert = "INSERT INTO Administrador (nombre, apPaterno, apMaterno, contrasenha) VALUES (?, ?, ?, ?)";
-        if ($stmt = $conn->prepare($sql_insert)) {
-            $stmt->bind_param("ssss", $nombre, $apPaterno, $apMaterno, $contrasenha);
-            if ($stmt->execute()) {
-                echo "Administrador registrado correctamente.";
-                header('Location: ../admAdmin.php?insert=true');
-                exit;
+        $contrasenha = password_hash($_POST['contrasenha'], PASSWORD_DEFAULT);
+
+        $errores = [];
+
+        if (!validateName($nombre)) {
+            $errores[] = "El nombre no debe contener números.";
+        }else if (!validateName($apPaterno)) {
+            $errores[] = "Los apellidos no deben contener números.";
+        }else if (!validateName($apMaterno)) {
+            $errores[] = "Los apellidos no deben contener números.";
+
+
+        }
+        if (empty($errores)) {
+
+            $sql_insert = "INSERT INTO Administrador (nombre, apPaterno, apMaterno, contrasenha) VALUES (?, ?, ?, ?)";
+            if ($stmt = $conn->prepare($sql_insert)) {
+                $stmt->bind_param("ssss", $nombre, $apPaterno, $apMaterno, $contrasenha);
+                if ($stmt->execute()) {
+                    echo "Administrador registrado correctamente.";
+                    header('Location: ../admAdmin.php?insert=true');
+                    exit;
+                } else {
+                    echo "Error al registrar el administrador: " . $stmt->error;
+                    header('Location: ../admAdmin.php?insert=false');
+                    exit;
+                }
+                $stmt->close();
             } else {
-                echo "Error al registrar el administrador: " . $stmt->error;
-                header('Location: ../admAdmin.php?insert=false');
-                exit;
+                echo "Error al preparar la consulta: " . $conn->error;
             }
-            $stmt->close();
         } else {
-            echo "Error al preparar la consulta: " . $conn->error;
+            $errorString = implode(", ", $errores);
+            header("Location: ../admAdmin.php?insert=false&errors=" . urlencode($errorString));
         }
 
     }else if ($action == 'update') {

@@ -1,7 +1,7 @@
 <?php
 session_start();
-session_unset(); // Destruir todas las variables de sesión
-session_destroy(); // Destruir la sesión
-header("Location: ../admPanel.php"); // Redirigir al formulario de inicio de sesión
+session_unset(); 
+session_destroy(); 
+header("Location: ../admPanel.php");
 exit();
 ?>

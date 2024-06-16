@@ -1,4 +1,7 @@
 <?php
+session_start();
+session_unset(); 
+session_destroy(); 
 $error = isset($_GET['error']) ? $_GET['error'] : 'Desconocido';
 ?>
 <!DOCTYPE html>

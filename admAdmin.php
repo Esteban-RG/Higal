@@ -9,6 +9,8 @@ if (!isset($_SESSION['idAdministrador'])) {
 $insert = isset($_GET['insert']) ? $_GET['insert'] : 'Desconocido';
 $delete = isset($_GET['delete']) ? $_GET['delete'] : 'Desconocido';
 $update = isset($_GET['update']) ? $_GET['update'] : 'Desconocido';
+$error = isset($_GET['errors']) ? $_GET['errors'] : 'Desconocido';
+
 
 
 ?>
@@ -25,6 +27,7 @@ $update = isset($_GET['update']) ? $_GET['update'] : 'Desconocido';
         var insert = <?php echo json_encode($insert); ?>;
         var delet = <?php echo json_encode($delete); ?>;
         var update = <?php echo json_encode($update); ?>;
+        var errors = <?php echo json_encode($error); ?>;
 
         if (insert === 'true') {
             Swal.fire({
@@ -33,14 +36,24 @@ $update = isset($_GET['update']) ? $_GET['update'] : 'Desconocido';
             }).then(() => {
                 window.location.href='admAdmin.php';
             });
-        }else if(insert === 'false'){
-            Swal.fire({
+        }
+
+        if (insert === 'false') {
+            let swalOptions = {
                 icon: "error",
-                text: "Ocurrió un error al insertar el elemento"
-            }).then(() => {
-                window.location.href='admAdmin.php';
+                title: "Error",
+            };
+            
+            if (errors !== 'Desconocido') {
+                swalOptions.text = errors;
+            }
+            
+            Swal.fire(swalOptions).then(() => {
+                window.location.href = 'admAdmin.php';
             });
         }
+
+
 
         if (delet  === 'true') {
             Swal.fire({

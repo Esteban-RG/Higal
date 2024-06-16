@@ -112,7 +112,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     echo "Error al preparar la consulta para buscar la mesa: " . $conn->error;
             }
         } else {
-            // Si hay errores, redirigir con los mensajes de error
             $errorString = implode(", ", $errores);
             if ($source == 'client') {
                 header("Location: ../index.php?reservation==false&errors=" . urlencode($errorString));

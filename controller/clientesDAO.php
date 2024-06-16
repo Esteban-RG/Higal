@@ -1,6 +1,8 @@
 
 <?php
 include 'conexion.php';
+include 'validaciones.php';
+
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
@@ -10,23 +12,37 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         $nombre = $_POST['nombre'];
         $correo = $_POST['correo'];
+
+        $errores = [];
+
+        if (!validateName($nombre)) {
+            $errores[] = "El nombre no debe contener números.";
+        }else if (!validateEmail($correo)) {
+            $errores[] = "Por favor, introduce un email válido.";
+        }
     
-        // Preparar y ejecutar la consulta SQL para insertar un nuevo cliente
-        $sql_insert = "INSERT INTO Cliente (nombre, correo) VALUES (?, ?)";
-        if ($stmt = $conn->prepare($sql_insert)) {
-            $stmt->bind_param("ss", $nombre,$correo);
-            if ($stmt->execute()) {
-                echo "Cliente registrado correctamente.";
-                header('Location: ../admCliente.php?insert=true');
-                exit;
+
+        if (empty($errores)) {
+           
+            $sql_insert = "INSERT INTO Cliente (nombre, correo) VALUES (?, ?)";
+            if ($stmt = $conn->prepare($sql_insert)) {
+                $stmt->bind_param("ss", $nombre,$correo);
+                if ($stmt->execute()) {
+                    echo "Cliente registrado correctamente.";
+                    header('Location: ../admCliente.php?insert=true');
+                    exit;
+                } else {
+                    echo "Error al registrar el cliente: " . $stmt->error;
+                    header('Location: ../admCliente.php?insert=false');
+                    exit;
+                }
+                $stmt->close();
             } else {
-                echo "Error al registrar el cliente: " . $stmt->error;
-                header('Location: ../admCliente.php?insert=false');
-                exit;
+                echo "Error al preparar la consulta: " . $conn->error;
             }
-            $stmt->close();
         } else {
-            echo "Error al preparar la consulta: " . $conn->error;
+            $errorString = implode(", ", $errores);
+            header("Location: ../admCliente.php?insert=false&errors=" . urlencode($errorString));
         }
 
     }else if ($action == 'update') {
@@ -56,7 +72,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 throw new Exception("Error al preparar la consulta: " . $conn->error);
             }
         } catch (Exception $e) {
-            $conn->rollback(); // Revertir la transacción
+            $conn->rollback(); 
             if ($conn->errno == 1451) {
                 echo "No se puede eliminar el Cliente porque está siendo referenciada en otra tabla.";
                 header('Location: ../admCliente.php?delete=false');
