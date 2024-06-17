@@ -11371,6 +11371,10 @@ pre {
   opacity: 0;
   -webkit-transition: all 0.2s linear 0s;
   transition: all 0.2s linear 0s;
+  flex-direction: column;
+  padding: 50px;
+  color: #f8f9ff;
+  text-align: center;
 }
 
 .gallary .gallary-item .gallary-overlay .gallary-icon {
@@ -11383,3 +11387,4 @@ pre {
   visibility: visible;
   opacity: 1;
 }
+

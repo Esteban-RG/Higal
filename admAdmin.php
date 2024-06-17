@@ -170,11 +170,11 @@ $error = isset($_GET['errors']) ? $_GET['errors'] : 'Desconocido';
 
     <script>
         function mostrarFormulario() {
-            var formulario = document.querySelector('.new'); // Selecciona el primer elemento con la clase 'new'
+            var formulario = document.querySelector('.new');
             if (formulario.style.display === 'none' || formulario.style.display === '') {
-                formulario.style.display = 'block'; // Muestra el formulario
+                formulario.style.display = 'block'; 
             } else {
-                formulario.style.display = 'none'; // Oculta el formulario
+                formulario.style.display = 'none'; 
             }
         }
 
