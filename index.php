@@ -83,9 +83,6 @@ $error = isset($_GET['errors']) ? $_GET['errors'] : 'Desconocido';
             </a>
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="#blog">Blog<span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
                     <a class="nav-link" href="#testmonial">Reviews</a>
                 </li>
                 <li class="nav-item">
@@ -113,25 +110,19 @@ $error = isset($_GET['errors']) ? $_GET['errors'] : 'Desconocido';
                 <h2 class="section-title" >¿Quienes somos?</h2>
             </div>
             <table class="sobreNostros" >
-
-                <tr>
-                    <td><img src="assets/imgs/HigalComida2.png" alt="" width="800" height="500"></td>
-                    <td>
-                        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptas hic vero placeat corrupti
-                            est ut laudantium quibusdam repudiandae sit qui! At dignissimos iste necessitatibus omnis
-                            iure voluptas tenetur optio aliquid.</p>
-                    </td>
-                </tr>
+                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptas hic vero placeat corrupti
+                    st ut laudantium quibusdam repudiandae sit qui! At dignissimos iste necessitatibus omnis
+                    iure voluptas tenetur optio aliquid.</p>
             </table>
         </div>
 
 
     </section>
 
-    <!--  gallary Section  -->
-    <div id="gallary" class="text-center bg-dark text-light has-height-md middle-items wow fadeIn">
-        <h2 class="section-title">Nuestro Menu</h2>
+    
     </div>
+
+    <!--  gallary Section  -->
 
 
     <div class="gallary row">
@@ -139,7 +130,7 @@ $error = isset($_GET['errors']) ? $_GET['errors'] : 'Desconocido';
 
         include 'controller/conexion.php';
 
-        $sql = "SELECT nombre, descripcion, precio, imagen FROM Platillo ";
+        $sql = "SELECT nombre, descripcion, precio, imagen FROM Platillo WHERE visibilidad = 1";
         $result = $conn->query($sql);
 
         if ($result->num_rows > 0) {
@@ -147,11 +138,6 @@ $error = isset($_GET['errors']) ? $_GET['errors'] : 'Desconocido';
                 echo "
                 <div class='col-sm-6 col-lg-3 gallary-item wow fadeIn'>
                 <img src=".$row["imagen"]." alt=".$row["nombre"]." class='gallary-img'>
-                <div href='#'class='gallary-overlay'>
-                <p class='name'>".$row["nombre"]."</p><br>
-                <p>".$row["descripcion"]."</p><br>
-                <p class='price'>$".$row["precio"]."</p>
-                </div>
                 </div>";
             }
         } else {
@@ -162,6 +148,8 @@ $error = isset($_GET['errors']) ? $_GET['errors'] : 'Desconocido';
     ?>
 
     </div>
+
+    
 
     <!-- book a table Section  -->
     <div class="container-fluid has-bg-overlay text-center text-light has-height-lg middle-items" id="book-table">
@@ -189,71 +177,143 @@ $error = isset($_GET['errors']) ? $_GET['errors'] : 'Desconocido';
             </form>
         </div>
     </div>
-
     <!-- BLOG Section  -->
 
-    <div id="blog" class="container-fluid bg-dark text-light py-5 text-center wow fadeIn">
-        <h2 class="section-title py-5">Nuestro menu para eventos</h2>
-        <div class="row justify-content-center">
-            <div class="col-sm-7 col-md-4 mb-5">
-                <ul class="nav nav-pills nav-justified mb-3" id="pills-tab" role="tablist">
-                    <li class="nav-item">
-                        <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#foods" role="tab"
-                            aria-controls="pills-home" aria-selected="true">Foods</a>
+    <div id="gallary" class="container-fluid bg-dark text-light py-5 text-center wow fadeIn">
+
+        <?php
+
+        include 'controller/conexion.php';
+
+        $categorias = array();
+
+        $sql = "SELECT nombre FROM Categoria";
+        $result = $conn->query($sql);
+
+        if ($result->num_rows > 0) {
+            while($row = $result->fetch_assoc()) {
+                $categorias[] = $row['nombre'];
+            }
+        } else {
+            echo "<p>NO HAY CATEGORIAS DISPONIBLES</p>";
+        }
+
+        $conn->close();
+        ?>
+
+        <h2 class="section-title py-5">Nuestro menu</h2>
+        <div class='row justify-content-center'>
+            <div class='col-sm-7 col-md-4 mb-5'>
+                <ul class='nav nav-pills nav-justified mb-3' id='pills-tab' role='tablist'>
+
+                <?php
+                echo "
+                    <li class='nav-item'>
+                        <a class='nav-link active' id='pills-home-tab' data-toggle='pill' href='#".$categorias[0]."' role='tab'
+                            aria-controls='pills-home' aria-selected='true'>".$categorias[0]."</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#juices" role="tab"
-                            aria-controls="pills-profile" aria-selected="false">Juices</a>
+                ";
+
+                for ($i = 1; $i < count($categorias); $i++) {
+                    echo "
+                    <li class='nav-item'>
+                        <a class='nav-link' id='pills-profile-tab' data-toggle='pill' href='#".$categorias[$i]."' role='tab'
+                            aria-controls='pills-profile' aria-selected='false'>".$categorias[$i]."</a>
                     </li>
+                    ";
+                }
+
+                ?>        
                 </ul>
             </div>
         </div>
 
         <div class="tab-content" id="pills-tabContent">
-            <div class="tab-pane fade show active" id="foods" role="tabpanel" aria-labelledby="pills-home-tab">
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="card bg-transparent border my-3 my-md-0">
-                            <img src="assets/imgs/blog-1.jpg" alt="template by DevCRID http://www.devcrud.com/"
-                                class="rounded-0 card-img-top mg-responsive" width="500">
-                            <div class="card-body">
-                                <h1 class="text-center mb-4"><a href="#" class="badge badge-primary">$5</a></h1>
-                                <h4 class="pt20 pb20">Reiciendis Laborum</h4>
-                                <p class="text-white">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa
-                                    provident illum officiis fugit laudantium voluptatem sit iste delectus qui ex. </p>
+
+            <?php
+
+            echo "<div class='tab-pane fade show active' id='".$categorias[0]."' role='tabpanel' aria-labelledby='pills-home-tab'>
+                <div class='row'>
+            ";
+
+            include 'controller/conexion.php';
+
+
+            
+            $sql = "SELECT p.imagen,p.nombre,p.descripcion,p.precio,c.nombre as categoria FROM Platillo p JOIN Categoria c ON p.idCategoria = c.idCategoria WHERE c.nombre = '$categorias[0]'";
+            $result = $conn->query($sql);
+        
+            if ($result->num_rows > 0) {
+                while($row = $result->fetch_assoc()) {
+                    echo "
+                    <div class='col-md-4'>
+                        <div class='card bg-transparent border my-3 my-md-0'>
+                            <img src='".$row["imagen"]."' alt='".$row["nombre"]."'
+                                class='rounded-0 card-img-top mg-responsive' width='500'>
+                            <div class='card-body'>
+                                <h1 class='text-center mb-4'><a href='#".$row["categoria"]."' class='badge badge-primary'>$".$row["precio"]."</a></h1>
+                                <h4 class='pt20 pb20'>".$row["nombre"]."</h4>
+                                <p class='text-white'>".$row["descripcion"]."</p>
                             </div>
                         </div>
                     </div>
+                    ";
+                }
+            } else {
+                echo "<p>NO HAY CATEGORIAS DISPONIBLES</p>";
+            }
+        
+            $conn->close();
 
+            echo "  </div>
+            </div>";
 
-                    <div class="col-md-4">
-                        <div class="card bg-transparent border my-3 my-md-0">
-                            <img src="assets/imgs/blog-2.jpg" alt="template by DevCRID http://www.devcrud.com/"
-                                class="rounded-0 card-img-top mg-responsive">
-                            <div class="card-body">
-                                <h1 class="text-center mb-4"><a href="#" class="badge badge-primary">$12</a></h1>
-                                <h4 class="pt20 pb20">Adipisci Totam</h4>
-                                <p class="text-white">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa
-                                    provident illum officiis fugit laudantium voluptatem sit iste delectus qui ex. </p>
+            for ($i = 1; $i < count($categorias); $i++) {
+                echo "
+                <div class='tab-pane fade' id='".$categorias[$i]."' role='tabpanel' aria-labelledby='pills-profile-tab'>
+                    <div class='row'>
+                ";
+        
+                include 'controller/conexion.php';
+        
+        
+        
+                $sql = "SELECT p.imagen,p.nombre,p.descripcion,p.precio,c.nombre as categoria FROM Platillo p JOIN Categoria c ON p.idCategoria = c.idCategoria WHERE c.nombre = '$categorias[$i]'";
+                $result = $conn->query($sql);
+        
+                if ($result->num_rows > 0) {
+                    while($row = $result->fetch_assoc()) {
+                        echo "
+                            <div class='col-md-4'>
+                                <div class='card bg-transparent border my-3 my-md-0'>
+                                    <img src='".$row["imagen"]."' alt='".$row["nombre"]."'
+                                        class='rounded-0 card-img-top mg-responsive' width='500'>
+                                    <div class='card-body'>
+                                        <h1 class='text-center mb-4'><a href='#".$row["categoria"]."' class='badge badge-primary'>$".$row["precio"]."</a></h1>
+                                        <h4 class='pt20 pb20'>".$row["nombre"]."</h4>
+                                        <p class='text-white'>".$row["descripcion"]."</p>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-
-
-                    <div class="col-md-4">
-                        <div class="card bg-transparent border my-3 my-md-0">
-                            <img src="assets/imgs/blog-3.jpg" alt="template by DevCRID http://www.devcrud.com/"
-                                class="rounded-0 card-img-top mg-responsive">
-                            <div class="card-body">
-                                <h1 class="text-center mb-4"><a href="#" class="badge badge-primary">$8</a></h1>
-                                <h4 class="pt20 pb20">Dicta Deserunt</h4>
-                                <p class="text-white">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa
-                                    provident illum officiis fugit laudantium voluptatem sit iste delectus qui ex. </p>
-                            </div>
-                        </div>
-                    </div>
+                        ";
+                    }
+                } else {
+                    echo "<p>NO HAY CATEGORIAS DISPONIBLES</p>";
+                }
+        
+                $conn->close();
+                    
+                    
+                echo "
                 </div>
-            </div>
+                </div>
+                ";
+            }
+
+            ?>
+
+
+
             <div class="tab-pane fade" id="juices" role="tabpanel" aria-labelledby="pills-profile-tab">
                 <div class="row">
                     <div class="col-md-4 my-3 my-md-0">
@@ -295,6 +355,8 @@ $error = isset($_GET['errors']) ? $_GET['errors'] : 'Desconocido';
                 </div>
             </div>
         </div>
+        
+
     </div>
 
     <!-- REVIEWS Section  -->

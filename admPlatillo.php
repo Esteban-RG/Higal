@@ -135,6 +135,7 @@ $update = isset($_GET['update']) ? $_GET['update'] : 'Desconocido';
                 <th>Precio</th>
                 <th>Categoría</th>
                 <th>Administrador</th>
+                <th>Visibilidad</th>
                 <th>Imagen</th>
                 <th>Acciones</th>
             </tr>
@@ -143,7 +144,7 @@ $update = isset($_GET['update']) ? $_GET['update'] : 'Desconocido';
             <?php
                 include 'controller/conexion.php';
 
-                $sql = "SELECT p.idPlatillo, p.nombre, p.descripcion, p.precio, c.nombre AS categoria, a.nombre AS administrador, p.imagen 
+                $sql = "SELECT p.idPlatillo, p.nombre, p.descripcion, p.precio,p.visibilidad, c.nombre AS categoria, a.nombre AS administrador, p.imagen 
                         FROM Platillo p
                         JOIN Categoria c ON p.idCategoria = c.idCategoria
                         JOIN Administrador a ON p.idAdministrador = a.idAdministrador";
@@ -159,7 +160,16 @@ $update = isset($_GET['update']) ? $_GET['update'] : 'Desconocido';
                             <td>" ."$". $row["precio"]. "</td>
                             <td>" . $row["categoria"]. "</td>
                             <td>" . $row["administrador"]. "</td>
+                            <td>
+                                <form action='controller/platillosDAO.php' method='post' style='display:inline-block;'>
+                                    <input type='hidden' name='idPlatillo' value='" . $row["idPlatillo"] . "'>
+                                    <input type='checkbox' name='visibilidad' value='1' " . ($row["visibilidad"] ? "checked" : "") . ">
+                                    <input type='hidden' name='action' value='update_visibility'>
+                                    <input type='submit' style='background-color: #4CAF50; margin:10px; color: white; padding: 5px 10px; border: none; border-radius: 4px; cursor: pointer; font-size: 14px;' value='Guardar'>
+                                </form>
+                            </td>
                             <td><img src='" . $row["imagen"] . "' alt='Imagen de " . $row["nombre"] . "' style='width: 100px;'></td>
+
                             <td>
                                 <form action='controller/platillosDAO.php' method='post'>
                                     <input type='hidden' name='idPlatillo' value='" . $row["idPlatillo"] . "'>

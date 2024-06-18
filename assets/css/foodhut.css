@@ -5159,6 +5159,9 @@ input[type="button"].btn-block {
   width: 100%;
   border-top-left-radius: calc(0.2rem - 1px);
   border-top-right-radius: calc(0.2rem - 1px);
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+
 }
 
 .card-img-bottom {
@@ -11345,6 +11348,8 @@ pre {
 
 .gallary .gallary-item .gallary-img {
   width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
 }
 
 .gallary .gallary-item .gallary-overlay {
@@ -11387,4 +11392,3 @@ pre {
   visibility: visible;
   opacity: 1;
 }
-
