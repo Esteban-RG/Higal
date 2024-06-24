@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 10-06-2024 a las 02:25:38
+-- Tiempo de generación: 24-06-2024 a las 20:25:44
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -59,8 +59,11 @@ CREATE TABLE `Categoria` (
 --
 
 INSERT INTO `Categoria` (`idCategoria`, `nombre`) VALUES
-(5, 'Postres'),
-(6, 'Bebidas');
+(15, 'Entradas'),
+(16, 'Segundos'),
+(20, 'Fuertes'),
+(21, 'Botana'),
+(22, 'Postres');
 
 -- --------------------------------------------------------
 
@@ -79,17 +82,8 @@ CREATE TABLE `Cliente` (
 --
 
 INSERT INTO `Cliente` (`idCliente`, `nombre`, `correo`) VALUES
-(7, 'Ricardo Esteban', 'ricardoespace@gmail.com');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `Menu`
---
-
-CREATE TABLE `Menu` (
-  `idPlatillo` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+(7, 'Ricardo Esteban', 'ricardoespace@gmail.com'),
+(10, 'Julio', 'calva@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -127,8 +121,20 @@ CREATE TABLE `Platillo` (
   `precio` float DEFAULT NULL,
   `idCategoria` int(11) DEFAULT NULL,
   `idAdministrador` int(11) DEFAULT NULL,
-  `imagen` varchar(200) NOT NULL
+  `imagen` varchar(200) NOT NULL,
+  `visibilidad` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `Platillo`
+--
+
+INSERT INTO `Platillo` (`idPlatillo`, `nombre`, `descripcion`, `precio`, `idCategoria`, `idAdministrador`, `imagen`, `visibilidad`) VALUES
+(23, 'Ensalada de la casa', 'Mix de lechugas y espinaca con frutos rojos, ate, semillas\r\ncaramelizadas, cubos de queso ahumado y vinagreta.', 80, 15, 1, 'uploads/Ensalada de la cas.jpg', 0),
+(24, 'Pasta del día', 'Los ingredientes varían cada semana, pregunta a nuestros\r\nasociados.', 85, 16, 1, 'uploads/Pasta.avif', 1),
+(26, 'Taco Ensenada', 'Filete de pescado en tempura de garbanzo, acompañado de un\r\nguacamole rústico, con una ensalada de col morada bañada en\r\nmayonesa de chile habanero, pico de gallo contemporáneo y\r\nlimón Eureka.', 85, 20, 1, 'uploads/taco ensenada.jpeg', 0),
+(27, 'Alitas', 'BBQ\r\nOriginal hot\r\nMango habanero\r\nBufalo\r\n10 Alitas, acompañadas de papas a la francesa, bastones de\r\napio y zanahoria y aderezo ranch.', 170, 21, 1, 'uploads/alitas.avif', 1),
+(28, 'Strudel de manzana con helado', 'Deliciosa masa hojaldre con un relleno de manzana flameada y\r\naromatizada con licor de ciruela, acompañado de helado.', 89, 22, 1, 'uploads/strudedl.png', 0);
 
 -- --------------------------------------------------------
 
@@ -145,13 +151,6 @@ CREATE TABLE `Reservacion` (
   `estado` varchar(15) DEFAULT NULL,
   `idAdministrador` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Volcado de datos para la tabla `Reservacion`
---
-
-INSERT INTO `Reservacion` (`idReservacion`, `fecha`, `cantPersonas`, `idMesa`, `idCliente`, `estado`, `idAdministrador`) VALUES
-(27, '2024-06-12 18:20:00', 4, 7, 7, 'Pendiente', NULL);
 
 --
 -- Índices para tablas volcadas
@@ -174,12 +173,6 @@ ALTER TABLE `Categoria`
 --
 ALTER TABLE `Cliente`
   ADD PRIMARY KEY (`idCliente`);
-
---
--- Indices de la tabla `Menu`
---
-ALTER TABLE `Menu`
-  ADD KEY `idPlatillo` (`idPlatillo`);
 
 --
 -- Indices de la tabla `Mesa`
@@ -218,13 +211,13 @@ ALTER TABLE `Administrador`
 -- AUTO_INCREMENT de la tabla `Categoria`
 --
 ALTER TABLE `Categoria`
-  MODIFY `idCategoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `idCategoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT de la tabla `Cliente`
 --
 ALTER TABLE `Cliente`
-  MODIFY `idCliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `idCliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT de la tabla `Mesa`
@@ -236,23 +229,17 @@ ALTER TABLE `Mesa`
 -- AUTO_INCREMENT de la tabla `Platillo`
 --
 ALTER TABLE `Platillo`
-  MODIFY `idPlatillo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `idPlatillo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT de la tabla `Reservacion`
 --
 ALTER TABLE `Reservacion`
-  MODIFY `idReservacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `idReservacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- Restricciones para tablas volcadas
 --
-
---
--- Filtros para la tabla `Menu`
---
-ALTER TABLE `Menu`
-  ADD CONSTRAINT `Menu_ibfk_1` FOREIGN KEY (`idPlatillo`) REFERENCES `Platillo` (`idPlatillo`);
 
 --
 -- Filtros para la tabla `Platillo`
