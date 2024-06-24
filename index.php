@@ -41,9 +41,9 @@ $error = isset($_GET['errors']) ? $_GET['errors'] : 'Desconocido';
             Swal.fire({
                 icon: "success",
                 title: "Tu reservacion se almaceno correctamente",
-                text: "Recibiras un correo confirmando tu reservacion"
+                text: "Recibiras un correo confirmando tu reservación"
             }).then(() => {
-                window.location.href='index.php';
+                window.location.href = 'index.php';
             });
         }
 
@@ -52,15 +52,14 @@ $error = isset($_GET['errors']) ? $_GET['errors'] : 'Desconocido';
                 icon: "error",
                 text: errors,
             }).then(() => {
-                window.location.href='index.php';
+                window.location.href = 'index.php';
             });
         }
     </script>
 
     <!-- Navbar -->
     <nav class="custom-navbar navbar navbar-expand-lg navbar-dark fixed-top" data-spy="affix" data-offset-top="10">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -83,12 +82,12 @@ $error = isset($_GET['errors']) ? $_GET['errors'] : 'Desconocido';
             </a>
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="#testmonial">Reviews</a>
+                    <a class="nav-link" href="#testmonial">Reseñas</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#contact">Contact Us</a>
+                    <a class="nav-link" href="#contact">Contacto</a>
                 </li>
-                
+
             </ul>
         </div>
     </nav>
@@ -98,35 +97,40 @@ $error = isset($_GET['errors']) ? $_GET['errors'] : 'Desconocido';
     <header id="home" class="header">
         <div class="overlay text-white text-center">
             <h1 class="display-2 font-weight-bold my-3">Higal</h1>
-            <h2 class="display-4 mb-5">Restaurante Jardin</h2>
-            <a class="btn btn-lg btn-primary" href="#gallary">Nuestro menu</a>
+            <h2 class="display-4 mb-5">Restaurante Jardín</h2>
+            <a class="btn btn-lg btn-primary" href="#gallary">Nuestro Menú</a>
         </div>
     </header>
 
     <section>
 
-        <div>
+        <div class="sobreNosotros col-md-12">
             <div id="about" class="text-center bg-dark text-light has-height-md middle-items wow fadeIn">
-                <h2 class="section-title" >¿Quienes somos?</h2>
+                <h2 class="section-title">¿Quienes somos?</h2>
             </div>
-            <table class="sobreNostros" >
-                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptas hic vero placeat corrupti
-                    st ut laudantium quibusdam repudiandae sit qui! At dignissimos iste necessitatibus omnis
-                    iure voluptas tenetur optio aliquid.</p>
-            </table>
+            <p>
+                Bienvenidos a El HigAl Restaurante-Jardín. Nuestra misión es celebrar la rica y vibrante gastronomía mexicana, ofreciendo a nuestros comensales una experiencia única que combina sabores auténticos con un ambiente natural y acogedor.
+
+                En El HigAl, creemos en la magia de los ingredientes frescos y locales. Cada platillo que servimos está cuidadosamente elaborado, honrando las tradiciones culinarias que han pasado de generación en generación.
+
+                Nuestro restaurante jardín no solo es un lugar para disfrutar de una excelente comida, sino también un espacio para relajarse y conectar con la naturaleza. Rodeados de frondosos árboles y coloridas flores, nuestros comensales pueden disfrutar de una comida al aire libre que enriquece los sentidos y alimenta el espíritu.
+
+                Ven y descubre por qué El HigAl Restaurante Jardín es el lugar ideal para celebrar la gastronomía mexicana en Chimalhuacán. Ya sea una cena familiar, una celebración especial o una simple escapada culinaria, estamos aquí para ofrecerte una experiencia gastronómica inolvidable.
+            </p>
+             
         </div>
 
 
     </section>
 
-    
+
     </div>
 
     <!--  gallary Section  -->
 
 
     <div class="gallary row">
-    <?php
+        <?php
 
         include 'controller/conexion.php';
 
@@ -134,10 +138,10 @@ $error = isset($_GET['errors']) ? $_GET['errors'] : 'Desconocido';
         $result = $conn->query($sql);
 
         if ($result->num_rows > 0) {
-            while($row = $result->fetch_assoc()) {
+            while ($row = $result->fetch_assoc()) {
                 echo "
                 <div class='col-sm-6 col-lg-3 gallary-item wow fadeIn'>
-                <img src=".$row["imagen"]." alt=".$row["nombre"]." class='gallary-img'>
+                <img src=" . $row["imagen"] . " alt=" . $row["nombre"] . " class='gallary-img'>
                 </div>";
             }
         } else {
@@ -145,11 +149,11 @@ $error = isset($_GET['errors']) ? $_GET['errors'] : 'Desconocido';
         }
 
         $conn->close();
-    ?>
+        ?>
 
     </div>
 
-    
+
 
     <!-- book a table Section  -->
     <div class="container-fluid has-bg-overlay text-center text-light has-height-lg middle-items" id="book-table">
@@ -161,16 +165,16 @@ $error = isset($_GET['errors']) ? $_GET['errors'] : 'Desconocido';
                         <input type="text" name="name" class="form-control form-control-lg custom-form-control" placeholder="Nombre" maxlength="50" required>
                     </div>
                     <div class="col-sm-6 col-md-3 col-xs-12 my-2">
-                        <input type="email" name="email" class="form-control form-control-lg custom-form-control" placeholder="Email"  maxlength="30" required>
+                        <input type="email" name="email" class="form-control form-control-lg custom-form-control" placeholder="Email" maxlength="30" required>
                     </div>
                     <div class="col-sm-6 col-md-3 col-xs-12 my-2">
                         <input type="number" name="cantPersonas" class="form-control form-control-lg custom-form-control" placeholder="Cantidad de invitados" max="20" min="1" required>
                     </div>
                     <div class="col-sm-6 col-md-3 col-xs-12 my-2">
-                        <input type="datetime-local" name="fecha" class="form-control form-control-lg custom-form-control" placeholder="Fecha y Hora" required >
+                        <input type="datetime-local" name="fecha" class="form-control form-control-lg custom-form-control" placeholder="Fecha y Hora" required>
                     </div>
-                    <input type="hidden" id="action" name="action" value="insert" >
-                    <input type="hidden" id="source" name="source" value="client" >
+                    <input type="hidden" id="action" name="action" value="insert">
+                    <input type="hidden" id="source" name="source" value="client">
 
                 </div>
                 <button type="submit" class="btn btn-lg btn-primary" id="rounded-btn">Agendar cita</button>
@@ -191,7 +195,7 @@ $error = isset($_GET['errors']) ? $_GET['errors'] : 'Desconocido';
         $result = $conn->query($sql);
 
         if ($result->num_rows > 0) {
-            while($row = $result->fetch_assoc()) {
+            while ($row = $result->fetch_assoc()) {
                 $categorias[] = $row['nombre'];
             }
         } else {
@@ -201,29 +205,29 @@ $error = isset($_GET['errors']) ? $_GET['errors'] : 'Desconocido';
         $conn->close();
         ?>
 
-        <h2 class="section-title py-5">Nuestro menu</h2>
+        <h2 class="section-title py-5">Nuestro menú</h2>
         <div class='row justify-content-center'>
-            <div class='col-sm-7 col-md-4 mb-5'>
+            <div class='col-sm-7 col-md-12 mb-5'>
                 <ul class='nav nav-pills nav-justified mb-3' id='pills-tab' role='tablist'>
 
-                <?php
-                echo "
+                    <?php
+                    echo "
                     <li class='nav-item'>
-                        <a class='nav-link active' id='pills-home-tab' data-toggle='pill' href='#".$categorias[0]."' role='tab'
-                            aria-controls='pills-home' aria-selected='true'>".$categorias[0]."</a>
+                        <a class='nav-link active' id='pills-home-tab' data-toggle='pill' href='#" . $categorias[0] . "' role='tab'
+                            aria-controls='pills-home' aria-selected='true'>" . $categorias[0] . "</a>
                     </li>
                 ";
 
-                for ($i = 1; $i < count($categorias); $i++) {
-                    echo "
+                    for ($i = 1; $i < count($categorias); $i++) {
+                        echo "
                     <li class='nav-item'>
-                        <a class='nav-link' id='pills-profile-tab' data-toggle='pill' href='#".$categorias[$i]."' role='tab'
-                            aria-controls='pills-profile' aria-selected='false'>".$categorias[$i]."</a>
+                        <a class='nav-link' id='pills-profile-tab' data-toggle='pill' href='#" . $categorias[$i] . "' role='tab'
+                            aria-controls='pills-profile' aria-selected='false'>" . $categorias[$i] . "</a>
                     </li>
                     ";
-                }
+                    }
 
-                ?>        
+                    ?>
                 </ul>
             </div>
         </div>
@@ -232,28 +236,28 @@ $error = isset($_GET['errors']) ? $_GET['errors'] : 'Desconocido';
 
             <?php
 
-            echo "<div class='tab-pane fade show active' id='".$categorias[0]."' role='tabpanel' aria-labelledby='pills-home-tab'>
+            echo "<div class='tab-pane show active' id='" . $categorias[0] . "' role='tabpanel' aria-labelledby='pills-home-tab'>
                 <div class='row'>
             ";
 
             include 'controller/conexion.php';
 
 
-            
+
             $sql = "SELECT p.imagen,p.nombre,p.descripcion,p.precio,c.nombre as categoria FROM Platillo p JOIN Categoria c ON p.idCategoria = c.idCategoria WHERE c.nombre = '$categorias[0]'";
             $result = $conn->query($sql);
-        
+
             if ($result->num_rows > 0) {
-                while($row = $result->fetch_assoc()) {
+                while ($row = $result->fetch_assoc()) {
                     echo "
-                    <div class='col-md-4'>
+                    <div class='col-md-3'>
                         <div class='card bg-transparent border my-3 my-md-0'>
-                            <img src='".$row["imagen"]."' alt='".$row["nombre"]."'
+                            <img src='" . $row["imagen"] . "' alt='" . $row["nombre"] . "'
                                 class='rounded-0 card-img-top mg-responsive' width='500'>
                             <div class='card-body'>
-                                <h1 class='text-center mb-4'><a href='#".$row["categoria"]."' class='badge badge-primary'>$".$row["precio"]."</a></h1>
-                                <h4 class='pt20 pb20'>".$row["nombre"]."</h4>
-                                <p class='text-white'>".$row["descripcion"]."</p>
+                                <h1 class='text-center mb-4'><a href='#" . $row["categoria"] . "' class='badge badge-primary'>$" . $row["precio"] . "</a></h1>
+                                <h4 class='pt20 pb20'>" . $row["nombre"] . "</h4>
+                                <p class='text-white'>" . $row["descripcion"] . "</p>
                             </div>
                         </div>
                     </div>
@@ -262,7 +266,7 @@ $error = isset($_GET['errors']) ? $_GET['errors'] : 'Desconocido';
             } else {
                 echo "<p>NO HAY CATEGORIAS DISPONIBLES</p>";
             }
-        
+
             $conn->close();
 
             echo "  </div>
@@ -270,28 +274,28 @@ $error = isset($_GET['errors']) ? $_GET['errors'] : 'Desconocido';
 
             for ($i = 1; $i < count($categorias); $i++) {
                 echo "
-                <div class='tab-pane fade' id='".$categorias[$i]."' role='tabpanel' aria-labelledby='pills-profile-tab'>
+                <div class='tab-pane' id='" . $categorias[$i] . "' role='tabpanel' aria-labelledby='pills-profile-tab'>
                     <div class='row'>
                 ";
-        
+
                 include 'controller/conexion.php';
-        
-        
-        
+
+
+
                 $sql = "SELECT p.imagen,p.nombre,p.descripcion,p.precio,c.nombre as categoria FROM Platillo p JOIN Categoria c ON p.idCategoria = c.idCategoria WHERE c.nombre = '$categorias[$i]'";
                 $result = $conn->query($sql);
-        
+
                 if ($result->num_rows > 0) {
-                    while($row = $result->fetch_assoc()) {
+                    while ($row = $result->fetch_assoc()) {
                         echo "
-                            <div class='col-md-4'>
+                            <div class='col-md-3'>
                                 <div class='card bg-transparent border my-3 my-md-0'>
-                                    <img src='".$row["imagen"]."' alt='".$row["nombre"]."'
+                                    <img src='" . $row["imagen"] . "' alt='" . $row["nombre"] . "'
                                         class='rounded-0 card-img-top mg-responsive' width='500'>
                                     <div class='card-body'>
-                                        <h1 class='text-center mb-4'><a href='#".$row["categoria"]."' class='badge badge-primary'>$".$row["precio"]."</a></h1>
-                                        <h4 class='pt20 pb20'>".$row["nombre"]."</h4>
-                                        <p class='text-white'>".$row["descripcion"]."</p>
+                                        <h1 class='text-center mb-4'><a href='#" . $row["categoria"] . "' class='badge badge-primary'>$" . $row["precio"] . "</a></h1>
+                                        <h4 class='pt20 pb20'>" . $row["nombre"] . "</h4>
+                                        <p class='text-white'>" . $row["descripcion"] . "</p>
                                     </div>
                                 </div>
                             </div>
@@ -300,10 +304,10 @@ $error = isset($_GET['errors']) ? $_GET['errors'] : 'Desconocido';
                 } else {
                     echo "<p>NO HAY CATEGORIAS DISPONIBLES</p>";
                 }
-        
+
                 $conn->close();
-                    
-                    
+
+
                 echo "
                 </div>
                 </div>
@@ -312,50 +316,8 @@ $error = isset($_GET['errors']) ? $_GET['errors'] : 'Desconocido';
 
             ?>
 
-
-
-            <div class="tab-pane fade" id="juices" role="tabpanel" aria-labelledby="pills-profile-tab">
-                <div class="row">
-                    <div class="col-md-4 my-3 my-md-0">
-                        <div class="card bg-transparent border">
-                            <img src="assets/imgs/blog-4.jpg" alt="template by DevCRID http://www.devcrud.com/"
-                                class="rounded-0 card-img-top mg-responsive">
-                            <div class="card-body">
-                                <h1 class="text-center mb-4"><a href="#" class="badge badge-primary">$15</a></h1>
-                                <h4 class="pt20 pb20">Consectetur Adipisicing Elit</h4>
-                                <p class="text-white">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa
-                                    provident illum officiis fugit laudantium voluptatem sit iste delectus qui ex. </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 my-3 my-md-0">
-                        <div class="card bg-transparent border">
-                            <img src="assets/imgs/blog-5.jpg" alt="template by DevCRID http://www.devcrud.com/"
-                                class="rounded-0 card-img-top mg-responsive">
-                            <div class="card-body">
-                                <h1 class="text-center mb-4"><a href="#" class="badge badge-primary">$29</a></h1>
-                                <h4 class="pt20 pb20">Ullam Laboriosam</h4>
-                                <p class="text-white">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa
-                                    provident illum officiis fugit laudantium voluptatem sit iste delectus qui ex. </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 my-3 my-md-0">
-                        <div class="card bg-transparent border">
-                            <img src="assets/imgs/blog-6.jpg" alt="template by DevCRID http://www.devcrud.com/"
-                                class="rounded-0 card-img-top mg-responsive">
-                            <div class="card-body">
-                                <h1 class="text-center mb-4"><a href="#" class="badge badge-primary">$3</a></h1>
-                                <h4 class="pt20 pb20">Fugit Ipsam</h4>
-                                <p class="text-white">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa
-                                    provident illum officiis fugit laudantium voluptatem sit iste delectus qui ex. </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
-        
+
 
     </div>
 
@@ -365,31 +327,28 @@ $error = isset($_GET['errors']) ? $_GET['errors'] : 'Desconocido';
         <div class="row mt-3 mb-5">
             <div class="col-md-4 my-3 my-md-0">
                 <div class="testmonial-card">
-                    <h3 class="testmonial-title">John Doe</h3>
-                    <h6 class="testmonial-subtitle">Web Designer</h6>
+                    <h3 class="testmonial-title">Elizabeth Aguilar</h3>
+                    <h6 class="testmonial-subtitle"></h6>
                     <div class="testmonial-body">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Earum nobis eligendi, quaerat
-                            accusamus ipsum sequi dignissimos consequuntur blanditiis natus. Aperiam!</p>
+                        <p>Hermosos lugar, la comida muy sabrosa y el servicio maravillosos. Un lugar muy recomendable con ambiente familiar</p>
                     </div>
                 </div>
             </div>
             <div class="col-md-4 my-3 my-md-0">
                 <div class="testmonial-card">
-                    <h3 class="testmonial-title">Steve Thomas</h3>
-                    <h6 class="testmonial-subtitle">UX/UI Designer</h6>
+                    <h3 class="testmonial-title">Alexa Rodriguez</h3>
+                    <h6 class="testmonial-subtitle"></h6>
                     <div class="testmonial-body">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laborum minus obcaecati cum
-                            eligendi perferendis magni dolorum ipsum magnam, sunt reiciendis natus. Aperiam!</p>
+                        <p>Esta muy bonito el lugar, es uno de los mejpres lugares en Chimalhuacán</p>
                     </div>
                 </div>
             </div>
             <div class="col-md-4 my-3 my-md-0">
                 <div class="testmonial-card">
-                    <h3 class="testmonial-title">Miranda Joy</h3>
-                    <h6 class="testmonial-subtitle">Graphic Designer</h6>
+                    <h3 class="testmonial-title">Geovany Díaz</h3>
+                    <h6 class="testmonial-subtitle"></h6>
                     <div class="testmonial-body">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid, nam. Earum nobis eligendi,
-                            dignissimos consequuntur blanditiis natus. Aperiam!</p>
+                        <p>Las comidas estan muy ricas y la cocteleria no esta nada mal</p>
                     </div>
                 </div>
             </div>
@@ -428,14 +387,16 @@ $error = isset($_GET['errors']) ? $_GET['errors'] : 'Desconocido';
                 <P class="text-muted">(123) 456-7890</P>
             </div>
             <div class="col-sm-4">
-                <h3>FIND US</h3>
-                <P class="text-muted">12345 Fake ST NoWhere AB Country</P>
+                <h3>DIRECCIÓN</h3>
+                <P class="text-muted">Cda. Cognahuac 9, San Pedro, 56334 Chimalhuacán, Méx.</P>
             </div>
         </div>
     </div>
     <div class="bg-dark text-light text-center border-top wow fadeIn">
         <p class="mb-0 py-3 text-muted small">&copy; Copyright
-            <script>document.write(new Date().getFullYear())</script> Made with <i class="ti-heart text-danger"></i> By
+            <script>
+                document.write(new Date().getFullYear())
+            </script> Made with <i class="ti-heart text-danger"></i> By
             <a href="http://devcrud.com">DevCRUD</a>
         </p>
     </div>
@@ -452,10 +413,9 @@ $error = isset($_GET['errors']) ? $_GET['errors'] : 'Desconocido';
     <script src="assets/vendors/wow/wow.js"></script>
 
     <!-- google maps -->
-    <script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCtme10pzgKSPeJVJrG1O3tjR6lk98o4w8&callback=initMap"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCtme10pzgKSPeJVJrG1O3tjR6lk98o4w8&callback=initMap"></script>
 
-  
+
 
 </body>
 
