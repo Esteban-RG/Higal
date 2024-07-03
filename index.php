@@ -141,7 +141,7 @@ $error = isset($_GET['errors']) ? $_GET['errors'] : 'Desconocido';
             while ($row = $result->fetch_assoc()) {
                 echo "
                 <div class='col-sm-6 col-lg-3 gallary-item wow fadeIn'>
-                <img src=" . $row["imagen"] . " alt=" . $row["nombre"] . " class='gallary-img'>
+                <img src='" . $row["imagen"] . "'alt='" . $row["nombre"] . "' class='gallary-img'>
                 </div>";
             }
         } else {
