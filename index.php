@@ -359,17 +359,15 @@ $error = isset($_GET['errors']) ? $_GET['errors'] : 'Desconocido';
     <div id="contact" class="container-fluid bg-dark text-light border-top wow fadeIn">
         <div class="row">
             <div class="col-md-6 px-0">
-                <div id="map" style="width: 100%; height: 100%; min-height: 400px"></div>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3762.721334410449!2d-98.94986442478584!3d19.42444268185324!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1e3d71cf164d1%3A0x2a077eeb5ff8ce30!2sHigal!5e0!3m2!1ses!2smx!4v1720071426892!5m2!1ses!2smx" width="600" height="450" style="width: 100%; height: 100%; min-height: 400px; border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
             <div class="col-md-6 px-5 has-height-lg middle-items">
-                <h3>FIND US</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sit, laboriosam doloremque odio delectus,
-                    sunt magnam laborum impedit molestiae, magni quae ipsum, ullam eos! Alias suscipit impedit et,
-                    adipisci illo quam.</p>
+                <h3>Visitanos</h3>
+                <p>Te invitamos a conocer nuestro restaurante, un lugar donde podrás disfrutar de una experiencia gastronómica única. Nuestra misión es ofrecerte los mejores platillos con ingredientes frescos y de alta calidad. Ven y disfruta de un ambiente acogedor y familiar.</p>
                 <div class="text-muted">
-                    <p><span class="ti-location-pin pr-3"></span> 12345 Fake ST NoWhere, AB Country</p>
-                    <p><span class="ti-support pr-3"></span> (123) 456-7890</p>
-                    <p><span class="ti-email pr-3"></span>info@website.com</p>
+                    <p><span class="ti-location-pin pr-3"></span><a href="https://maps.app.goo.gl/wYkKMsbZnxC9fTiu5">Cda. Cognahuac 9, San Pedro, 56334 Chimalhuacán, Méx.</a></p>
+                    <p><span class="ti-instagram pr-3"></span><a href="https://www.instagram.com/higal_restaurante_jardin">Instagram</a></p>
+                    <p><span class="ti-facebook pr-3"></span><a href="https://www.facebook.com/p/HigAl-Restaurante-Jard%C3%ADn-100083409247341/">Facebook</a></p>
                 </div>
             </div>
         </div>
@@ -379,12 +377,12 @@ $error = isset($_GET['errors']) ? $_GET['errors'] : 'Desconocido';
     <div class="container-fluid bg-dark text-light has-height-md middle-items border-top text-center wow fadeIn">
         <div class="row">
             <div class="col-sm-4">
-                <h3>EMAIL US</h3>
-                <P class="text-muted">info@website.com</P>
+                <h3>EMAIL</h3>
+                <P class="text-muted">elhigalrestaurante@gmail.com</P>
             </div>
             <div class="col-sm-4">
-                <h3>CALL US</h3>
-                <P class="text-muted">(123) 456-7890</P>
+                <h3>TELÉFONO</h3>
+                <P class="text-muted">55 2078 8985</P>
             </div>
             <div class="col-sm-4">
                 <h3>DIRECCIÓN</h3>
@@ -392,14 +390,7 @@ $error = isset($_GET['errors']) ? $_GET['errors'] : 'Desconocido';
             </div>
         </div>
     </div>
-    <div class="bg-dark text-light text-center border-top wow fadeIn">
-        <p class="mb-0 py-3 text-muted small">&copy; Copyright
-            <script>
-                document.write(new Date().getFullYear())
-            </script> Made with <i class="ti-heart text-danger"></i> By
-            <a href="http://devcrud.com">DevCRUD</a>
-        </p>
-    </div>
+  
     <!-- end of page footer -->
 
     <!-- core  -->
@@ -411,9 +402,6 @@ $error = isset($_GET['errors']) ? $_GET['errors'] : 'Desconocido';
 
     <!-- wow.js -->
     <script src="assets/vendors/wow/wow.js"></script>
-
-    <!-- google maps -->
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCtme10pzgKSPeJVJrG1O3tjR6lk98o4w8&callback=initMap"></script>
 
 
 

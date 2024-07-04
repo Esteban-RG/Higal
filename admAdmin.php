@@ -149,11 +149,6 @@ $error = isset($_GET['errors']) ? $_GET['errors'] : 'Desconocido';
                                             <input type='hidden' name='action' value='delete'>
                                             <input type='submit' style='background-color: #e22121; margin:10px; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; font-size: 16px;' value='Eliminar'>
                                         </form>
-                                        <form action='controller/administradoresDAO.php' method='post'>
-                                            <input type='hidden' name='idAdministrador' value='" . $row["idAdministrador"] . "'>
-                                            <input type='hidden' name='action' value='update'>
-                                            <input type='submit' style='background-color: #a970ff; margin:10px; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; font-size: 16px;' value='Editar'>
-                                        </form>
                                     </td>
                                 </tr>";
                             }
