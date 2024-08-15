@@ -1,6 +1,9 @@
 <?php
 include 'dao/mesaDAO.php';
 
+$error = isset($_GET['error']) ? $_GET['error'] : 'Desconocido';
+
+
 session_start();
 if (!isset($_SESSION['idAdministrador'])) {
     header("Location: admPanel.php");
@@ -16,77 +19,29 @@ $update = isset($_GET['update']) ? $_GET['update'] : 'Desconocido';
 ?>
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <title>Administración de la Base de Datos</title>
     <link rel="stylesheet" href="assets/css/adminPanel.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
+
 <body>
     <script>
-        var insert = <?php echo json_encode($insert); ?>;
-        var delet = <?php echo json_encode($delete); ?>;
-        var update = <?php echo json_encode($update); ?>;
-
-        if (insert === 'true') {
-            Swal.fire({
-                icon: "success",
-                text: "El elemento se inserto correctamente"
-            }).then(() => {
-                window.location.href='admMesa.php';
-            });
-        }else if(insert === 'false'){
-            Swal.fire({
-                icon: "error",
-                text: "Ocurrió un error al insertar el elemento"
-            }).then(() => {
-                window.location.href='admMesa.php';
-            });
-        }
-
-        if (delet  === 'true') {
-            Swal.fire({
-                icon: "success",
-                text: "El elemento se elimino correctamente"
-            }).then(() => {
-                window.location.href='admMesa.php';
-            });
-        }else if(delet === 'false'){
-            Swal.fire({
-                icon: "error",
-                text: "Ocurrió un error al eliminar el elemento"
-            }).then(() => {
-                window.location.href='admMesa.php';
-            });
-        }
-        
-        if (update  === 'true') {
-            Swal.fire({
-                icon: "success",
-                text: "El elemento se actualizo correctamente"
-            }).then(() => {
-                window.location.href='admMesa.php';
-            });
-        }else if(update  === 'false'){
-            Swal.fire({
-                icon: "error",
-                text: "Ocurrió un error al actualizar el elemento"
-            }).then(() => {
-                window.location.href='admMesa.php';
-            });
-        }
+        var error = <?php echo json_encode($error); ?>;
     </script>
     <div class="container">
         <aside class="sidebar">
             <h2>Tablas</h2>
             <ul>
-                <li><a href="admReservacion.php" >Reservaciones</a></li>
-                <li><a href="admPlatillo.php" >Platillos</a></li>
+                <li><a href="admReservacion.php">Reservaciones</a></li>
+                <li><a href="admPlatillo.php">Platillos</a></li>
                 <li><a href="admCliente.php">Clientes</a></li>
                 <li><a href="admCategoria.php">Categorias</a></li>
-                <li><a href="admMesa.php" style="color:blue;" >Mesas</a></li>
+                <li><a href="admMesa.php" style="color:blue;">Mesas</a></li>
                 <li><a href="admAdmin.php">Administradores</a></li>
-                <li><a href="controller/sesionKiller.php" style="color:#ff0000;" >Cerrar Sesion</a></li>
+                <li><a href="controller/sesionKiller.php" style="color:#ff0000;">Cerrar Sesion</a></li>
 
             </ul>
         </aside>
@@ -102,22 +57,22 @@ $update = isset($_GET['update']) ? $_GET['update'] : 'Desconocido';
                 </form>
             </div>
             <table>
-        <thead>
-            <tr>
-                <th>ID de Mesa</th>
-                <th>Asientos</th>
-                <th>Acciones</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php
-                $mesaDAO = new MesaDAO;
-                $datos = $mesaDAO->obtenerMesas();
-                
-                if ($datos !== false && count($datos) > 0) {
-                foreach ($datos as $row) {
-                        echo "
+                <thead>
+                    <tr>
+                        <th>ID de Mesa</th>
+                        <th>Asientos</th>
+                        <th>Acciones</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    $mesaDAO = new MesaDAO;
+                    $datos = $mesaDAO->obtenerMesas();
+
+                    if ($datos !== false && count($datos) > 0) {
+                        foreach ($datos as $row) {
+                            echo "
                         
                         <tr>
                             <form action='controller/mesaLogic.php' method='post'>
@@ -138,14 +93,14 @@ $update = isset($_GET['update']) ? $_GET['update'] : 'Desconocido';
                                 </form>
                             </td>
                         </tr>";
+                        }
+                    } else {
+                        echo "<tr><td colspan='5'>No se encontraron mesas registradas.</td></tr>";
                     }
-                } else {
-                    echo "<tr><td colspan='5'>No se encontraron mesas registradas.</td></tr>";
-                }       
-            
-            ?>
-        </tbody>
-    </table>
+
+                    ?>
+                </tbody>
+            </table>
         </main>
     </div>
 
@@ -158,7 +113,7 @@ $update = isset($_GET['update']) ? $_GET['update'] : 'Desconocido';
                 formulario.style.display = 'none'; // Oculta el formulario
             }
         }
-
     </script>
 </body>
+
 </html>

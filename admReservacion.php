@@ -2,6 +2,9 @@
 include 'dao/reservacionDAO.php';
 include 'dao/mesaDAO.php';
 
+$error = isset($_GET['error']) ? $_GET['error'] : 'Desconocido';
+
+
 
 $reservacionDAO = new ReservacionDAO();
 $mesaDAO = new MesaDAO();
@@ -16,90 +19,24 @@ if (!isset($_SESSION['idAdministrador'])) {
 }
 ?>
 
-<?php
-$insert = isset($_GET['insert']) ? $_GET['insert'] : 'Desconocido';
-$delete = isset($_GET['delete']) ? $_GET['delete'] : 'Desconocido';
-$update = isset($_GET['update']) ? $_GET['update'] : 'Desconocido';
-$error = isset($_GET['errors']) ? $_GET['errors'] : 'Desconocido';
 
-
-
-
-?>
 
 
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <title>Administración de la Base de Datos</title>
     <link rel="stylesheet" href="assets/css/adminPanel.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
+
 <body>
     <script>
-        var insert = <?php echo json_encode($insert); ?>;
-        var delet = <?php echo json_encode($delete); ?>;
-        var update = <?php echo json_encode($update); ?>;
-        var errors = <?php echo json_encode($error); ?>;
-
-        if (insert === 'true') {
-            Swal.fire({
-                icon: "success",
-                text: "El elemento se inserto correctamente"
-            }).then(() => {
-                window.location.href='admReservacion.php';
-            });
-        }
-
-        if (insert === 'false') {
-            let swalOptions = {
-                icon: "error",
-                title: "Error",
-            };
-            
-            if (errors !== 'Desconocido') {
-                swalOptions.text = errors;
-            }
-            
-            Swal.fire(swalOptions).then(() => {
-                window.location.href = 'admReservacion.php';
-            });
-        }
-
-
-        if (delet  === 'true') {
-            Swal.fire({
-                icon: "success",
-                text: "El elemento se elimino correctamente"
-            }).then(() => {
-                window.location.href='admReservacion.php';
-            });
-        }else if(delet === 'false'){
-            Swal.fire({
-                icon: "error",
-                text: "Ocurrió un error al eliminar el elemento"
-            }).then(() => {
-                window.location.href='admReservacion.php';
-            });
-        }
-        
-        if (update  === 'true') {
-            Swal.fire({
-                icon: "success",
-                text: "El elemento se actualizo correctamente"
-            }).then(() => {
-                window.location.href='admReservacion.php';
-            });
-        }else if(update  === 'false'){
-            Swal.fire({
-                icon: "error",
-                text: "Ocurrió un error al actualizar el elemento"
-            }).then(() => {
-                window.location.href='admReservacion.php';
-            });
-        }
+        var error = <?php echo json_encode($error); ?>;
     </script>
+
     <div class="container">
         <aside class="sidebar">
             <h2>Tablas</h2>
@@ -110,7 +47,7 @@ $error = isset($_GET['errors']) ? $_GET['errors'] : 'Desconocido';
                 <li><a href="admCategoria.php">Categorias</a></li>
                 <li><a href="admMesa.php">Mesas</a></li>
                 <li><a href="admAdmin.php">Administradores</a></li>
-                <li><a href="controller/sesionKiller.php" style="color:#ff0000;" >Cerrar Sesion</a></li>
+                <li><a href="controller/sesionKiller.php" style="color:#ff0000;">Cerrar Sesion</a></li>
 
             </ul>
         </aside>
@@ -127,12 +64,12 @@ $error = isset($_GET['errors']) ? $_GET['errors'] : 'Desconocido';
                             <input type="email" name="email" class="form-control form-control-lg custom-form-control" placeholder="Email" maxlength="30" required>
                         </div>
                         <div class="col-sm-6 col-md-3 col-xs-12 my-2">
-                            <input type="number" name="cantPersonas" class="form-control form-control-lg custom-form-control" placeholder="Cantidad de invitados" max="20" min="1" required >
+                            <input type="number" name="cantPersonas" class="form-control form-control-lg custom-form-control" placeholder="Cantidad de invitados" max="20" min="1" required>
                         </div>
                         <div class="col-sm-6 col-md-3 col-xs-12 my-2">
                             <input type="datetime-local" name="fecha" class="form-control form-control-lg custom-form-control" placeholder="Fecha y Hora" required>
                         </div>
-                        <input type="hidden" id="action" name="action" value="insert" >
+                        <input type="hidden" id="action" name="action" value="insert">
                     </div>
                     <button type="submit" class="btn btn-lg btn-primary" id="rounded-btn">Agendar cita</button>
                 </form>
@@ -148,11 +85,11 @@ $error = isset($_GET['errors']) ? $_GET['errors'] : 'Desconocido';
                     <th></th>
                 </tr>
                 <?php
-                    $datos = $reservacionDAO -> obtenerReservaciones();
+                $datos = $reservacionDAO->obtenerReservaciones();
 
-                    if ($datos !== false && count($datos) > 0) {
-                        foreach ($datos as $row) {
-                                echo "
+                if ($datos !== false && count($datos) > 0) {
+                    foreach ($datos as $row) {
+                        echo "
                                 
                                 <tr>
                                     <form action='controller/reservacionLogic.php' method='post'>
@@ -166,12 +103,12 @@ $error = isset($_GET['errors']) ? $_GET['errors'] : 'Desconocido';
                                         <select name='idCategoria' class='form-control form-control-lg custom-form-control' required style='pointer-events: none;'>
                                         <option >Seleccione una mesa</option>
                                         ";
-                                                foreach($mesas as $mesa)  {
-                                                    echo "<option value='" . $mesa["idMesa"] . "' " . 
-                                                    ($row["idMesa"] == $mesa["idMesa"] ? "selected" : "") . 
-                                                    ">" . htmlspecialchars($mesa["idMesa"]) . "</option>";
-                                                }
-                                        echo "
+                        foreach ($mesas as $mesa) {
+                            echo "<option value='" . $mesa["idMesa"] . "' " .
+                                ($row["idMesa"] == $mesa["idMesa"] ? "selected" : "") .
+                                ">" . htmlspecialchars($mesa["idMesa"]) . "</option>";
+                        }
+                        echo "
                                         </select>
                                        </td> 
                                                                                 
@@ -194,10 +131,10 @@ $error = isset($_GET['errors']) ? $_GET['errors'] : 'Desconocido';
                                         </form>
                                     </td>
                                 </tr>";
-                            }
-                        } else {
-                            echo "<tr><td colspan='5'>No se encontraron reservaciones registradas.</td></tr>";
-                        }    
+                    }
+                } else {
+                    echo "<tr><td colspan='5'>No se encontraron reservaciones registradas.</td></tr>";
+                }
                 ?>
             </table>
         </main>
@@ -205,14 +142,14 @@ $error = isset($_GET['errors']) ? $_GET['errors'] : 'Desconocido';
 
     <script>
         function mostrarFormulario() {
-            var formulario = document.querySelector('.new'); 
+            var formulario = document.querySelector('.new');
             if (formulario.style.display === 'none' || formulario.style.display === '') {
                 formulario.style.display = 'block';
             } else {
                 formulario.style.display = 'none';
             }
         }
-
     </script>
 </body>
+
 </html>

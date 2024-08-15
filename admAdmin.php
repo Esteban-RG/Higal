@@ -1,6 +1,9 @@
 <?php
 include 'dao/administradorDAO.php';
 
+$error = isset($_GET['error']) ? $_GET['error'] : 'Desconocido';
+
+
 session_start();
 if (!isset($_SESSION['idAdministrador'])) {
     header("Location: admPanel.php");
@@ -8,100 +11,31 @@ if (!isset($_SESSION['idAdministrador'])) {
 }
 ?>
 
-
-<?php
-$insert = isset($_GET['insert']) ? $_GET['insert'] : 'Desconocido';
-$delete = isset($_GET['delete']) ? $_GET['delete'] : 'Desconocido';
-$update = isset($_GET['update']) ? $_GET['update'] : 'Desconocido';
-$error = isset($_GET['errors']) ? $_GET['errors'] : 'Desconocido';
-
-
-
-?>
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <title>Administración de la Base de Datos</title>
     <link rel="stylesheet" href="assets/css/adminPanel.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
+
 <body>
     <script>
-        var insert = <?php echo json_encode($insert); ?>;
-        var delet = <?php echo json_encode($delete); ?>;
-        var update = <?php echo json_encode($update); ?>;
-        var errors = <?php echo json_encode($error); ?>;
-
-        if (insert === 'true') {
-            Swal.fire({
-                icon: "success",
-                text: "El elemento se inserto correctamente"
-            }).then(() => {
-                window.location.href='admAdmin.php';
-            });
-        }
-
-        if (insert === 'false') {
-            let swalOptions = {
-                icon: "error",
-                title: "Error",
-            };
-            
-            if (errors !== 'Desconocido') {
-                swalOptions.text = errors;
-            }
-            
-            Swal.fire(swalOptions).then(() => {
-                window.location.href = 'admAdmin.php';
-            });
-        }
-
-
-
-        if (delet  === 'true') {
-            Swal.fire({
-                icon: "success",
-                text: "El elemento se elimino correctamente"
-            }).then(() => {
-                window.location.href='admAdmin.php';
-            });
-        }else if(delet === 'false'){
-            Swal.fire({
-                icon: "error",
-                text: "Ocurrió un error al eliminar el elemento"
-            }).then(() => {
-                window.location.href='admAdmin.php';
-            });
-        }
-        
-        if (update  === 'true') {
-            Swal.fire({
-                icon: "success",
-                text: "El elemento se actualizo correctamente"
-            }).then(() => {
-                window.location.href='admAdmin.php';
-            });
-        }else if(update  === 'false'){
-            Swal.fire({
-                icon: "error",
-                text: "Ocurrió un error al actualizar el elemento"
-            }).then(() => {
-                window.location.href='admAdmin.php';
-            });
-        }
+        var error = <?php echo json_encode($error); ?>;
     </script>
     <div class="container">
         <aside class="sidebar">
             <h2>Tablas</h2>
             <ul>
-                <li><a href="admReservacion.php" >Reservaciones</a></li>
-                <li><a href="admPlatillo.php" >Platillos</a></li>
-                <li><a href="admCliente.php"  >Clientes</a></li>
+                <li><a href="admReservacion.php">Reservaciones</a></li>
+                <li><a href="admPlatillo.php">Platillos</a></li>
+                <li><a href="admCliente.php">Clientes</a></li>
                 <li><a href="admCategoria.php">Categorias</a></li>
-                <li><a href="admMesa.php"  >Mesas</a></li>
+                <li><a href="admMesa.php">Mesas</a></li>
                 <li><a href="admAdmin.php" style="color:blue;">Administradores</a></li>
-                <li><a href="controller/sesionKiller.php" style="color:#ff0000;" >Cerrar Sesion</a></li>
+                <li><a href="controller/sesionKiller.php" style="color:#ff0000;">Cerrar Sesion</a></li>
 
             </ul>
         </aside>
@@ -137,10 +71,10 @@ $error = isset($_GET['errors']) ? $_GET['errors'] : 'Desconocido';
                 </thead>
                 <tbody>
                     <?php
-                       $administradorDAO = new AdministradorDAO;
-                       $administradores = $administradorDAO->obtenerAdministradores();
-                       
-                       if ($administradores !== false && count($administradores) > 0) {
+                    $administradorDAO = new AdministradorDAO;
+                    $administradores = $administradorDAO->obtenerAdministradores();
+
+                    if ($administradores !== false && count($administradores) > 0) {
                         foreach ($administradores as $row) {
                             echo "
                             
@@ -167,10 +101,10 @@ $error = isset($_GET['errors']) ? $_GET['errors'] : 'Desconocido';
                                 </td>
                             </tr>";
                         }
-                        } else {
-                            echo "<tr><td colspan='5'>No se encontraron administradores.</td></tr>";
-                        }       
-                        
+                    } else {
+                        echo "<tr><td colspan='5'>No se encontraron administradores.</td></tr>";
+                    }
+
                     ?>
                 </tbody>
             </table>
@@ -181,12 +115,12 @@ $error = isset($_GET['errors']) ? $_GET['errors'] : 'Desconocido';
         function mostrarFormulario() {
             var formulario = document.querySelector('.new');
             if (formulario.style.display === 'none' || formulario.style.display === '') {
-                formulario.style.display = 'block'; 
+                formulario.style.display = 'block';
             } else {
-                formulario.style.display = 'none'; 
+                formulario.style.display = 'none';
             }
         }
-
     </script>
 </body>
+
 </html>

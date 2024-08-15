@@ -1,14 +1,17 @@
 <?php
 require_once 'Database.php';
 
-class ClienteDAO {
+class ClienteDAO
+{
     private $pdo;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->pdo = Database::getInstance();
     }
 
-    public function insertarCliente($nombre,$correo) {
+    public function insertarCliente($nombre, $correo)
+    {
         try {
             $sql = "INSERT INTO cliente (nombre, correo) VALUES (:nombre, :correo)";
             $stmt = $this->pdo->prepare($sql);
@@ -21,7 +24,8 @@ class ClienteDAO {
         }
     }
 
-    public function actualizarCliente($idCliente,$nombre,$correo) {
+    public function actualizarCliente($idCliente, $nombre, $correo)
+    {
         try {
             $sql = "UPDATE cliente SET nombre = :nombre, correo = :correo WHERE idCliente = :idCliente";
             $stmt = $this->pdo->prepare($sql);
@@ -34,9 +38,10 @@ class ClienteDAO {
             return false;
         }
     }
-    
 
-    public function eliminarCliente($idCliente) {
+
+    public function eliminarCliente($idCliente)
+    {
         try {
             $sql = "DELETE FROM cliente WHERE idCliente = :idCliente";
             $stmt = $this->pdo->prepare($sql);
@@ -48,11 +53,12 @@ class ClienteDAO {
         }
     }
 
-    public function obtenerClientes() {
+    public function obtenerClientes()
+    {
         try {
             $sql = "SELECT idCliente, nombre, correo FROM cliente";
             $stmt = $this->pdo->prepare($sql);
-            $stmt->execute(); 
+            $stmt->execute();
             $datos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
             return $datos;
@@ -62,12 +68,13 @@ class ClienteDAO {
         }
     }
 
-    public function buscarCorreo($correo) {
+    public function buscarCorreo($correo)
+    {
         try {
             $sql = "SELECT idCliente FROM cliente WHERE correo = :correo";
             $stmt = $this->pdo->prepare($sql);
             $stmt->bindParam(':correo', $correo);
-            $stmt->execute(); 
+            $stmt->execute();
             $datos = $stmt->fetch(PDO::FETCH_ASSOC);
             return $datos;
         } catch (PDOException $e) {
@@ -76,13 +83,14 @@ class ClienteDAO {
         }
     }
 
-    public function obtenerID($correo, $nombre) {
+    public function obtenerID($correo, $nombre)
+    {
         try {
             $sql = "SELECT idCliente FROM cliente WHERE correo = :correo AND nombre = :nombre";
             $stmt = $this->pdo->prepare($sql);
             $stmt->bindParam(':correo', $correo);
             $stmt->bindParam(':nombre', $nombre);
-            $stmt->execute(); 
+            $stmt->execute();
             $datos = $stmt->fetch(PDO::FETCH_ASSOC);
 
             return $datos;
@@ -91,6 +99,4 @@ class ClienteDAO {
             return false;
         }
     }
-    
 }
-?>

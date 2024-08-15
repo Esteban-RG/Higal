@@ -17,8 +17,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         header('Location: ../admPanel.php?error=badAuentication'); //usuario o contraseña incorrecto
     }
-
 } else {
     echo "Método de solicitud no permitido.";
 }
-?>

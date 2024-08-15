@@ -10,47 +10,38 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $idMesa = intval($_POST['idMesa']);
 
 
-   
-    if($action == 'insert'){
+
+    if ($action == 'insert') {
 
         $asientos = $_POST['asientos'];
 
-        $mesaInsertada = $mesaDAO -> insertarMesa($idMesa,$asientos);
+        $mesaInsertada = $mesaDAO->insertarMesa($idMesa, $asientos);
 
         if ($mesaInsertada) {
             header('Location: ../admMesa.php?error=false');
         } else {
-            header('Location: ../admMesa.php?error=systemError'); 
+            header('Location: ../admMesa.php?error=systemError');
         }
-
-        
-
-    }else if ($action == 'update') {
+    } else if ($action == 'update') {
         $asientos = $_POST['asientos'];
 
-        $mesaActualizada = $mesaDAO -> actualizarMesa($idMesa,$asientos);
+        $mesaActualizada = $mesaDAO->actualizarMesa($idMesa, $asientos);
 
         if ($mesaActualizada) {
             header('Location: ../admMesa.php?error=false');
         } else {
-            header('Location: ../admMesa.php?error=systemError'); 
+            header('Location: ../admMesa.php?error=systemError');
         }
+    } else if ($action == 'delete') {
 
-       
-    }else if ($action == 'delete') {
-
-        $mesaEliminada = $mesaDAO -> eliminarMesa($idMesa);
+        $mesaEliminada = $mesaDAO->eliminarMesa($idMesa);
 
         if ($mesaEliminada) {
             header('Location: ../admMesa.php?error=false');
         } else {
-            header('Location: ../admMesa.php?error=systemError'); 
+            header('Location: ../admMesa.php?error=systemError');
         }
-       
     }
-
-    
-
 } else {
     echo "Método de solicitud no permitido.";
 }

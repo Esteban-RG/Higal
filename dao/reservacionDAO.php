@@ -1,14 +1,17 @@
 <?php
 require_once 'Database.php';
 
-class ReservacionDAO {
+class ReservacionDAO
+{
     private $pdo;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->pdo = Database::getInstance();
     }
 
-    public function insertarReservacion($fecha, $cantPersonas, $idMesa, $idCliente) {
+    public function insertarReservacion($fecha, $cantPersonas, $idMesa, $idCliente)
+    {
         try {
             $sql = "INSERT INTO reservacion (fecha, cantPersonas, idMesa, idCliente) VALUES (:fecha, :cantPersonas, :idMesa, :idCliente)";
             $stmt = $this->pdo->prepare($sql);
@@ -23,7 +26,8 @@ class ReservacionDAO {
         }
     }
 
-    public function actualizarReservacion($idReservacion,$fecha,$cantPersonas,$idMesa,$idCliente) {
+    public function actualizarReservacion($idReservacion, $fecha, $cantPersonas, $idMesa, $idCliente)
+    {
         try {
             $sql = "UPDATE reservacion SET fecha = :fecha, cantPersonas = :cantPersonas, idMesa = :idMesa, idCliente = :idCliente WHERE idReservacion = :idReservacion";
             $stmt = $this->pdo->prepare($sql);
@@ -39,7 +43,8 @@ class ReservacionDAO {
         }
     }
 
-    public function eliminarReservacion($idReservacion) {
+    public function eliminarReservacion($idReservacion)
+    {
         try {
             $sql = "DELETE FROM reservacion WHERE idReservacion = :idReservacion";
             $stmt = $this->pdo->prepare($sql);
@@ -51,14 +56,15 @@ class ReservacionDAO {
         }
     }
 
-    public function obtenerReservaciones() {
+    public function obtenerReservaciones()
+    {
         try {
             $sql = "SELECT r.idReservacion, r.fecha, r.cantPersonas, r.estado, m.idMesa, c.nombre AS cliente, r.idCliente
                       FROM reservacion r
                       JOIN mesa m ON r.idMesa = m.idMesa
                       JOIN cliente c ON r.idCliente = c.idCliente";
             $stmt = $this->pdo->prepare($sql);
-            $stmt->execute(); 
+            $stmt->execute();
             $reservaciones = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
             return $reservaciones;
@@ -68,7 +74,8 @@ class ReservacionDAO {
         }
     }
 
-    public function obtenerMesaDisponible($cantPersonas,$fecha) {
+    public function obtenerMesaDisponible($cantPersonas, $fecha)
+    {
         try {
             $sql = "SELECT idMesa 
             FROM mesa 
@@ -84,7 +91,7 @@ class ReservacionDAO {
             $stmt = $this->pdo->prepare($sql);
             $stmt->bindParam(':cantPersonas', $cantPersonas);
             $stmt->bindParam(':fecha', $fecha);
-            $stmt->execute(); 
+            $stmt->execute();
             $mesa = $stmt->fetch(PDO::FETCH_ASSOC);
 
             return $mesa;
@@ -93,6 +100,4 @@ class ReservacionDAO {
             return false;
         }
     }
-
 }
-?>

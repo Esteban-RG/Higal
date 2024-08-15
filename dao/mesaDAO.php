@@ -1,14 +1,17 @@
 <?php
 require_once 'Database.php';
 
-class MesaDAO {
+class MesaDAO
+{
     private $pdo;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->pdo = Database::getInstance();
     }
 
-    public function insertarMesa($idMesa, $asientos) {
+    public function insertarMesa($idMesa, $asientos)
+    {
         try {
             $sql = "INSERT INTO mesa (idMesa, asientos) VALUES (:idMesa, :asientos)";
             $stmt = $this->pdo->prepare($sql);
@@ -21,7 +24,8 @@ class MesaDAO {
         }
     }
 
-    public function actualizarMesa($idMesa,$asientos) {
+    public function actualizarMesa($idMesa, $asientos)
+    {
         try {
             $sql = "UPDATE mesa SET asientos = :asientos WHERE idMesa = :idMesa";
             $stmt = $this->pdo->prepare($sql);
@@ -33,9 +37,10 @@ class MesaDAO {
             return false;
         }
     }
-    
 
-    public function eliminarMesa($idMesa) {
+
+    public function eliminarMesa($idMesa)
+    {
         try {
             $sql = "DELETE FROM mesa WHERE idMesa = :idMesa";
             $stmt = $this->pdo->prepare($sql);
@@ -47,11 +52,12 @@ class MesaDAO {
         }
     }
 
-    public function obtenerMesas() {
+    public function obtenerMesas()
+    {
         try {
             $sql = "SELECT * FROM mesa";
             $stmt = $this->pdo->prepare($sql);
-            $stmt->execute(); 
+            $stmt->execute();
             $datos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
             return $datos;
@@ -60,6 +66,4 @@ class MesaDAO {
             return false;
         }
     }
-    
 }
-?>

@@ -13,8 +13,7 @@ $galeria = $platilloDAO->obtenerPlatillosVisibles();
 $categorias = $categoriaDAO->obtenerCategorias();
 
 
-$reservation = isset($_GET['reservation']) ? $_GET['reservation'] : 'Desconocido';
-$error = isset($_GET['errors']) ? $_GET['errors'] : 'Desconocido';
+$error = isset($_GET['error']) ? $_GET['error'] : 'Desconocido';
 
 ?>
 <!DOCTYPE html>
@@ -48,27 +47,7 @@ $error = isset($_GET['errors']) ? $_GET['errors'] : 'Desconocido';
 
 <body data-spy="scroll" data-target=".navbar" data-offset="40" id="home">
     <script>
-        var reservation = <?php echo json_encode($reservation); ?>;
-        var errors = <?php echo json_encode($error); ?>;
-
-        if (reservation === 'true') {
-            Swal.fire({
-                icon: "success",
-                title: "Tu reservacion se almaceno correctamente",
-                text: "Recibiras un correo confirmando tu reservación"
-            }).then(() => {
-                window.location.href = 'index.php';
-            });
-        }
-
-        if (errors != 'Desconocido') {
-            Swal.fire({
-                icon: "error",
-                text: errors,
-            }).then(() => {
-                window.location.href = 'index.php';
-            });
-        }
+        var error = <?php echo json_encode($error); ?>;
     </script>
 
     <!-- Navbar -->

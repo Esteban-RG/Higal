@@ -1,6 +1,7 @@
 <?php
 
-function validateName($nombre){
+function validateName($nombre)
+{
     if (preg_match('/[0-9]/', $nombre)) {
         return false;
     } else {
@@ -8,20 +9,21 @@ function validateName($nombre){
     }
 }
 
-function validateEmail($email){
+function validateEmail($email)
+{
     if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
         return true;
     }
 }
 
-function validateDate($date){
-     $currentDate = new DateTime();
-     $inputDate = new DateTime($date);
-     
-     if ($inputDate > $currentDate) {
-            return true;
-     }else{
+function validateDate($date)
+{
+    $currentDate = new DateTime();
+    $inputDate = new DateTime($date);
+
+    if ($inputDate > $currentDate) {
+        return true;
+    } else {
         return false;
-     }
+    }
 }
-?>

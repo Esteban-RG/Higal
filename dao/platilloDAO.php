@@ -1,14 +1,17 @@
 <?php
 require_once 'Database.php';
 
-class PlatilloDAO {
+class PlatilloDAO
+{
     private $pdo;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->pdo = Database::getInstance();
     }
 
-    public function insertarPlatillo($nombre, $descripcion, $precio, $idCategoria, $imagen, $visibilidad) {
+    public function insertarPlatillo($nombre, $descripcion, $precio, $idCategoria, $imagen, $visibilidad)
+    {
         try {
             $sql = "INSERT INTO platillo (nombre, descripcion, precio, idCategoria, imagen, visibilidad) 
             VALUES (:nombre, :descripcion, :precio, :idCategoria, :imagen, :visibilidad)";
@@ -26,7 +29,8 @@ class PlatilloDAO {
         }
     }
 
-    public function actualizarPlatillo($idPlatillo,$nombre, $descripcion, $precio, $idCategoria, $visibilidad) {
+    public function actualizarPlatillo($idPlatillo, $nombre, $descripcion, $precio, $idCategoria, $visibilidad)
+    {
         try {
             $sql = "UPDATE platillo SET nombre = :nombre, descripcion = :descripcion, precio = :precio, idCategoria = :idCategoria, visibilidad = :visibilidad
             WHERE idPlatillo = :idPlatillo";
@@ -44,7 +48,8 @@ class PlatilloDAO {
         }
     }
 
-    public function actualizarImagen($idPlatillo, $imagen) {
+    public function actualizarImagen($idPlatillo, $imagen)
+    {
         try {
             $sql = "UPDATE platillo SET imagen = :imagen
             WHERE idPlatillo = :idPlatillo";
@@ -57,9 +62,10 @@ class PlatilloDAO {
             return false;
         }
     }
-    
 
-    public function eliminarPlatillo($idPlatillo) {
+
+    public function eliminarPlatillo($idPlatillo)
+    {
         try {
             $sql = "DELETE FROM platillo WHERE idPlatillo = :idPlatillo";
             $stmt = $this->pdo->prepare($sql);
@@ -71,11 +77,12 @@ class PlatilloDAO {
         }
     }
 
-    public function obtenerPlatillos() {
+    public function obtenerPlatillos()
+    {
         try {
             $sql = "SELECT * FROM platillo";
             $stmt = $this->pdo->prepare($sql);
-            $stmt->execute(); 
+            $stmt->execute();
             $datos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
             return $datos;
@@ -85,11 +92,12 @@ class PlatilloDAO {
         }
     }
 
-    public function obtenerPlatillosVisibles() {
+    public function obtenerPlatillosVisibles()
+    {
         try {
             $sql = "SELECT nombre, descripcion, precio, imagen FROM platillo WHERE visibilidad = 1";
             $stmt = $this->pdo->prepare($sql);
-            $stmt->execute(); 
+            $stmt->execute();
             $datos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
             return $datos;
@@ -99,12 +107,13 @@ class PlatilloDAO {
         }
     }
 
-    public function obtenerPlatillosPCat($nombre) {
+    public function obtenerPlatillosPCat($nombre)
+    {
         try {
             $sql = "SELECT p.imagen,p.nombre,p.descripcion,p.precio,c.nombre as categoria FROM platillo p JOIN categoria c ON p.idCategoria = c.idCategoria WHERE c.nombre = :nombre";
             $stmt = $this->pdo->prepare($sql);
-            $stmt->bindParam(':nombre',$nombre);
-            $stmt->execute(); 
+            $stmt->bindParam(':nombre', $nombre);
+            $stmt->execute();
             $datos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
             return $datos;
@@ -113,10 +122,4 @@ class PlatilloDAO {
             return false;
         }
     }
-
-
-
-    
-    
 }
-?>
