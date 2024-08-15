@@ -1,9 +1,16 @@
 <?php
+include 'dao/platilloDAO.php';
+include 'dao/categoriaDAO.php';
+
+
 session_start();
 if (!isset($_SESSION['idAdministrador'])) {
     header("Location: admPanel.php");
     exit();
 }
+
+$categoriaDAO = new CategoriaDAO();
+$categorias = $categoriaDAO->obtenerCategorias();
 ?>
 <?php
 $insert = isset($_GET['insert']) ? $_GET['insert'] : 'Desconocido';
@@ -89,7 +96,7 @@ $update = isset($_GET['update']) ? $_GET['update'] : 'Desconocido';
             <h1>Registro de Platillos</h1>
             <button onclick="mostrarFormulario()">Nuevo</button>
             <div class="new" style="display:none;">
-                <form action="controller/platillosDAO.php" method="post" enctype="multipart/form-data">
+                <form action="controller/platilloLogic.php" method="post" enctype="multipart/form-data">
                     <div class="row mb-5">
                         <div class="col-sm-6 col-md-3 col-xs-12 my-2">
                             <input type="text" name="nombre" class="form-control form-control-lg custom-form-control" placeholder="Nombre" maxlength="50" required>
@@ -104,22 +111,19 @@ $update = isset($_GET['update']) ? $_GET['update'] : 'Desconocido';
                             <select name="idCategoria" class="form-control form-control-lg custom-form-control" required>
                                 <option value="">Seleccione una categoría</option>
                                 <?php
-                                include 'controller/conexion.php';
-                                $sql = "SELECT idCategoria, nombre FROM Categoria";
-                                $result = $conn->query($sql);
-                                if ($result->num_rows > 0) {
-                                    while($row = $result->fetch_assoc()) {
+
+                                if ($categorias !== false && count($categorias) > 0) {
+                                    foreach($categorias as $row)  {
                                         echo "<option value='" . $row["idCategoria"] . "'>" . $row["nombre"] . "</option>";
                                     }
-                                } else {
-                                    echo "<option value=''>No hay categorías disponibles</option>";
-                                }
-                                $conn->close();
+                                }else{
+                                        echo "<option value=''>No hay categorías disponibles</option>";
+                                    }
                                 ?>
                             </select>
                         </div>
                         <div class="col-sm-6 col-md-3 col-xs-12 my-2">
-                            <input type="file" id="imagen" name="imagen" accept="image/*" required>
+                            <input type="file" id="imagen" name="imagen" accept="image/*">
                         </div>
                         <input type="hidden" id="action" name="action" value="insert" >
                     </div>
@@ -134,56 +138,75 @@ $update = isset($_GET['update']) ? $_GET['update'] : 'Desconocido';
                 <th>Descripción</th>
                 <th>Precio</th>
                 <th>Categoría</th>
-                <th>Administrador</th>
                 <th>Visibilidad</th>
                 <th>Imagen</th>
                 <th>Acciones</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
+            
             <?php
-                include 'controller/conexion.php';
 
-                $sql = "SELECT p.idPlatillo, p.nombre, p.descripcion, p.precio,p.visibilidad, c.nombre AS categoria, a.nombre AS administrador, p.imagen 
-                        FROM Platillo p
-                        JOIN Categoria c ON p.idCategoria = c.idCategoria
-                        JOIN Administrador a ON p.idAdministrador = a.idAdministrador";
-                $result = $conn->query($sql);
+                $platilloDAO = new PlatilloDAO();
+                $datos = $platilloDAO->obtenerPlatillos();
 
-                if ($result->num_rows > 0) {
-                    while($row = $result->fetch_assoc()) {
-                        echo 
-                        "<tr>
-                            <td>" . $row["idPlatillo"]. "</td>
-                            <td>" . $row["nombre"]. "</td>
-                            <td>" . $row["descripcion"]. "</td>
-                            <td>" ."$". $row["precio"]. "</td>
-                            <td>" . $row["categoria"]. "</td>
-                            <td>" . $row["administrador"]. "</td>
-                            <td>
-                                <form action='controller/platillosDAO.php' method='post' style='display:inline-block;'>
-                                    <input type='hidden' name='idPlatillo' value='" . $row["idPlatillo"] . "'>
-                                    <input type='checkbox' name='visibilidad' value='1' " . ($row["visibilidad"] ? "checked" : "") . ">
-                                    <input type='hidden' name='action' value='update_visibility'>
-                                    <input type='submit' style='background-color: #4CAF50; margin:10px; color: white; padding: 5px 10px; border: none; border-radius: 4px; cursor: pointer; font-size: 14px;' value='Guardar'>
-                                </form>
+                if ($datos !== false && count($datos) > 0) {
+                foreach ($datos as $row) {
+                    echo "
+                    
+                    <tr>
+                        <form action='controller/platilloLogic.php' method='post' enctype='multipart/form-data'>
+                            <td><input type='hidden' name='idPlatillo' value='" . htmlspecialchars($row["idPlatillo"]) . "'>
+                                " . htmlspecialchars($row["idPlatillo"]) . "
                             </td>
-                            <td><img src='" . $row["imagen"] . "' alt='Imagen de " . $row["nombre"] . "' style='width: 100px;'></td>
+                            <td><input type='text' name='nombre' value='" . htmlspecialchars($row["nombre"]) . "'></td>
+                            <td><textarea name='descripcion' >" . htmlspecialchars($row["descripcion"]) . "</textarea></td>
+                            <td><input type='number' name='precio' value='" . htmlspecialchars($row["precio"]) . "'></td>
+                            <td>
+                            <select name='idCategoria' class='form-control form-control-lg custom-form-control' required>
+                                <option >Seleccione una categoría</option>
+                    ";
+                            foreach($categorias as $categoria)  {
+                                echo "<option value='" . $categoria["idCategoria"] . "' " . 
+                                ($row["idCategoria"] == $categoria["idCategoria"] ? "selected" : "") . 
+                                ">" . htmlspecialchars($categoria["nombre"]) . "</option>";
+                            }
+                    echo "
+                            </select>
+
+                            </td>
+                            
+                            <td><input type='checkbox' name='visibilidad' value='1' " . ($row["visibilidad"] ? "checked" : "") . "></td>
+                            <td>
+                                <img src='" . $row["imagen"] . "' alt='Imagen de " . $row["nombre"] . "' style='width: 100px;'>
+                                <input type='hidden' name='oldImagen' value='".$row["imagen"]."'>
+                                <input type='file' name='imagen' accept='image/*'>
+                            </td>
 
                             <td>
-                                <form action='controller/platillosDAO.php' method='post'>
-                                    <input type='hidden' name='idPlatillo' value='" . $row["idPlatillo"] . "'>
-                                    <input type='hidden' name='action' value='delete'>
-                                    <input type='submit' style='background-color: #e22121; margin:10px; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; font-size: 16px;' value='Eliminar'>
-                                </form>
+                                <input type='hidden' name='action' value='update'>
+                                <input type='submit' style='background-color: #5058ba; margin:10px; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; font-size: 16px;' value='Actualizar'>
                             </td>
-                        </tr>";
+                        </form>
+                        <td>
+                            <form action='controller/platilloLogic.php' method='post'>
+                                <input type='hidden' name='idPlatillo' value='" . htmlspecialchars($row["idPlatillo"]) . "'>
+                                <input type='hidden' name='oldImagen' value='".$row["imagen"]."'>
+                                <input type='hidden' name='action' value='delete'>
+                                <input type='submit' style='background-color: #e22121; margin:10px; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; font-size: 16px;' value='Eliminar'>
+                            </form>
+                        </td>
+                    </tr>
+                    
+                    ";
                     }
                 } else {
-                    echo "<tr><td colspan='8'>No hay platillos disponibles</td></tr>";
-                }
+                    echo "<tr><td colspan='5'>No se encontraron administradores.</td></tr>";
+                }       
 
-                $conn->close();
+                
+
             ?>
         </tbody>
     </table>

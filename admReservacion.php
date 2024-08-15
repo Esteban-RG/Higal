@@ -1,4 +1,14 @@
 <?php
+include 'dao/reservacionDAO.php';
+include 'dao/mesaDAO.php';
+
+
+$reservacionDAO = new ReservacionDAO();
+$mesaDAO = new MesaDAO();
+
+$mesas = $mesaDAO->obtenerMesas();
+
+
 session_start();
 if (!isset($_SESSION['idAdministrador'])) {
     header("Location: admPanel.php");
@@ -13,13 +23,7 @@ $update = isset($_GET['update']) ? $_GET['update'] : 'Desconocido';
 $error = isset($_GET['errors']) ? $_GET['errors'] : 'Desconocido';
 
 
-include 'controller/conexion.php'; 
 
-$sql_reservaciones = "SELECT r.idReservacion, r.fecha, r.cantPersonas, r.estado, m.idMesa AS mesa, c.nombre AS cliente 
-                      FROM Reservacion r
-                      JOIN Mesa m ON r.idMesa = m.idMesa
-                      JOIN Cliente c ON r.idCliente = c.idCliente";
-$result_reservaciones = $conn->query($sql_reservaciones);
 
 ?>
 
@@ -114,7 +118,7 @@ $result_reservaciones = $conn->query($sql_reservaciones);
             <h1>Registro de Reservaciones</h1>
             <button onclick="mostrarFormulario()">Nuevo</button>
             <div class="new" style="display:none;">
-                <form action="controller/reservacionesDAO.php" method="POST">
+                <form action="controller/reservacionLogic.php" method="POST">
                     <div class="row mb-5">
                         <div class="col-sm-6 col-md-3 col-xs-12 my-2">
                             <input type="text" name="name" class="form-control form-control-lg custom-form-control" placeholder="Nombre" maxlength="50" required>
@@ -140,38 +144,60 @@ $result_reservaciones = $conn->query($sql_reservaciones);
                     <th>Cantidad de Personas</th>
                     <th>Mesa</th>
                     <th>Cliente</th>
-                    <th>Estado</th>
                     <th>Acciones</th>
+                    <th></th>
                 </tr>
                 <?php
-                if ($result_reservaciones->num_rows > 0) {
-                    while($row = $result_reservaciones->fetch_assoc()) {
-                        echo "<tr>
-                                <td>" . $row["idReservacion"] . "</td>
-                                <td>" . $row["fecha"] . "</td>
-                                <td>" . $row["cantPersonas"] . "</td>
-                                <td>" . $row["mesa"] . "</td>
-                                <td>" . $row["cliente"] . "</td>
-                                <td>" . $row["estado"] . "</td>
-                                <td>
-                                    <form action='controller/reservacionesDAO.php' class='insert' method='post' style='display:inline;'>
-                                        <input type='hidden' name='idReservacion' value='" . $row["idReservacion"] . "'>
-                                        <input type='hidden' name='estado' value='confirmar'>
-                                        <input type='hidden' name='action' value='update'>
-                                        <input type='submit' style='margin:10px; background-color: #4caf50; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; font-size: 16px;' value='Confirmar'>
+                    $datos = $reservacionDAO -> obtenerReservaciones();
+
+                    if ($datos !== false && count($datos) > 0) {
+                        foreach ($datos as $row) {
+                                echo "
+                                
+                                <tr>
+                                    <form action='controller/reservacionLogic.php' method='post'>
+                                        <td><input type='hidden' name='idReservacion' value='" . htmlspecialchars($row["idReservacion"]) . "'>
+                                            " . htmlspecialchars($row["idReservacion"]) . "
+                                        </td>
+                                        <td><input type='datetime-local' name='fecha' value='" . htmlspecialchars($row["fecha"]) . "' readonly></td>
+                                        <td><input type='number' name='cantPersonas' value='" . htmlspecialchars($row["cantPersonas"]) . "' readonly></td>
+
+                                        <td>
+                                        <select name='idCategoria' class='form-control form-control-lg custom-form-control' required style='pointer-events: none;'>
+                                        <option >Seleccione una mesa</option>
+                                        ";
+                                                foreach($mesas as $mesa)  {
+                                                    echo "<option value='" . $mesa["idMesa"] . "' " . 
+                                                    ($row["idMesa"] == $mesa["idMesa"] ? "selected" : "") . 
+                                                    ">" . htmlspecialchars($mesa["idMesa"]) . "</option>";
+                                                }
+                                        echo "
+                                        </select>
+                                       </td> 
+                                                                                
+                                        <td>
+                                            " . htmlspecialchars($row["cliente"]) . "
+                                            <input type='hidden' name='cliente' value='" . htmlspecialchars($row["idCliente"]) . "'>
+                                        </td>
+
+
+                                        <td>
+                                            <input type='hidden' name='action' value='update'>
+                                            <input type='hidden' style='background-color: #5058ba; margin:10px; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; font-size: 16px;' value='Actualizar'>
+                                        </td>
                                     </form>
-                                    <form action='controller/reservacionesDAO.php' class='action' method='post' style='display:inline;'>
-                                        <input type='hidden' name='idReservacion' value='" . $row["idReservacion"] . "'>
-                                        <input type='hidden' name='action' value='delete'>
-                                        <input type='submit' style='background-color: #e22121; margin:10px; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; font-size: 16px;' value='Eliminar'>
-                                    </form>
-                                </td>
-                            </tr>";
-                    }
-                } else {
-                    echo "<tr><td colspan='7'>No hay reservaciones.</td></tr>";
-                }
-                $conn->close();
+                                    <td>
+                                        <form action='controller/reservacionLogic.php' method='post'>
+                                            <input type='hidden' name='idReservacion' value='" . htmlspecialchars($row["idReservacion"]) . "'>
+                                            <input type='hidden' name='action' value='delete'>
+                                            <input type='submit' style='background-color: #e22121; margin:10px; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; font-size: 16px;' value='Eliminar'>
+                                        </form>
+                                    </td>
+                                </tr>";
+                            }
+                        } else {
+                            echo "<tr><td colspan='5'>No se encontraron reservaciones registradas.</td></tr>";
+                        }    
                 ?>
             </table>
         </main>
@@ -179,11 +205,11 @@ $result_reservaciones = $conn->query($sql_reservaciones);
 
     <script>
         function mostrarFormulario() {
-            var formulario = document.querySelector('.new'); // Selecciona el primer elemento con la clase 'new'
+            var formulario = document.querySelector('.new'); 
             if (formulario.style.display === 'none' || formulario.style.display === '') {
-                formulario.style.display = 'block'; // Muestra el formulario
+                formulario.style.display = 'block';
             } else {
-                formulario.style.display = 'none'; // Oculta el formulario
+                formulario.style.display = 'none';
             }
         }
 

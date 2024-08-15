@@ -42,7 +42,7 @@ $error = isset($_GET['error']) ? $_GET['error'] : 'Desconocido';
             <div class="new">
             <form action="controller/login.php" method="POST">
                 <input type="text" name="idAdministrador" placeholder="ID de Usuario" required>
-                <input type="password" name="contrasenha" placeholder="Contraseña" required>
+                <input type="password" name="pass" placeholder="Contraseña" required>
                 <button type="submit" class="btn btn-lg btn-primary" id="rounded-btn">Autenticar</button>
             </form>
             </div>
@@ -51,11 +51,11 @@ $error = isset($_GET['error']) ? $_GET['error'] : 'Desconocido';
 
     <script>
         function mostrarFormulario() {
-            var formulario = document.querySelector('.new'); // Selecciona el primer elemento con la clase 'new'
+            var formulario = document.querySelector('.new'); 
             if (formulario.style.display === 'none' || formulario.style.display === '') {
-                formulario.style.display = 'block'; // Muestra el formulario
+                formulario.style.display = 'block'; 
             } else {
-                formulario.style.display = 'none'; // Oculta el formulario
+                formulario.style.display = 'none'; 
             }
         }
 

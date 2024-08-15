@@ -125,3 +125,20 @@ button{
     background-color: #45a049;
 }
 
+
+ input[type="text"],
+ input[type="email"],
+ input[type="number"],
+ input[type="datetime-local"],
+ input[type="password"],
+ textarea,
+ select {
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+

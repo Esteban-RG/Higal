@@ -1,4 +1,18 @@
 <?php
+include 'dao/platilloDAO.php';
+include 'dao/categoriaDAO.php';
+
+
+$platilloDAO = new PlatilloDAO();
+$categoriaDAO = new CategoriaDAO();
+
+
+
+
+$galeria = $platilloDAO->obtenerPlatillosVisibles();
+$categorias = $categoriaDAO->obtenerCategorias();
+
+
 $reservation = isset($_GET['reservation']) ? $_GET['reservation'] : 'Desconocido';
 $error = isset($_GET['errors']) ? $_GET['errors'] : 'Desconocido';
 
@@ -117,7 +131,7 @@ $error = isset($_GET['errors']) ? $_GET['errors'] : 'Desconocido';
 
                 Ven y descubre por qué El HigAl Restaurante Jardín es el lugar ideal para celebrar la gastronomía mexicana en Chimalhuacán. Ya sea una cena familiar, una celebración especial o una simple escapada culinaria, estamos aquí para ofrecerte una experiencia gastronómica inolvidable.
             </p>
-             
+
         </div>
 
 
@@ -132,13 +146,9 @@ $error = isset($_GET['errors']) ? $_GET['errors'] : 'Desconocido';
     <div class="gallary row">
         <?php
 
-        include 'controller/conexion.php';
 
-        $sql = "SELECT nombre, descripcion, precio, imagen FROM Platillo WHERE visibilidad = 1";
-        $result = $conn->query($sql);
-
-        if ($result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
+        if ($galeria !== false && count($galeria) > 0) {
+            foreach ($galeria as $row) {
                 echo "
                 <div class='col-sm-6 col-lg-3 gallary-item wow fadeIn'>
                 <img src='" . $row["imagen"] . "'alt='" . $row["nombre"] . "' class='gallary-img'>
@@ -147,8 +157,6 @@ $error = isset($_GET['errors']) ? $_GET['errors'] : 'Desconocido';
         } else {
             echo "<p>NO HAY PLATILLOS DISPONIBLES</p>";
         }
-
-        $conn->close();
         ?>
 
     </div>
@@ -159,7 +167,7 @@ $error = isset($_GET['errors']) ? $_GET['errors'] : 'Desconocido';
     <div class="container-fluid has-bg-overlay text-center text-light has-height-lg middle-items" id="book-table">
         <div class="">
             <h2 class="section-title mb-5">Reservaciones</h2>
-            <form action="controller/reservacionesDAO.php" method="POST">
+            <form action="controller/reservacionLogic.php" method="POST">
                 <div class="row mb-5">
                     <div class="col-sm-6 col-md-3 col-xs-12 my-2">
                         <input type="text" name="name" class="form-control form-control-lg custom-form-control" placeholder="Nombre" maxlength="50" required>
@@ -181,29 +189,16 @@ $error = isset($_GET['errors']) ? $_GET['errors'] : 'Desconocido';
             </form>
         </div>
     </div>
+
+
+
+
+
     <!-- BLOG Section  -->
 
     <div id="gallary" class="container-fluid bg-dark text-light py-5 text-center wow fadeIn">
 
-        <?php
 
-        include 'controller/conexion.php';
-
-        $categorias = array();
-
-        $sql = "SELECT nombre FROM Categoria";
-        $result = $conn->query($sql);
-
-        if ($result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
-                $categorias[] = $row['nombre'];
-            }
-        } else {
-            echo "<p>NO HAY CATEGORIAS DISPONIBLES</p>";
-        }
-
-        $conn->close();
-        ?>
 
         <h2 class="section-title py-5">Nuestro menú</h2>
         <div class='row justify-content-center'>
@@ -213,16 +208,16 @@ $error = isset($_GET['errors']) ? $_GET['errors'] : 'Desconocido';
                     <?php
                     echo "
                     <li class='nav-item'>
-                        <a class='nav-link active' id='pills-home-tab' data-toggle='pill' href='#" . $categorias[0] . "' role='tab'
-                            aria-controls='pills-home' aria-selected='true'>" . $categorias[0] . "</a>
+                        <a class='nav-link active' id='pills-home-tab' data-toggle='pill' href='#" . $categorias[0]['nombre'] . "' role='tab'
+                            aria-controls='pills-home' aria-selected='true'>" . $categorias[0]['nombre'] . "</a>
                     </li>
                 ";
 
                     for ($i = 1; $i < count($categorias); $i++) {
                         echo "
                     <li class='nav-item'>
-                        <a class='nav-link' id='pills-profile-tab' data-toggle='pill' href='#" . $categorias[$i] . "' role='tab'
-                            aria-controls='pills-profile' aria-selected='false'>" . $categorias[$i] . "</a>
+                        <a class='nav-link' id='pills-profile-tab' data-toggle='pill' href='#" . $categorias[$i]['nombre'] . "' role='tab'
+                            aria-controls='pills-profile' aria-selected='false'>" . $categorias[$i]['nombre'] . "</a>
                     </li>
                     ";
                     }
@@ -236,78 +231,64 @@ $error = isset($_GET['errors']) ? $_GET['errors'] : 'Desconocido';
 
             <?php
 
-            echo "<div class='tab-pane show active' id='" . $categorias[0] . "' role='tabpanel' aria-labelledby='pills-home-tab'>
+            echo "<div class='tab-pane show active' id='" . $categorias[0]['nombre'] . "' role='tabpanel' aria-labelledby='pills-home-tab'>
                 <div class='row'>
             ";
 
-            include 'controller/conexion.php';
+            $platillosCategoria = $platilloDAO->obtenerPlatillosPCat($categorias[0]['nombre']);
 
-
-
-            $sql = "SELECT p.imagen,p.nombre,p.descripcion,p.precio,c.nombre as categoria FROM Platillo p JOIN Categoria c ON p.idCategoria = c.idCategoria WHERE c.nombre = '$categorias[0]'";
-            $result = $conn->query($sql);
-
-            if ($result->num_rows > 0) {
-                while ($row = $result->fetch_assoc()) {
+            if ($platillosCategoria !== false && count($platillosCategoria) > 0) {
+                foreach ($platillosCategoria as $row) {
                     echo "
-                    <div class='col-md-3'>
-                        <div class='card bg-transparent border my-3 my-md-0'>
-                            <img src='" . $row["imagen"] . "' alt='" . $row["nombre"] . "'
-                                class='rounded-0 card-img-top mg-responsive' width='500'>
-                            <div class='card-body'>
-                                <h1 class='text-center mb-4'><a href='#" . $row["categoria"] . "' class='badge badge-primary'>$" . $row["precio"] . "</a></h1>
-                                <h4 class='pt20 pb20'>" . $row["nombre"] . "</h4>
-                                <p class='text-white'>" . $row["descripcion"] . "</p>
-                            </div>
+                <div class='col-md-3'>
+                    <div class='card bg-transparent border my-3 my-md-0'>
+                        <img src='" . $row["imagen"] . "' alt='" . $row["nombre"] . "'
+                            class='rounded-0 card-img-top mg-responsive' width='500'>
+                        <div class='card-body'>
+                            <h1 class='text-center mb-4'><a href='#" . $row["categoria"] . "' class='badge badge-primary'>$" . $row["precio"] . "</a></h1>
+                            <h4 class='pt20 pb20'>" . $row["nombre"] . "</h4>
+                            <p class='text-white'>" . $row["descripcion"] . "</p>
                         </div>
                     </div>
-                    ";
+                </div>
+                ";
                 }
             } else {
                 echo "<p>NO HAY CATEGORIAS DISPONIBLES</p>";
             }
 
-            $conn->close();
-
-            echo "  </div>
+            echo "</div>
             </div>";
 
             for ($i = 1; $i < count($categorias); $i++) {
                 echo "
-                <div class='tab-pane' id='" . $categorias[$i] . "' role='tabpanel' aria-labelledby='pills-profile-tab'>
+                <div class='tab-pane' id='" . $categorias[$i]['nombre'] . "' role='tabpanel' aria-labelledby='pills-profile-tab'>
                     <div class='row'>
                 ";
 
-                include 'controller/conexion.php';
 
 
+                $platillosCategoria = $platilloDAO->obtenerPlatillosPCat($categorias[$i]['nombre']);
 
-                $sql = "SELECT p.imagen,p.nombre,p.descripcion,p.precio,c.nombre as categoria FROM Platillo p JOIN Categoria c ON p.idCategoria = c.idCategoria WHERE c.nombre = '$categorias[$i]'";
-                $result = $conn->query($sql);
-
-                if ($result->num_rows > 0) {
-                    while ($row = $result->fetch_assoc()) {
+                if ($platillosCategoria !== false && count($platillosCategoria) > 0) {
+                    foreach ($platillosCategoria as $row) {
                         echo "
-                            <div class='col-md-3'>
-                                <div class='card bg-transparent border my-3 my-md-0'>
-                                    <img src='" . $row["imagen"] . "' alt='" . $row["nombre"] . "'
-                                        class='rounded-0 card-img-top mg-responsive' width='500'>
-                                    <div class='card-body'>
-                                        <h1 class='text-center mb-4'><a href='#" . $row["categoria"] . "' class='badge badge-primary'>$" . $row["precio"] . "</a></h1>
-                                        <h4 class='pt20 pb20'>" . $row["nombre"] . "</h4>
-                                        <p class='text-white'>" . $row["descripcion"] . "</p>
-                                    </div>
+                        <div class='col-md-3'>
+                            <div class='card bg-transparent border my-3 my-md-0'>
+                                <img src='" . $row["imagen"] . "' alt='" . $row["nombre"] . "'
+                                    class='rounded-0 card-img-top mg-responsive' width='500'>
+                                <div class='card-body'>
+                                    <h1 class='text-center mb-4'><a href='#" . $row["categoria"] . "' class='badge badge-primary'>$" . $row["precio"] . "</a></h1>
+                                    <h4 class='pt20 pb20'>" . $row["nombre"] . "</h4>
+                                    <p class='text-white'>" . $row["descripcion"] . "</p>
                                 </div>
                             </div>
-                        ";
+                        </div>
+                    ";
                     }
                 } else {
                     echo "<p>NO HAY CATEGORIAS DISPONIBLES</p>";
                 }
-
-                $conn->close();
-
-
                 echo "
                 </div>
                 </div>
@@ -359,7 +340,7 @@ $error = isset($_GET['errors']) ? $_GET['errors'] : 'Desconocido';
     <div id="contact" class="container-fluid bg-dark text-light border-top wow fadeIn">
         <div class="row">
             <div class="col-md-6 px-0">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3762.721334410449!2d-98.94986442478584!3d19.42444268185324!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1e3d71cf164d1%3A0x2a077eeb5ff8ce30!2sHigal!5e0!3m2!1ses!2smx!4v1720071426892!5m2!1ses!2smx" width="600" height="450" style="width: 100%; height: 100%; min-height: 400px; border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3762.721334410449!2d-98.94986442478584!3d19.42444268185324!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1e3d71cf164d1%3A0x2a077eeb5ff8ce30!2sHigal!5e0!3m2!1ses!2smx!4v1720071426892!5m2!1ses!2smx" width="600" height="450" style="width: 100%; height: 100%; min-height: 400px; border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
             <div class="col-md-6 px-5 has-height-lg middle-items">
                 <h3>Visitanos</h3>
@@ -390,7 +371,7 @@ $error = isset($_GET['errors']) ? $_GET['errors'] : 'Desconocido';
             </div>
         </div>
     </div>
-  
+
     <!-- end of page footer -->
 
     <!-- core  -->

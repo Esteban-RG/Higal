@@ -1,4 +1,6 @@
 <?php
+include 'dao/clienteDAO.php';
+
 session_start();
 if (!isset($_SESSION['idAdministrador'])) {
     header("Location: admPanel.php");
@@ -103,7 +105,7 @@ $error = isset($_GET['errors']) ? $_GET['errors'] : 'Desconocido';
             <h1>Registro de Clientes</h1>
             <button onclick="mostrarFormulario()">Nuevo</button>
             <div class="new" style="display:none;">
-            <form action="controller/clientesDAO.php" method="post">
+            <form action="controller/clienteLogic.php" method="post">
                 <input type="text" id="nombre" name="nombre" placeholder="Nombre"  maxlength="50" required>
 
                 <input type="email" id="correo" name="correo" placeholder="Email"  maxlength="50" required>
@@ -119,37 +121,44 @@ $error = isset($_GET['errors']) ? $_GET['errors'] : 'Desconocido';
                         <th>Nombre</th>
                         <th>Correo</th>
                         <th>Acciones</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
-                    <?php
-                        include 'controller/conexion.php';
-
-                        $sql = "SELECT idCliente, nombre, correo FROM Cliente";
-                        $result = $conn->query($sql);
-
-                        if ($result->num_rows > 0) {
-                            while($row = $result->fetch_assoc()) {
-                                echo 
-                                "<tr>
-                                    <td>" . $row["idCliente"]. "</td>
-                                    <td>" . $row["nombre"]. "</td>
-                                    <td>" . $row["correo"]. "</td>
-                                    <td>
-                                        <form action='controller/clientesDAO.php' method='post'>
-                                            <input type='hidden' name='idCliente' value='" . $row["idCliente"] . "'>
-                                            <input type='hidden' name='action' value='delete'>
-                                            <input type='submit' style='background-color: #e22121; margin:10px; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; font-size: 16px;' value='Eliminar'>
-                                        </form>
-                                    </td>
-                                </tr>";
-                            }
-                        } else {
-                            echo "<tr><td colspan='7'>No hay clientes disponibles</td></tr>";
+                <?php
+                    $clienteDAO = new ClienteDAO();
+                    $datos = $clienteDAO->obtenerClientes();
+                    
+                    if ($datos !== false && count($datos) > 0) {
+                    foreach ($datos as $row) {
+                        echo "
+                        
+                        <tr>
+                            <form action='controller/clienteLogic.php' method='post'>
+                                <td><input type='hidden' name='idCliente' value='" . htmlspecialchars($row["idCliente"]) . "'>
+                                    " . htmlspecialchars($row["idCliente"]) . "
+                                </td>
+                                <td><input type='text' name='nombre' value='" . htmlspecialchars($row["nombre"]) . "'></td>
+                                <td><input type='email' name='correo' value='" . htmlspecialchars($row["correo"]) . "'></td>
+                                <td>
+                                    <input type='hidden' name='action' value='update'>
+                                    <input type='submit' style='background-color: #5058ba; margin:10px; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; font-size: 16px;' value='Actualizar'>
+                                </td>
+                            </form>
+                            <td>
+                                <form action='controller/clienteLogic.php' method='post'>
+                                    <input type='hidden' name='idCliente' value='" . htmlspecialchars($row["idCliente"]) . "'>
+                                    <input type='hidden' name='action' value='delete'>
+                                    <input type='submit' style='background-color: #e22121; margin:10px; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; font-size: 16px;' value='Eliminar'>
+                                </form>
+                            </td>
+                        </tr>";
                         }
-
-                        $conn->close();
-                    ?>
+                    } else {
+                        echo "<tr><td colspan='5'>No se encontraron clientes.</td></tr>";
+                    }       
+                
+                ?>
                 </tbody>
             </table>
         </main>
