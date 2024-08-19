@@ -1,3 +1,15 @@
-body{
+.about{
+    padding: 20px;
+}
+
+.card{
+    height: 100%;
+    padding: 5px;
+    border-color: aliceblue;
     background-color: #343a40;
+}
+
+.promotions{
+    height: 300px;
+    background-color: brown;
 }

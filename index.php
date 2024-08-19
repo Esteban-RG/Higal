@@ -43,6 +43,10 @@ $error = isset($_GET['error']) ? $_GET['error'] : 'Desconocido';
     <!-- Bootstrap + FoodHut main styles -->
     <link rel="stylesheet" href="assets/css/foodhut.css">
     <script src="assets/js/foodhut.js"></script>
+
+    <link rel="stylesheet" href="assets/css/higal.css">
+
+
 </head>
 
 <body data-spy="scroll" data-target=".navbar" data-offset="40" id="home">
@@ -50,8 +54,8 @@ $error = isset($_GET['error']) ? $_GET['error'] : 'Desconocido';
         var error = <?php echo json_encode($error); ?>;
     </script>
 
-        <!-- Navbar -->
-        <nav class="custom-navbar navbar navbar-expand-lg navbar-dark fixed-top" data-spy="affix" data-offset-top="10">
+    <!-- Navbar -->
+    <nav class="custom-navbar navbar navbar-expand-lg navbar-dark fixed-top" data-spy="affix" data-offset-top="10">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -81,14 +85,16 @@ $error = isset($_GET['error']) ? $_GET['error'] : 'Desconocido';
                 <li class="nav-item">
                     <a class="nav-link" href="#contact">Contacto</a>
                 </li>
-    
+
             </ul>
         </div>
     </nav>
 
-        <!-- Header -->
-    
-        <header id="home" class="header">
+
+
+    <!-- Header -->
+
+    <header id="home" class="header">
         <div class="overlay text-white text-center">
             <h1 class="display-2 font-weight-bold my-3">Higal</h1>
             <h2 class="display-4 mb-5">Restaurante Jardín</h2>
@@ -96,26 +102,14 @@ $error = isset($_GET['error']) ? $_GET['error'] : 'Desconocido';
         </div>
     </header>
 
-    <!-- about -->
-     
-    <div class="row has-height-md">
     
-        <div class="container-fluid col-md-8">
-            <div id="about" class="text-center bg-dark text-light has-height-sm middle-items wow fadeIn">
-                <h2 class="section-title">¿Quienes somos?</h2>
-            </div>
-            <div class="text-center">
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent nec tempus magna, vitae malesuada sem.
-                    Fusce ut faucibus nisl, quis imperdiet erat. Nam nibh magna, imperdiet eget sollicitudin eget,
-                    condimentum ac odio. Nullam justo libero, condimentum sed nisl eu, lobortis eleifend tellus. Quisque
-                    congue sit amet enim eget dictum. Sed vehicula est nulla, non laoreet turpis rhoncus ac. Maecenas sit
-                    amet felis eu libero varius viverra. Ut vitae bibendum nulla.
-                </p>
-            </div>
-    
-        </div>
-    
+
+    <!-- Promotions -->
+    <div class="promotions container-fluid  ">
+            PROMOCIONES
     </div>
+
+
 
     <!--  gallary Section  -->
 
@@ -142,7 +136,7 @@ $error = isset($_GET['error']) ? $_GET['error'] : 'Desconocido';
 
     <!-- book a table Section  -->
     <div class="has-height-xl has-bg-overlay text-center text-light middle-items" id="book-table">
-    
+
         <h2 class="section-title mb-5">Reservaciones</h2>
         <form action="controller/reservacionLogic.php" method="POST">
             <div class="row mb-5">
@@ -163,15 +157,47 @@ $error = isset($_GET['error']) ? $_GET['error'] : 'Desconocido';
                         placeholder="Fecha y Hora" required>
                 </div>
             </div>
-    
+
             <input type="hidden" id="action" name="action" value="insert">
             <input type="hidden" id="source" name="source" value="client">
-    
+
             <button type="submit" class="btn btn-lg btn-primary" id="rounded-btn">Agendar cita</button>
         </form>
-    
+
     </div>
 
+    <!-- about -->
+
+
+    <div class=" about row has-height-md" id="about">
+
+        <div class="container col-md-4">
+            <div class="card">
+                <img class="card-img-top" src="assets/imgs/chef.jpg" alt="">
+                <div class="card-body">
+                    <p class="card-text">Chef Aldo Buendia</p>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="container-fluid col-md-8 d-flex align-items-center">
+
+            <div class="text-center">
+                <div class="text-center bg-dark text-light has-height-sm middle-items wow fadeIn">
+                    <h2 class="section-title">¿Quienes somos?</h2>
+                </div>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent nec tempus magna, vitae malesuada sem.
+                    Fusce ut faucibus nisl, quis imperdiet erat. Nam nibh magna, imperdiet eget sollicitudin eget,
+                    condimentum ac odio. Nullam justo libero, condimentum sed nisl eu, lobortis eleifend tellus. Quisque
+                    congue sit amet enim eget dictum. Sed vehicula est nulla, non laoreet turpis rhoncus ac. Maecenas sit
+                    amet felis eu libero varius viverra. Ut vitae bibendum nulla.
+                </p>
+            </div>
+
+        </div>
+
+    </div>
 
 
 
