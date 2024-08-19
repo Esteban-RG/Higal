@@ -9,9 +9,11 @@
     background-color: #343a40;
 }
 
-.promotions{
+.promotion{
     height: 300px;
-    background-color: brown;
+    object-fit: cover;
+    overflow: hidden;
+    aspect-ratio: 1/30;
 }
 
 .carousel{

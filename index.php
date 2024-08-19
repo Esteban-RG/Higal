@@ -26,8 +26,6 @@ $error = isset($_GET['error']) ? $_GET['error'] : 'Desconocido';
     <meta name="author" content="Devcrud">
 
     <title>Higal Restaurante Jardin</title>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
 
     <!-- Incluye JQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -43,9 +41,10 @@ $error = isset($_GET['error']) ? $_GET['error'] : 'Desconocido';
     <!-- Bootstrap + FoodHut main styles -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="assets/css/foodhut.css">
+    <link rel="stylesheet" href="assets/css/higal.css">
+
     <script src="assets/js/foodhut.js"></script>
 
-    <link rel="stylesheet" href="assets/css/higal.css">
 
 
 </head>
@@ -106,7 +105,7 @@ $error = isset($_GET['error']) ? $_GET['error'] : 'Desconocido';
 
 
     <!-- Promotions -->
-    <div class=" container-fluid has-height-md ">
+    <div class=" container-fluid has-height-sm has-height-md  ">
         <div id="carouselExampleIndicators" class="carousel slide">
             <div class="carousel-indicators">
                 <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
@@ -115,13 +114,13 @@ $error = isset($_GET['error']) ? $_GET['error'] : 'Desconocido';
             </div>
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img src="assets/imgs/blog-1.jpg" class="d-block w-100" alt="...">
+                    <img src="assets/imgs/blog-1.jpg" class="d-block w-100 promotion" alt="...">
                 </div>
                 <div class="carousel-item active">
-                    <img src="assets/imgs/blog-2.jpg" class="d-block w-100" alt="...">
+                    <img src="assets/imgs/blog-2.jpg" class="d-block w-100 promotion" alt="...">
                 </div>
                 <div class="carousel-item active">
-                    <img src="assets/imgs/blog-3.jpg" class="d-block w-100" alt="...">
+                    <img src="assets/imgs/blog-3.jpg" class="d-block w-100 promotion" alt="...">
                 </div>
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
@@ -134,68 +133,6 @@ $error = isset($_GET['error']) ? $_GET['error'] : 'Desconocido';
             </button>
         </div>
     </div>
-
-
-
-    <!--  gallary Section  -->
-
-
-    <div class="gallary row">
-        <?php
-
-
-        if ($galeria !== false && count($galeria) > 0) {
-            foreach ($galeria as $row) {
-                echo "
-                <div class='col-4 col-lg-2 gallary-item wow fadeIn'>
-                <img src='" . $row["imagen"] . "'alt='" . $row["nombre"] . "' class='gallary-img'>
-                </div>";
-            }
-        } else {
-            echo "<p>NO HAY PLATILLOS DISPONIBLES</p>";
-        }
-        ?>
-
-    </div>
-
-
-
-    <!-- book a table Section  -->
-    <div class="has-height-xl has-bg-overlay text-center text-light middle-items" id="book-table">
-
-        <h2 class="section-title mb-5">Reservaciones</h2>
-        <form action="controller/reservacionLogic.php" method="POST">
-            <div class="row mb-5">
-                <div class="col-sm-6 col-md-3 my-2">
-                    <input type="text" name="name" class="form-control form-control-lg custom-form-control"
-                        placeholder="Nombre" maxlength="50" autocomplete="given-name" required>
-                </div>
-                <div class="col-sm-6 col-md-3 my-2">
-                    <input type="email" name="email" class="form-control form-control-lg custom-form-control"
-                        placeholder="Email" maxlength="30" autocomplete="family-name" required>
-                </div>
-                <div class="col-sm-6 col-md-3 my-2">
-                    <input type="number" name="cantPersonas" class="form-control form-control-lg custom-form-control"
-                        placeholder="Cantidad de invitados" max="20" min="1" required>
-                </div>
-                <div class="col-sm-6 col-md-3 my-2">
-                    <input type="datetime-local" name="fecha" class="form-control form-control-lg custom-form-control"
-                        placeholder="Fecha y Hora" required>
-                </div>
-            </div>
-
-            <input type="hidden" id="action" name="action" value="insert">
-            <input type="hidden" id="source" name="source" value="client">
-
-            <button type="submit" class="btn btn-lg btn-primary" id="rounded-btn">Agendar cita</button>
-        </form>
-
-    </div>
-
-
-
-
-
 
     <!-- BLOG Section  -->
 
@@ -304,6 +241,69 @@ $error = isset($_GET['error']) ? $_GET['error'] : 'Desconocido';
 
 
     </div>
+
+
+
+    <!--  gallary Section  -->
+
+
+    <div class="gallary row">
+        <?php
+
+
+        if ($galeria !== false && count($galeria) > 0) {
+            foreach ($galeria as $row) {
+                echo "
+                <div class='col-4 col-lg-2 gallary-item wow fadeIn'>
+                <img src='" . $row["imagen"] . "'alt='" . $row["nombre"] . "' class='gallary-img'>
+                </div>";
+            }
+        } else {
+            echo "<p>NO HAY PLATILLOS DISPONIBLES</p>";
+        }
+        ?>
+
+    </div>
+
+
+
+    <!-- book a table Section  -->
+    <div class="has-height-xl has-bg-overlay text-center text-light middle-items" id="book-table">
+
+        <h2 class="section-title mb-5">Reservaciones</h2>
+        <form action="controller/reservacionLogic.php" method="POST">
+            <div class="row mb-5">
+                <div class="col-sm-6 col-md-3 my-2">
+                    <input type="text" name="name" class="form-control form-control-lg custom-form-control"
+                        placeholder="Nombre" maxlength="50" autocomplete="given-name" required>
+                </div>
+                <div class="col-sm-6 col-md-3 my-2">
+                    <input type="email" name="email" class="form-control form-control-lg custom-form-control"
+                        placeholder="Email" maxlength="30" autocomplete="family-name" required>
+                </div>
+                <div class="col-sm-6 col-md-3 my-2">
+                    <input type="number" name="cantPersonas" class="form-control form-control-lg custom-form-control"
+                        placeholder="Cantidad de invitados" max="20" min="1" required>
+                </div>
+                <div class="col-sm-6 col-md-3 my-2">
+                    <input type="datetime-local" name="fecha" class="form-control form-control-lg custom-form-control"
+                        placeholder="Fecha y Hora" required>
+                </div>
+            </div>
+
+            <input type="hidden" id="action" name="action" value="insert">
+            <input type="hidden" id="source" name="source" value="client">
+
+            <button type="submit" class="btn btn-lg btn-primary" id="rounded-btn">Agendar cita</button>
+        </form>
+
+    </div>
+
+
+
+
+
+
 
     <!-- about -->
 
