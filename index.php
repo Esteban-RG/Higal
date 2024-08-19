@@ -50,12 +50,13 @@ $error = isset($_GET['error']) ? $_GET['error'] : 'Desconocido';
         var error = <?php echo json_encode($error); ?>;
     </script>
 
-    <!-- Navbar -->
-    <nav class="custom-navbar navbar navbar-expand-lg navbar-dark fixed-top" data-spy="affix" data-offset-top="10">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <!-- Navbar -->
+        <nav class="custom-navbar navbar navbar-expand-lg navbar-dark fixed-top" data-spy="affix" data-offset-top="10">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="collapse navbar-collapse text-center" id="navbarSupportedContent">
             <ul class="navbar-nav">
                 <li class="nav-item">
                     <a class="nav-link" href="#home">Inicio</a>
@@ -80,14 +81,14 @@ $error = isset($_GET['error']) ? $_GET['error'] : 'Desconocido';
                 <li class="nav-item">
                     <a class="nav-link" href="#contact">Contacto</a>
                 </li>
-
+    
             </ul>
         </div>
     </nav>
 
-    <!-- header -->
-
-    <header id="home" class="header">
+        <!-- Header -->
+    
+        <header id="home" class="header">
         <div class="overlay text-white text-center">
             <h1 class="display-2 font-weight-bold my-3">Higal</h1>
             <h2 class="display-4 mb-5">Restaurante Jardín</h2>
@@ -95,28 +96,25 @@ $error = isset($_GET['error']) ? $_GET['error'] : 'Desconocido';
         </div>
     </header>
 
-    <section>
-
-        <div class="sobreNosotros col-md-12">
-            <div id="about" class="text-center bg-dark text-light has-height-md middle-items wow fadeIn">
+    <!-- about -->
+     
+    <div class="row has-height-md">
+    
+        <div class="container-fluid col-md-8">
+            <div id="about" class="text-center bg-dark text-light has-height-sm middle-items wow fadeIn">
                 <h2 class="section-title">¿Quienes somos?</h2>
             </div>
-            <p>
-                Bienvenidos a El HigAl Restaurante-Jardín. Nuestra misión es celebrar la rica y vibrante gastronomía mexicana, ofreciendo a nuestros comensales una experiencia única que combina sabores auténticos con un ambiente natural y acogedor.
-
-                En El HigAl, creemos en la magia de los ingredientes frescos y locales. Cada platillo que servimos está cuidadosamente elaborado, honrando las tradiciones culinarias que han pasado de generación en generación.
-
-                Nuestro restaurante jardín no solo es un lugar para disfrutar de una excelente comida, sino también un espacio para relajarse y conectar con la naturaleza. Rodeados de frondosos árboles y coloridas flores, nuestros comensales pueden disfrutar de una comida al aire libre que enriquece los sentidos y alimenta el espíritu.
-
-                Ven y descubre por qué El HigAl Restaurante Jardín es el lugar ideal para celebrar la gastronomía mexicana en Chimalhuacán. Ya sea una cena familiar, una celebración especial o una simple escapada culinaria, estamos aquí para ofrecerte una experiencia gastronómica inolvidable.
-            </p>
-
+            <div class="text-center">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent nec tempus magna, vitae malesuada sem.
+                    Fusce ut faucibus nisl, quis imperdiet erat. Nam nibh magna, imperdiet eget sollicitudin eget,
+                    condimentum ac odio. Nullam justo libero, condimentum sed nisl eu, lobortis eleifend tellus. Quisque
+                    congue sit amet enim eget dictum. Sed vehicula est nulla, non laoreet turpis rhoncus ac. Maecenas sit
+                    amet felis eu libero varius viverra. Ut vitae bibendum nulla.
+                </p>
+            </div>
+    
         </div>
-
-
-    </section>
-
-
+    
     </div>
 
     <!--  gallary Section  -->
@@ -129,7 +127,7 @@ $error = isset($_GET['error']) ? $_GET['error'] : 'Desconocido';
         if ($galeria !== false && count($galeria) > 0) {
             foreach ($galeria as $row) {
                 echo "
-                <div class='col-sm-6 col-lg-3 gallary-item wow fadeIn'>
+                <div class='col-4 col-lg-2 gallary-item wow fadeIn'>
                 <img src='" . $row["imagen"] . "'alt='" . $row["nombre"] . "' class='gallary-img'>
                 </div>";
             }
@@ -143,30 +141,35 @@ $error = isset($_GET['error']) ? $_GET['error'] : 'Desconocido';
 
 
     <!-- book a table Section  -->
-    <div class="container-fluid has-bg-overlay text-center text-light has-height-lg middle-items" id="book-table">
-        <div class="">
-            <h2 class="section-title mb-5">Reservaciones</h2>
-            <form action="controller/reservacionLogic.php" method="POST">
-                <div class="row mb-5">
-                    <div class="col-sm-6 col-md-3 col-xs-12 my-2">
-                        <input type="text" name="name" class="form-control form-control-lg custom-form-control" placeholder="Nombre" maxlength="50" required>
-                    </div>
-                    <div class="col-sm-6 col-md-3 col-xs-12 my-2">
-                        <input type="email" name="email" class="form-control form-control-lg custom-form-control" placeholder="Email" maxlength="30" required>
-                    </div>
-                    <div class="col-sm-6 col-md-3 col-xs-12 my-2">
-                        <input type="number" name="cantPersonas" class="form-control form-control-lg custom-form-control" placeholder="Cantidad de invitados" max="20" min="1" required>
-                    </div>
-                    <div class="col-sm-6 col-md-3 col-xs-12 my-2">
-                        <input type="datetime-local" name="fecha" class="form-control form-control-lg custom-form-control" placeholder="Fecha y Hora" required>
-                    </div>
-                    <input type="hidden" id="action" name="action" value="insert">
-                    <input type="hidden" id="source" name="source" value="client">
-
+    <div class="has-height-xl has-bg-overlay text-center text-light middle-items" id="book-table">
+    
+        <h2 class="section-title mb-5">Reservaciones</h2>
+        <form action="controller/reservacionLogic.php" method="POST">
+            <div class="row mb-5">
+                <div class="col-sm-6 col-md-3 my-2">
+                    <input type="text" name="name" class="form-control form-control-lg custom-form-control"
+                        placeholder="Nombre" maxlength="50" autocomplete="given-name" required>
                 </div>
-                <button type="submit" class="btn btn-lg btn-primary" id="rounded-btn">Agendar cita</button>
-            </form>
-        </div>
+                <div class="col-sm-6 col-md-3 my-2">
+                    <input type="email" name="email" class="form-control form-control-lg custom-form-control"
+                        placeholder="Email" maxlength="30" autocomplete="family-name" required>
+                </div>
+                <div class="col-sm-6 col-md-3 my-2">
+                    <input type="number" name="cantPersonas" class="form-control form-control-lg custom-form-control"
+                        placeholder="Cantidad de invitados" max="20" min="1" required>
+                </div>
+                <div class="col-sm-6 col-md-3 my-2">
+                    <input type="datetime-local" name="fecha" class="form-control form-control-lg custom-form-control"
+                        placeholder="Fecha y Hora" required>
+                </div>
+            </div>
+    
+            <input type="hidden" id="action" name="action" value="insert">
+            <input type="hidden" id="source" name="source" value="client">
+    
+            <button type="submit" class="btn btn-lg btn-primary" id="rounded-btn">Agendar cita</button>
+        </form>
+    
     </div>
 
 
@@ -181,7 +184,7 @@ $error = isset($_GET['error']) ? $_GET['error'] : 'Desconocido';
 
         <h2 class="section-title py-5">Nuestro menú</h2>
         <div class='row justify-content-center'>
-            <div class='col-sm-7 col-md-12 mb-5'>
+            <div class='col-12 mb-5'>
                 <ul class='nav nav-pills nav-justified mb-3' id='pills-tab' role='tablist'>
 
                     <?php
@@ -219,7 +222,7 @@ $error = isset($_GET['error']) ? $_GET['error'] : 'Desconocido';
             if ($platillosCategoria !== false && count($platillosCategoria) > 0) {
                 foreach ($platillosCategoria as $row) {
                     echo "
-                <div class='col-md-3'>
+                <div class=' col-md-3'>
                     <div class='card bg-transparent border my-3 my-md-0'>
                         <img src='" . $row["imagen"] . "' alt='" . $row["nombre"] . "'
                             class='rounded-0 card-img-top mg-responsive' width='500'>
