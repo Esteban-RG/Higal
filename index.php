@@ -41,6 +41,7 @@ $error = isset($_GET['error']) ? $_GET['error'] : 'Desconocido';
     <link rel="stylesheet" href="assets/vendors/animate/animate.css">
 
     <!-- Bootstrap + FoodHut main styles -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="assets/css/foodhut.css">
     <script src="assets/js/foodhut.js"></script>
 
@@ -105,8 +106,33 @@ $error = isset($_GET['error']) ? $_GET['error'] : 'Desconocido';
 
 
     <!-- Promotions -->
-    <div class="promotions container-fluid  ">
-        PROMOCIONES
+    <div class=" container-fluid has-height-md ">
+        <div id="carouselExampleIndicators" class="carousel slide">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            </div>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="assets/imgs/blog-1.jpg" class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item active">
+                    <img src="assets/imgs/blog-2.jpg" class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item active">
+                    <img src="assets/imgs/blog-3.jpg" class="d-block w-100" alt="...">
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
     </div>
 
 
@@ -185,7 +211,7 @@ $error = isset($_GET['error']) ? $_GET['error'] : 'Desconocido';
                     <?php
                     echo "
                     <li class='nav-item'>
-                        <a class='nav-link active' id='pills-home-tab' data-toggle='pill' href='#" . $categorias[0]['nombre'] . "' role='tab'
+                        <a class='nav-link active text-light' id='pills-home-tab' data-toggle='pill' href='#" . $categorias[0]['nombre'] . "' role='tab'
                             aria-controls='pills-home' aria-selected='true'>" . $categorias[0]['nombre'] . "</a>
                     </li>
                 ";
@@ -193,7 +219,7 @@ $error = isset($_GET['error']) ? $_GET['error'] : 'Desconocido';
                     for ($i = 1; $i < count($categorias); $i++) {
                         echo "
                     <li class='nav-item'>
-                        <a class='nav-link' id='pills-profile-tab' data-toggle='pill' href='#" . $categorias[$i]['nombre'] . "' role='tab'
+                        <a class='nav-link text-light' id='pills-profile-tab' data-toggle='pill' href='#" . $categorias[$i]['nombre'] . "' role='tab'
                             aria-controls='pills-profile' aria-selected='false'>" . $categorias[$i]['nombre'] . "</a>
                     </li>
                     ";
@@ -223,7 +249,7 @@ $error = isset($_GET['error']) ? $_GET['error'] : 'Desconocido';
                             class='rounded-0 card-img-top mg-responsive' width='500'>
                         <div class='card-body'>
                             <h1 class='text-center mb-4'><a href='#" . $row["categoria"] . "' class='badge badge-primary'>$" . $row["precio"] . "</a></h1>
-                            <h4 class='pt20 pb20'>" . $row["nombre"] . "</h4>
+                            <h4 class='pt20 pb20 text-light'>" . $row["nombre"] . "</h4>
                             <p class='text-white'>" . $row["descripcion"] . "</p>
                         </div>
                     </div>
@@ -256,7 +282,7 @@ $error = isset($_GET['error']) ? $_GET['error'] : 'Desconocido';
                                     class='rounded-0 card-img-top mg-responsive' width='500'>
                                 <div class='card-body'>
                                     <h1 class='text-center mb-4'><a href='#" . $row["categoria"] . "' class='badge badge-primary'>$" . $row["precio"] . "</a></h1>
-                                    <h4 class='pt20 pb20'>" . $row["nombre"] . "</h4>
+                                    <h4 class='pt20 pb20 text-light'>" . $row["nombre"] . "</h4>
                                     <p class='text-white'>" . $row["descripcion"] . "</p>
                                 </div>
                             </div>
@@ -288,7 +314,7 @@ $error = isset($_GET['error']) ? $_GET['error'] : 'Desconocido';
             <div class="card">
                 <img class="card-img-top" src="assets/imgs/chef.jpg" alt="">
                 <div class="card-body">
-                    <p class="card-text">Chef Aldo Buendia</p>
+                    <p class="card-text text-light">Chef Aldo Buendia</p>
                 </div>
 
             </div>
@@ -389,6 +415,8 @@ $error = isset($_GET['error']) ? $_GET['error'] : 'Desconocido';
     <script src="assets/vendors/bootstrap/bootstrap.bundle.js"></script>
 
     <!-- bootstrap affix -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
     <script src="assets/vendors/bootstrap/bootstrap.affix.js"></script>
 
     <!-- wow.js -->
