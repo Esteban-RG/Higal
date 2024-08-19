@@ -19,3 +19,12 @@
 .carousel{
     height: 300px;
 }
+
+.navbar{
+    display: block;
+}
+
+.list-group-item{
+    background-color: #1f1f1f00;
+    border: #ffffff;
+}

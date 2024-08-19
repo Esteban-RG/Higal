@@ -272,7 +272,7 @@ $error = isset($_GET['error']) ? $_GET['error'] : 'Desconocido';
 
         <h2 class="section-title mb-5">Reservaciones</h2>
         <form action="controller/reservacionLogic.php" method="POST">
-            <div class="row mb-5">
+            <div class="row ">
                 <div class="col-sm-6 col-md-3 my-2">
                     <input type="text" name="name" class="form-control form-control-lg custom-form-control"
                         placeholder="Nombre" maxlength="50" autocomplete="given-name" required>
@@ -294,8 +294,19 @@ $error = isset($_GET['error']) ? $_GET['error'] : 'Desconocido';
             <input type="hidden" id="action" name="action" value="insert">
             <input type="hidden" id="source" name="source" value="client">
 
+            <ul class="list-group">
+            <li class="list-group-item text-light">Viernes:    6:00 p.m. a  10:30 p.m.</li>
+            <li class="list-group-item text-light">Sábado:     8:00 a.m. a  10:30 p.m.</li>
+            <li class="list-group-item text-light">Domingo:     8:00 a.m. a  10:30 p.m.</li>
+            </ul>
+
             <button type="submit" class="btn btn-lg btn-primary" id="rounded-btn">Agendar cita</button>
         </form>
+
+        
+
+
+        
 
     </div>
 
