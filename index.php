@@ -102,11 +102,11 @@ $error = isset($_GET['error']) ? $_GET['error'] : 'Desconocido';
         </div>
     </header>
 
-    
+
 
     <!-- Promotions -->
     <div class="promotions container-fluid  ">
-            PROMOCIONES
+        PROMOCIONES
     </div>
 
 
@@ -166,38 +166,7 @@ $error = isset($_GET['error']) ? $_GET['error'] : 'Desconocido';
 
     </div>
 
-    <!-- about -->
 
-
-    <div class=" about row has-height-md" id="about">
-
-        <div class="container col-md-4">
-            <div class="card">
-                <img class="card-img-top" src="assets/imgs/chef.jpg" alt="">
-                <div class="card-body">
-                    <p class="card-text">Chef Aldo Buendia</p>
-                </div>
-
-            </div>
-        </div>
-
-        <div class="container-fluid col-md-8 d-flex align-items-center">
-
-            <div class="text-center">
-                <div class="text-center bg-dark text-light has-height-sm middle-items wow fadeIn">
-                    <h2 class="section-title">¿Quienes somos?</h2>
-                </div>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent nec tempus magna, vitae malesuada sem.
-                    Fusce ut faucibus nisl, quis imperdiet erat. Nam nibh magna, imperdiet eget sollicitudin eget,
-                    condimentum ac odio. Nullam justo libero, condimentum sed nisl eu, lobortis eleifend tellus. Quisque
-                    congue sit amet enim eget dictum. Sed vehicula est nulla, non laoreet turpis rhoncus ac. Maecenas sit
-                    amet felis eu libero varius viverra. Ut vitae bibendum nulla.
-                </p>
-            </div>
-
-        </div>
-
-    </div>
 
 
 
@@ -307,6 +276,39 @@ $error = isset($_GET['error']) ? $_GET['error'] : 'Desconocido';
 
         </div>
 
+
+    </div>
+
+    <!-- about -->
+
+
+    <div class=" about row has-height-md" id="about">
+
+        <div class="container col-md-4">
+            <div class="card">
+                <img class="card-img-top" src="assets/imgs/chef.jpg" alt="">
+                <div class="card-body">
+                    <p class="card-text">Chef Aldo Buendia</p>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="container-fluid col-md-8 d-flex align-items-center">
+
+            <div class="text-center">
+                <div class="text-center bg-dark text-light has-height-sm middle-items wow fadeIn">
+                    <h2 class="section-title">¿Quienes somos?</h2>
+                </div>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent nec tempus magna, vitae malesuada sem.
+                    Fusce ut faucibus nisl, quis imperdiet erat. Nam nibh magna, imperdiet eget sollicitudin eget,
+                    condimentum ac odio. Nullam justo libero, condimentum sed nisl eu, lobortis eleifend tellus. Quisque
+                    congue sit amet enim eget dictum. Sed vehicula est nulla, non laoreet turpis rhoncus ac. Maecenas sit
+                    amet felis eu libero varius viverra. Ut vitae bibendum nulla.
+                </p>
+            </div>
+
+        </div>
 
     </div>
 
