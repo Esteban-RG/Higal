@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 24-06-2024 a las 20:25:44
+-- Tiempo de generación: 19-08-2024 a las 07:17:14
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -24,83 +24,75 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `Administrador`
+-- Estructura de tabla para la tabla `administrador`
 --
 
-CREATE TABLE `Administrador` (
+CREATE TABLE `administrador` (
   `idAdministrador` int(11) NOT NULL,
   `nombre` varchar(100) DEFAULT NULL,
   `apPaterno` varchar(100) DEFAULT NULL,
   `apMaterno` varchar(100) DEFAULT NULL,
-  `contrasenha` varchar(100) DEFAULT NULL
+  `contrasenha` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Volcado de datos para la tabla `Administrador`
+-- Volcado de datos para la tabla `administrador`
 --
 
-INSERT INTO `Administrador` (`idAdministrador`, `nombre`, `apPaterno`, `apMaterno`, `contrasenha`) VALUES
-(1, 'admin', 'admin', 'admin', '$2y$10$ozvmdu8ytkKe.KfZbzzfE.c.kEP1k3krJMw53KrLtpxeP1tEkrX/.'),
-(4, 'Esteban', 'Reyes', 'Gutierrez', '$2y$10$jQzCytPbuzUMNkR8gcVrEeaAo0eukUYdL8rhYyCK.UlqQs17FNCX.');
+INSERT INTO `administrador` (`idAdministrador`, `nombre`, `apPaterno`, `apMaterno`, `contrasenha`) VALUES
+(1, 'admin', 'admin', 'admin', '$2y$10$ozvmdu8ytkKe.KfZbzzfE.c.kEP1k3krJMw53KrLtpxeP1tEkrX/.');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `Categoria`
+-- Estructura de tabla para la tabla `categoria`
 --
 
-CREATE TABLE `Categoria` (
+CREATE TABLE `categoria` (
   `idCategoria` int(11) NOT NULL,
   `nombre` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Volcado de datos para la tabla `Categoria`
+-- Volcado de datos para la tabla `categoria`
 --
 
-INSERT INTO `Categoria` (`idCategoria`, `nombre`) VALUES
+INSERT INTO `categoria` (`idCategoria`, `nombre`) VALUES
 (15, 'Entradas'),
 (16, 'Segundos'),
 (20, 'Fuertes'),
 (21, 'Botana'),
-(22, 'Postres');
+(22, 'Postres'),
+(23, 'Ensaladas');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `Cliente`
+-- Estructura de tabla para la tabla `cliente`
 --
 
-CREATE TABLE `Cliente` (
+CREATE TABLE `cliente` (
   `idCliente` int(11) NOT NULL,
   `nombre` varchar(100) DEFAULT NULL,
   `correo` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Volcado de datos para la tabla `Cliente`
---
-
-INSERT INTO `Cliente` (`idCliente`, `nombre`, `correo`) VALUES
-(7, 'Ricardo Esteban', 'ricardoespace@gmail.com'),
-(10, 'Julio', 'calva@gmail.com');
-
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `Mesa`
+-- Estructura de tabla para la tabla `mesa`
 --
 
-CREATE TABLE `Mesa` (
+CREATE TABLE `mesa` (
   `idMesa` int(11) NOT NULL,
   `asientos` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Volcado de datos para la tabla `Mesa`
+-- Volcado de datos para la tabla `mesa`
 --
 
-INSERT INTO `Mesa` (`idMesa`, `asientos`) VALUES
+INSERT INTO `mesa` (`idMesa`, `asientos`) VALUES
 (6, 4),
 (7, 4),
 (8, 4),
@@ -111,10 +103,10 @@ INSERT INTO `Mesa` (`idMesa`, `asientos`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `Platillo`
+-- Estructura de tabla para la tabla `platillo`
 --
 
-CREATE TABLE `Platillo` (
+CREATE TABLE `platillo` (
   `idPlatillo` int(11) NOT NULL,
   `nombre` varchar(100) DEFAULT NULL,
   `descripcion` varchar(255) DEFAULT NULL,
@@ -126,23 +118,35 @@ CREATE TABLE `Platillo` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Volcado de datos para la tabla `Platillo`
+-- Volcado de datos para la tabla `platillo`
 --
 
-INSERT INTO `Platillo` (`idPlatillo`, `nombre`, `descripcion`, `precio`, `idCategoria`, `idAdministrador`, `imagen`, `visibilidad`) VALUES
-(23, 'Ensalada de la casa', 'Mix de lechugas y espinaca con frutos rojos, ate, semillas\r\ncaramelizadas, cubos de queso ahumado y vinagreta.', 80, 15, 1, 'uploads/Ensalada de la cas.jpg', 0),
-(24, 'Pasta del día', 'Los ingredientes varían cada semana, pregunta a nuestros\r\nasociados.', 85, 16, 1, 'uploads/Pasta.avif', 1),
-(26, 'Taco Ensenada', 'Filete de pescado en tempura de garbanzo, acompañado de un\r\nguacamole rústico, con una ensalada de col morada bañada en\r\nmayonesa de chile habanero, pico de gallo contemporáneo y\r\nlimón Eureka.', 85, 20, 1, 'uploads/taco ensenada.jpeg', 0),
+INSERT INTO `platillo` (`idPlatillo`, `nombre`, `descripcion`, `precio`, `idCategoria`, `idAdministrador`, `imagen`, `visibilidad`) VALUES
+(24, 'Pasta del día', 'Los ingredientes varían cada semana, pregunta a nuestros\r\nasociados.', 85, 16, 1, 'uploads/Pasta.avif', 0),
+(26, 'Taco Ensenada', 'Filete de pescado en tempura de garbanzo, acompañado de un\r\nguacamole rústico, con una ensalada de col morada bañada en\r\nmayonesa de chile habanero, pico de gallo contemporáneo y\r\nlimón Eureka.', 85, 20, 1, 'uploads/taco ensenada.jpeg', 1),
 (27, 'Alitas', 'BBQ\r\nOriginal hot\r\nMango habanero\r\nBufalo\r\n10 Alitas, acompañadas de papas a la francesa, bastones de\r\napio y zanahoria y aderezo ranch.', 170, 21, 1, 'uploads/alitas.avif', 1),
-(28, 'Strudel de manzana con helado', 'Deliciosa masa hojaldre con un relleno de manzana flameada y\r\naromatizada con licor de ciruela, acompañado de helado.', 89, 22, 1, 'uploads/strudedl.png', 0);
+(28, 'Strudel de manzana con helado', 'Deliciosa masa hojaldre con un relleno de manzana flameada y\r\naromatizada con licor de ciruela, acompañado de helado.', 89, 22, 1, 'uploads/strudedl.png', 1),
+(29, 'Camarones en tortilla y queso', 'Los camarones en tortilla y queso son un platillo donde los camarones sazonados se cocinan y se colocan en tortillas calientes, cubiertos con queso derretido. Se sirven con guarniciones como salsa, aguacate y cilantro, ofreciendo una combinación deliciosa', 120, 20, 1, 'uploads/camarones en toritlla y queso.jpg', 1),
+(30, 'Aros de cebolla', 'Los aros de cebolla son un aperitivo crujiente y delicioso. Se preparan cortando cebollas en rodajas, sumergiéndolas en una masa o empanizado, y luego friéndolas hasta que estén doradas. Son perfectos para acompañar hamburguesas, sándwiches o como snack, ', 40, 21, 1, 'uploads/Aros de cebolla.jpg', 1),
+(31, 'Ensalada parrilera', 'Mix de lechugas y espinaca con vegetales blanqueados, rollitos de pechuga de pollo a la parrilla, jitomates cherry, mix de nueces, crotones y aderezo.', 85, 23, 1, 'uploads/ensalada con pechuga.avif', 1),
+(33, 'Taco Ensenada', 'Filete de pescado en tempura de garbanzo, acompañado de un\r\nguacamole rústico, con una ensalada de col morada bañada en\r\nmayonesa de chile habanero, pico de gallo contemporáneo y\r\nlimón Eureka.\r\n', 80, 20, 1, 'uploads/Filete de pescado con guacamole, y col morada.jpg', 1),
+(34, 'Fresas que endulzan el alma', 'Fresas cubiertas de chocolate obscuro y blanco acompañadas de colchones de plátano árabe bañados en compota de frutos rojos y crema ácida con menta.\r\n', 89, 22, 1, 'uploads/fresas con platano y chocolate.jpg', 1),
+(35, 'Mini gorditas michoacanas (Orden 3 pzas)', 'Chicharron prensado en salsa de tres chiles.\r\nSuadero de res macerado.\r\nCochinita pibil y carnitas (por temporada).\r\nAcompañadas con bombones de crema ácida, queso ahumado,\r\njulianas de lechuga italiana y salsa verde cruda con menta.\r\n', 70, 15, 1, 'uploads/gordita de carnitas (por temporada).jpg', 1),
+(36, 'Hamburguesa de arrachera', '200g de arrachera marinada y cocinada a la parrilla, queso cheddar, manchego y Oaxaca, crocante tocino ahumado, lechuga italiana, jitomate, cebolla morada, pepinillos, ensalada de col morada y el aderezo de casa, cama de frijoles yucatecos, guacamole rust', 160, 21, 1, 'uploads/hamburguesa de arrachera.jpg', 1),
+(37, 'Hamburguesa texana', '200g de carne de res cocinada a la parrilla, queso cheddar, manchego y Oaxaca, crocante tocino ahumado, lechuga italiana, jitomate, cebolla morada, pepinillos, ensalada de col morada y el aderezo de casa. Como guarnición papas a la francesa y aros de cebo', 130, 21, 1, 'uploads/Hamburguesa texana.avif', 1),
+(38, 'Papas a la francesa (250g)', 'Las papas a la francesa, también conocidas como papas fritas, son un aperitivo o acompañamiento popular. Se preparan cortando papas en tiras delgadas, que luego se fríen hasta quedar doradas y crujientes. Una porción de 250 gramos ofrece una cantidad gene', 49, 21, 1, 'uploads/papas a la francesa.webp', 1),
+(39, 'Pastel de queso', 'Montado sobre pasta sablée, decorado con frutos, bañado en salsa de frambuesa, acompañado de helado.\r\n', 92, 22, 1, 'uploads/pastel de queso.avif', 0),
+(40, 'Strudel de manzana con helado', 'Deliciosa masa hojaldre con un relleno de manzana flameada y aromatizada con licor de ciruela, acompañado de helado.\r\n', 89, 22, 1, 'uploads/Pludel de manzana con helado.jpg', 0),
+(41, 'Mini quesadil as (Orden 3 Pza)', 'Tinga de pollo ahumada.\r\nChampiñones aromatizados con epazote.\r\nChicharrón prensado en salsa de tres chiles.\r\nAcompañadas con bombones de crema ácida, queso, julianas\r\nde lechuga italiana y salsa verde cruda con menta.\r\n', 55, 15, 1, 'uploads/quesadilla champiñones.jpg', 0),
+(42, 'Mini sopecitos (Orden 5 pzas)', 'Tinga de pollo ahumada.\r\nSuadero de res macerado.\r\nChicharrón prensado en salsa de tres chiles.\r\nMasa de maíz nixtamalizada, cama de frijol refrito, bombones\r\nde crema ácida, queso ahumado y salsa verde cruda con\r\nmenta', 65, 15, 1, 'uploads/sopes de tinga aumada.jpg', 0);
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `Reservacion`
+-- Estructura de tabla para la tabla `reservacion`
 --
 
-CREATE TABLE `Reservacion` (
+CREATE TABLE `reservacion` (
   `idReservacion` int(11) NOT NULL,
   `fecha` datetime DEFAULT NULL,
   `cantPersonas` int(11) DEFAULT NULL,
@@ -157,41 +161,41 @@ CREATE TABLE `Reservacion` (
 --
 
 --
--- Indices de la tabla `Administrador`
+-- Indices de la tabla `administrador`
 --
-ALTER TABLE `Administrador`
+ALTER TABLE `administrador`
   ADD PRIMARY KEY (`idAdministrador`);
 
 --
--- Indices de la tabla `Categoria`
+-- Indices de la tabla `categoria`
 --
-ALTER TABLE `Categoria`
+ALTER TABLE `categoria`
   ADD PRIMARY KEY (`idCategoria`);
 
 --
--- Indices de la tabla `Cliente`
+-- Indices de la tabla `cliente`
 --
-ALTER TABLE `Cliente`
+ALTER TABLE `cliente`
   ADD PRIMARY KEY (`idCliente`);
 
 --
--- Indices de la tabla `Mesa`
+-- Indices de la tabla `mesa`
 --
-ALTER TABLE `Mesa`
+ALTER TABLE `mesa`
   ADD PRIMARY KEY (`idMesa`);
 
 --
--- Indices de la tabla `Platillo`
+-- Indices de la tabla `platillo`
 --
-ALTER TABLE `Platillo`
+ALTER TABLE `platillo`
   ADD PRIMARY KEY (`idPlatillo`),
   ADD KEY `idCategoria` (`idCategoria`),
   ADD KEY `idAdministrador` (`idAdministrador`);
 
 --
--- Indices de la tabla `Reservacion`
+-- Indices de la tabla `reservacion`
 --
-ALTER TABLE `Reservacion`
+ALTER TABLE `reservacion`
   ADD PRIMARY KEY (`idReservacion`),
   ADD KEY `idMesa` (`idMesa`),
   ADD KEY `idCliente` (`idCliente`),
@@ -202,59 +206,59 @@ ALTER TABLE `Reservacion`
 --
 
 --
--- AUTO_INCREMENT de la tabla `Administrador`
+-- AUTO_INCREMENT de la tabla `administrador`
 --
-ALTER TABLE `Administrador`
-  MODIFY `idAdministrador` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+ALTER TABLE `administrador`
+  MODIFY `idAdministrador` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
--- AUTO_INCREMENT de la tabla `Categoria`
+-- AUTO_INCREMENT de la tabla `categoria`
 --
-ALTER TABLE `Categoria`
-  MODIFY `idCategoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+ALTER TABLE `categoria`
+  MODIFY `idCategoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
--- AUTO_INCREMENT de la tabla `Cliente`
+-- AUTO_INCREMENT de la tabla `cliente`
 --
-ALTER TABLE `Cliente`
-  MODIFY `idCliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+ALTER TABLE `cliente`
+  MODIFY `idCliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
--- AUTO_INCREMENT de la tabla `Mesa`
+-- AUTO_INCREMENT de la tabla `mesa`
 --
-ALTER TABLE `Mesa`
-  MODIFY `idMesa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+ALTER TABLE `mesa`
+  MODIFY `idMesa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
--- AUTO_INCREMENT de la tabla `Platillo`
+-- AUTO_INCREMENT de la tabla `platillo`
 --
-ALTER TABLE `Platillo`
-  MODIFY `idPlatillo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+ALTER TABLE `platillo`
+  MODIFY `idPlatillo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 
 --
--- AUTO_INCREMENT de la tabla `Reservacion`
+-- AUTO_INCREMENT de la tabla `reservacion`
 --
-ALTER TABLE `Reservacion`
-  MODIFY `idReservacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+ALTER TABLE `reservacion`
+  MODIFY `idReservacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
 -- Restricciones para tablas volcadas
 --
 
 --
--- Filtros para la tabla `Platillo`
+-- Filtros para la tabla `platillo`
 --
-ALTER TABLE `Platillo`
-  ADD CONSTRAINT `Platillo_ibfk_1` FOREIGN KEY (`idCategoria`) REFERENCES `Categoria` (`idCategoria`),
-  ADD CONSTRAINT `Platillo_ibfk_2` FOREIGN KEY (`idAdministrador`) REFERENCES `Administrador` (`idAdministrador`);
+ALTER TABLE `platillo`
+  ADD CONSTRAINT `platillo_ibfk_1` FOREIGN KEY (`idCategoria`) REFERENCES `categoria` (`idCategoria`),
+  ADD CONSTRAINT `platillo_ibfk_2` FOREIGN KEY (`idAdministrador`) REFERENCES `administrador` (`idAdministrador`);
 
 --
--- Filtros para la tabla `Reservacion`
+-- Filtros para la tabla `reservacion`
 --
-ALTER TABLE `Reservacion`
-  ADD CONSTRAINT `Reservacion_ibfk_1` FOREIGN KEY (`idMesa`) REFERENCES `Mesa` (`idMesa`),
-  ADD CONSTRAINT `Reservacion_ibfk_2` FOREIGN KEY (`idCliente`) REFERENCES `Cliente` (`idCliente`),
-  ADD CONSTRAINT `Reservacion_ibfk_3` FOREIGN KEY (`idAdministrador`) REFERENCES `Administrador` (`idAdministrador`);
+ALTER TABLE `reservacion`
+  ADD CONSTRAINT `reservacion_ibfk_1` FOREIGN KEY (`idMesa`) REFERENCES `mesa` (`idMesa`),
+  ADD CONSTRAINT `reservacion_ibfk_2` FOREIGN KEY (`idCliente`) REFERENCES `cliente` (`idCliente`),
+  ADD CONSTRAINT `reservacion_ibfk_3` FOREIGN KEY (`idAdministrador`) REFERENCES `administrador` (`idAdministrador`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
