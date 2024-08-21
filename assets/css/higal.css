@@ -1,5 +1,6 @@
 .about{
     padding: 20px;
+    padding-top: 80px;
 }
 
 .card{
@@ -10,14 +11,10 @@
 }
 
 .promotion{
-    height: 300px;
+    width: 100%;
     object-fit: cover;
     overflow: hidden;
-    aspect-ratio: 1/30;
-}
-
-.carousel{
-    height: 300px;
+    aspect-ratio: 1/0.2;
 }
 
 .navbar{
@@ -28,3 +25,4 @@
     background-color: #1f1f1f00;
     border: #ffffff;
 }
+

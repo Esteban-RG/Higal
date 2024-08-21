@@ -624,17 +624,7 @@ pre code {
   margin-left: auto;
 }
 
-.row {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-wrap: wrap;
-  -ms-flex-wrap: wrap;
-  flex-wrap: wrap;
-  margin-right: -15px;
-  margin-left: -15px;
-}
+
 
 .no-gutters {
   margin-right: 0;
@@ -5046,7 +5036,7 @@ input[type="button"].btn-block {
 
 .navbar-toggler {
   padding: 0.25rem 0.75rem;
-  font-size: 1.25rem;
+  font-size: 1rem;
   line-height: 1;
   background-color: transparent;
   border: 1px solid transparent;
@@ -12445,11 +12435,14 @@ pre {
   min-height: 500px;
 }
 .has-height-xl {
-  min-height: 600px;
+  min-height: 700px;
 }
-
+.has-height-xxl {
+  min-height: 800px;
+}
 .gallary {
   margin: 0;
+  padding: 0;
 }
 
 .gallary .gallary-item {

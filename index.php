@@ -42,8 +42,7 @@ $error = isset($_GET['error']) ? $_GET['error'] : 'Desconocido';
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="assets/css/foodhut.css">
     <link rel="stylesheet" href="assets/css/higal.css">
-
-    <script src="assets/js/foodhut.js"></script>
+    <!-- <script src="assets/js/foodhut.js"></script> -->
 
 
 
@@ -55,7 +54,7 @@ $error = isset($_GET['error']) ? $_GET['error'] : 'Desconocido';
     </script>
 
     <!-- Navbar -->
-    <nav class="custom-navbar navbar navbar-expand-lg navbar-dark fixed-top" data-spy="affix" data-offset-top="10">
+    <nav class="row custom-navbar navbar navbar-expand-lg navbar-dark fixed-top" data-spy="affix" data-offset-top="10">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -66,10 +65,10 @@ $error = isset($_GET['error']) ? $_GET['error'] : 'Desconocido';
                     <a class="nav-link" href="#home">Inicio</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#about">Sobre nosotros</a>
+                    <a class="nav-link" href="#menu">Menu</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#gallary">Menu</a>
+                    <a class="nav-link" href="#gallary">Galeria</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#book-table">Reservaciones</a>
@@ -79,6 +78,9 @@ $error = isset($_GET['error']) ? $_GET['error'] : 'Desconocido';
                 <span class="brand-txt">Higal</span>
             </a>
             <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="#about">Sobre nosotros</a>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#testmonial">Reseñas</a>
                 </li>
@@ -105,38 +107,32 @@ $error = isset($_GET['error']) ? $_GET['error'] : 'Desconocido';
 
 
     <!-- Promotions -->
-    <div class=" container-fluid has-height-sm has-height-md  ">
-        <div id="carouselExampleIndicators" class="carousel slide">
-            <div class="carousel-indicators">
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+
+    <div id="carouselExampleIndicators" class="carousel slide">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="assets/imgs/blog-1.jpg" class="d-block w-100 promotion" alt="...">
             </div>
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <img src="assets/imgs/blog-1.jpg" class="d-block w-100 promotion" alt="...">
-                </div>
-                <div class="carousel-item active">
-                    <img src="assets/imgs/blog-2.jpg" class="d-block w-100 promotion" alt="...">
-                </div>
-                <div class="carousel-item active">
-                    <img src="assets/imgs/blog-3.jpg" class="d-block w-100 promotion" alt="...">
-                </div>
+            <div class="carousel-item active">
+                <img src="assets/imgs/blog-2.jpg" class="d-block w-100 promotion" alt="...">
             </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-            </button>
+            <div class="carousel-item active">
+                <img src="assets/imgs/blog-3.jpg" class="d-block w-100 promotion" alt="...">
+            </div>
         </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
     </div>
 
     <!-- BLOG Section  -->
 
-    <div id="gallary" class="container-fluid bg-dark text-light py-5 text-center wow fadeIn">
+    <div id="menu" class="container-fluid bg-dark text-light py-5 text-center wow fadeIn">
 
 
 
@@ -247,7 +243,7 @@ $error = isset($_GET['error']) ? $_GET['error'] : 'Desconocido';
     <!--  gallary Section  -->
 
 
-    <div class="gallary row">
+    <div class="container-fluid gallary row" id="gallary">
         <?php
 
 
@@ -268,7 +264,7 @@ $error = isset($_GET['error']) ? $_GET['error'] : 'Desconocido';
 
 
     <!-- book a table Section  -->
-    <div class="has-height-xl has-bg-overlay text-center text-light middle-items" id="book-table">
+    <div class="container-fluid has-height-xxl has-bg-overlay text-center text-light middle-items" id="book-table">
 
         <h2 class="section-title mb-5">Reservaciones</h2>
         <form action="controller/reservacionLogic.php" method="POST">
@@ -295,18 +291,18 @@ $error = isset($_GET['error']) ? $_GET['error'] : 'Desconocido';
             <input type="hidden" id="source" name="source" value="client">
 
             <ul class="list-group">
-            <li class="list-group-item text-light">Viernes:    6:00 p.m. a  10:30 p.m.</li>
-            <li class="list-group-item text-light">Sábado:     8:00 a.m. a  10:30 p.m.</li>
-            <li class="list-group-item text-light">Domingo:     8:00 a.m. a  10:30 p.m.</li>
+                <li class="list-group-item text-light">Viernes: 6:00 p.m. a 10:30 p.m.</li>
+                <li class="list-group-item text-light">Sábado: 8:00 a.m. a 10:30 p.m.</li>
+                <li class="list-group-item text-light">Domingo: 8:00 a.m. a 10:30 p.m.</li>
             </ul>
 
             <button type="submit" class="btn btn-lg btn-primary" id="rounded-btn">Agendar cita</button>
         </form>
 
-        
 
 
-        
+
+
 
     </div>
 
@@ -319,9 +315,9 @@ $error = isset($_GET['error']) ? $_GET['error'] : 'Desconocido';
     <!-- about -->
 
 
-    <div class=" about row has-height-md" id="about">
+    <div class="container-fluid row about  d-flex has-height-xl align-items-center" id="about">
 
-        <div class="container col-md-4">
+        <div class="container col-sm-12 col-md-4">
             <div class="card">
                 <img class="card-img-top" src="assets/imgs/chef.jpg" alt="">
                 <div class="card-body">
@@ -331,7 +327,7 @@ $error = isset($_GET['error']) ? $_GET['error'] : 'Desconocido';
             </div>
         </div>
 
-        <div class="container-fluid col-md-8 d-flex align-items-center">
+        <div class="col-sm-12 col-md-8 d-flex align-items-center">
 
             <div class="text-center">
                 <div class="text-center bg-dark text-light has-height-sm middle-items wow fadeIn">
