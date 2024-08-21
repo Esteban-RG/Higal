@@ -9,7 +9,6 @@
 
     <title>Higal Restaurante Jardin</title>
 
-
     <!-- Incluye JQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
@@ -22,8 +21,13 @@
     <link rel="stylesheet" href="assets/vendors/animate/animate.css">
 
     <!-- Bootstrap + FoodHut main styles -->
-    <link rel="stylesheet" href="assets/css/foodhut.css">
-    <script src="assets/js/foodhut.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="assets/css/higal.css">
+    <!-- <script src="assets/js/foodhut.js"></script> -->
+
+
+
 </head>
 
 <body data-spy="scroll" data-target=".navbar" data-offset="40" id="home">
@@ -32,7 +36,7 @@
     </script>
 
     <!-- Navbar -->
-    <nav class="custom-navbar navbar navbar-expand-lg navbar-dark fixed-top" data-spy="affix" data-offset-top="10">
+    <nav class=" custom-navbar navbar navbar-expand-lg navbar-dark fixed-top" data-spy="affix" data-offset-top="10">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -43,10 +47,10 @@
                     <a class="nav-link" href="#home">Inicio</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#about">Sobre nosotros</a>
+                    <a class="nav-link" href="#menu">Menu</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#gallary">Menu</a>
+                    <a class="nav-link" href="#gallary">Galeria</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#book-table">Reservaciones</a>
@@ -56,6 +60,9 @@
                 <span class="brand-txt">Higal</span>
             </a>
             <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="#about">Sobre nosotros</a>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#testmonial">Reseñas</a>
                 </li>
@@ -67,6 +74,8 @@
         </div>
     </nav>
 
+
+
     <!-- Header -->
 
     <header id="home" class="header">
@@ -77,137 +86,72 @@
         </div>
     </header>
 
-    <!-- about -->
 
-    <div class="row has-height-md">
 
-        <div class="container-fluid col-md-8">
-            <div id="about" class="text-center bg-dark text-light has-height-sm middle-items wow fadeIn">
-                <h2 class="section-title">¿Quienes somos?</h2>
+    <!-- Promotions -->
+
+    <div id="carouselExampleIndicators" class="carousel slide">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="assets/imgs/blog-1.jpg" class="d-block w-100 promotion" alt="...">
             </div>
-            <div class="text-center">
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent nec tempus magna, vitae malesuada
-                    sem.
-                    Fusce ut faucibus nisl, quis imperdiet erat. Nam nibh magna, imperdiet eget sollicitudin eget,
-                    condimentum ac odio. Nullam justo libero, condimentum sed nisl eu, lobortis eleifend tellus. Quisque
-                    congue sit amet enim eget dictum. Sed vehicula est nulla, non laoreet turpis rhoncus ac. Maecenas
-                    sit
-                    amet felis eu libero varius viverra. Ut vitae bibendum nulla.
-                </p>
+            <div class="carousel-item active">
+                <img src="assets/imgs/blog-2.jpg" class="d-block w-100 promotion" alt="...">
             </div>
-
-        </div>
-
-    </div>
-
-    <!--  gallary Section  -->
-
-
-    <div class="gallary row">
-
-        <div class=' col-4 col-lg-2 gallary-item wow fadeIn'>
-            <img src='uploads/Pasta.avif' alt='Pasta del día' class='gallary-img'>
-        </div>
-        <div class='col-4 col-lg-2 gallary-item wow fadeIn'>
-            <img src='uploads/taco ensenada.jpeg' alt='Taco Ensenada' class='gallary-img'>
-        </div>
-        <div class='col-4 col-lg-2 gallary-item wow fadeIn'>
-            <img src='uploads/alitas.avif' alt='Alitas' class='gallary-img'>
-        </div>
-        <div class='col-4 col-lg-2 gallary-item wow fadeIn'>
-            <img src='uploads/ensalada con pechuga.avif' alt='Ensalada parrilera' class='gallary-img'>
-        </div>
-        <div class='col-4 col-lg-2 gallary-item wow fadeIn'>
-            <img src='uploads/Filete de pescado con guacamole, y col morada.jpg' alt='Taco Ensenada'
-                class='gallary-img'>
-        </div>
-        <div class='col-4 col-lg-2 gallary-item wow fadeIn'>
-            <img src='uploads/fresas con platano y chocolate.jpg' alt='Fresas que endulzan el alma' class='gallary-img'>
-        </div>
-        <div class='col-4 col-lg-2 gallary-item wow fadeIn'>
-            <img src='uploads/gordita de carnitas (por temporada).jpg' alt='Mini gorditas michoacanas (Orden 3 pzas)'
-                class='gallary-img'>
-        </div>
-        <div class='col-4 col-lg-2 gallary-item wow fadeIn'>
-            <img src='uploads/Hamburguesa texana.avif' alt='Hamburguesa texana' class='gallary-img'>
-        </div>
-    </div>
-
-
-
-    <!-- book a table Section  -->
-    <div class="has-height-xl has-bg-overlay text-center text-light middle-items" id="book-table">
-
-        <h2 class="section-title mb-5">Reservaciones</h2>
-        <form action="controller/reservacionLogic.php" method="POST">
-            <div class="row mb-5">
-                <div class="col-sm-6 col-md-3 my-2">
-                    <input type="text" name="name" class="form-control form-control-lg custom-form-control"
-                        placeholder="Nombre" maxlength="50" required>
-                </div>
-                <div class="col-sm-6 col-md-3 my-2">
-                    <input type="email" name="email" class="form-control form-control-lg custom-form-control"
-                        placeholder="Email" maxlength="30" required>
-                </div>
-                <div class="col-sm-6 col-md-3 my-2">
-                    <input type="number" name="cantPersonas" class="form-control form-control-lg custom-form-control"
-                        placeholder="Cantidad de invitados" max="20" min="1" required>
-                </div>
-                <div class="col-sm-6 col-md-3 my-2">
-                    <input type="datetime-local" name="fecha" class="form-control form-control-lg custom-form-control"
-                        placeholder="Fecha y Hora" required>
-                </div>
+            <div class="carousel-item active">
+                <img src="assets/imgs/blog-3.jpg" class="d-block w-100 promotion" alt="...">
             </div>
-
-            <input type="hidden" id="action" name="action" value="insert">
-            <input type="hidden" id="source" name="source" value="client">
-
-            <button type="submit" class="btn btn-lg btn-primary" id="rounded-btn">Agendar cita</button>
-        </form>
-
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+            data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+            data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
     </div>
-
-
-
-
 
     <!-- BLOG Section  -->
 
-    <div id="gallary" class="container-fluid bg-dark text-light py-5 text-center wow fadeIn">
+    <div id="menu" class="container-fluid text-light py-5 text-center wow fadeIn">
+
         <h2 class="section-title py-5">Nuestro menú</h2>
         <div class='row justify-content-center'>
             <div class='col-12 mb-5'>
-                <ul class='nav nav-pills nav-justified mb-3' id='pills-tab' role='tablist'>
+                <ul class='nav nav-pills text-muted nav-justified mb-3' id='pills-tab' role='tablist'>
 
 
                     <li class='nav-item'>
-                        <a class='nav-link active' id='pills-home-tab' data-toggle='pill' href='#Entradas' role='tab'
-                            aria-controls='pills-home' aria-selected='true'>Entradas</a>
+                        <a class='nav-link active ' id='pills-home-tab' data-toggle='pill' href='#Entradas'
+                            role='tab' aria-controls='pills-home' aria-selected='true'>Entradas</a>
                     </li>
 
                     <li class='nav-item'>
-                        <a class='nav-link' id='pills-profile-tab' data-toggle='pill' href='#Segundos' role='tab'
-                            aria-controls='pills-profile' aria-selected='false'>Segundos</a>
+                        <a class='nav-link ' id='pills-profile-tab' data-toggle='pill' href='#Segundos'
+                            role='tab' aria-controls='pills-profile' aria-selected='false'>Segundos</a>
                     </li>
 
                     <li class='nav-item'>
-                        <a class='nav-link' id='pills-profile-tab' data-toggle='pill' href='#Fuertes' role='tab'
-                            aria-controls='pills-profile' aria-selected='false'>Fuertes</a>
+                        <a class='nav-link ' id='pills-profile-tab' data-toggle='pill' href='#Fuertes'
+                            role='tab' aria-controls='pills-profile' aria-selected='false'>Fuertes</a>
                     </li>
 
                     <li class='nav-item'>
-                        <a class='nav-link' id='pills-profile-tab' data-toggle='pill' href='#Botana' role='tab'
-                            aria-controls='pills-profile' aria-selected='false'>Botana</a>
+                        <a class='nav-link ' id='pills-profile-tab' data-toggle='pill' href='#Botana'
+                            role='tab' aria-controls='pills-profile' aria-selected='false'>Botana</a>
                     </li>
 
                     <li class='nav-item'>
-                        <a class='nav-link' id='pills-profile-tab' data-toggle='pill' href='#Postres' role='tab'
-                            aria-controls='pills-profile' aria-selected='false'>Postres</a>
+                        <a class='nav-link ' id='pills-profile-tab' data-toggle='pill' href='#Postres'
+                            role='tab' aria-controls='pills-profile' aria-selected='false'>Postres</a>
                     </li>
 
                     <li class='nav-item'>
-                        <a class='nav-link' id='pills-profile-tab' data-toggle='pill' href='#Ensaladas' role='tab'
-                            aria-controls='pills-profile' aria-selected='false'>Ensaladas</a>
+                        <a class='nav-link text-muted' id='pills-profile-tab' data-toggle='pill' href='#Ensaladas'
+                            role='tab' aria-controls='pills-profile' aria-selected='false'>Ensaladas</a>
                     </li>
                 </ul>
             </div>
@@ -218,7 +162,7 @@
             <div class='tab-pane show active' id='Entradas' role='tabpanel' aria-labelledby='pills-home-tab'>
                 <div class='row'>
 
-                    <div class='col-md-3'>
+                    <div class=' col-md-3'>
                         <div class='card bg-transparent border my-3 my-md-0'>
                             <img src='uploads/gordita de carnitas (por temporada).jpg'
                                 alt='Mini gorditas michoacanas (Orden 3 pzas)'
@@ -226,7 +170,7 @@
                             <div class='card-body'>
                                 <h1 class='text-center mb-4'><a href='#Entradas' class='badge badge-primary'>$70</a>
                                 </h1>
-                                <h4 class='pt20 pb20'>Mini gorditas michoacanas (Orden 3 pzas)</h4>
+                                <h4 class='pt20 pb20 text-light'>Mini gorditas michoacanas (Orden 3 pzas)</h4>
                                 <p class='text-white'>Chicharron prensado en salsa de tres chiles.
                                     Suadero de res macerado.
                                     Cochinita pibil y carnitas (por temporada).
@@ -237,14 +181,14 @@
                         </div>
                     </div>
 
-                    <div class='col-md-3'>
+                    <div class=' col-md-3'>
                         <div class='card bg-transparent border my-3 my-md-0'>
                             <img src='uploads/quesadilla champiñones.jpg' alt='Mini quesadil as (Orden 3 Pza)'
                                 class='rounded-0 card-img-top mg-responsive' width='500'>
                             <div class='card-body'>
                                 <h1 class='text-center mb-4'><a href='#Entradas' class='badge badge-primary'>$55</a>
                                 </h1>
-                                <h4 class='pt20 pb20'>Mini quesadil as (Orden 3 Pza)</h4>
+                                <h4 class='pt20 pb20 text-light'>Mini quesadil as (Orden 3 Pza)</h4>
                                 <p class='text-white'>Tinga de pollo ahumada.
                                     Champiñones aromatizados con epazote.
                                     Chicharrón prensado en salsa de tres chiles.
@@ -255,14 +199,14 @@
                         </div>
                     </div>
 
-                    <div class='col-md-3'>
+                    <div class=' col-md-3'>
                         <div class='card bg-transparent border my-3 my-md-0'>
                             <img src='uploads/sopes de tinga aumada.jpg' alt='Mini sopecitos (Orden 5 pzas)'
                                 class='rounded-0 card-img-top mg-responsive' width='500'>
                             <div class='card-body'>
                                 <h1 class='text-center mb-4'><a href='#Entradas' class='badge badge-primary'>$65</a>
                                 </h1>
-                                <h4 class='pt20 pb20'>Mini sopecitos (Orden 5 pzas)</h4>
+                                <h4 class='pt20 pb20 text-light'>Mini sopecitos (Orden 5 pzas)</h4>
                                 <p class='text-white'>Tinga de pollo ahumada.
                                     Suadero de res macerado.
                                     Chicharrón prensado en salsa de tres chiles.
@@ -284,7 +228,7 @@
                             <div class='card-body'>
                                 <h1 class='text-center mb-4'><a href='#Segundos' class='badge badge-primary'>$85</a>
                                 </h1>
-                                <h4 class='pt20 pb20'>Pasta del día</h4>
+                                <h4 class='pt20 pb20 text-light'>Pasta del día</h4>
                                 <p class='text-white'>Los ingredientes varían cada semana, pregunta a nuestros
                                     asociados.</p>
                             </div>
@@ -303,7 +247,7 @@
                                 class='rounded-0 card-img-top mg-responsive' width='500'>
                             <div class='card-body'>
                                 <h1 class='text-center mb-4'><a href='#Fuertes' class='badge badge-primary'>$85</a></h1>
-                                <h4 class='pt20 pb20'>Taco Ensenada</h4>
+                                <h4 class='pt20 pb20 text-light'>Taco Ensenada</h4>
                                 <p class='text-white'>Filete de pescado en tempura de garbanzo, acompañado de un
                                     guacamole rústico, con una ensalada de col morada bañada en
                                     mayonesa de chile habanero, pico de gallo contemporáneo y
@@ -319,7 +263,7 @@
                             <div class='card-body'>
                                 <h1 class='text-center mb-4'><a href='#Fuertes' class='badge badge-primary'>$120</a>
                                 </h1>
-                                <h4 class='pt20 pb20'>Camarones en tortilla y queso</h4>
+                                <h4 class='pt20 pb20 text-light'>Camarones en tortilla y queso</h4>
                                 <p class='text-white'>Los camarones en tortilla y queso son un platillo donde los
                                     camarones sazonados se cocinan y se colocan en tortillas calientes, cubiertos con
                                     queso derretido. Se sirven con guarniciones como salsa, aguacate y cilantro,
@@ -334,7 +278,7 @@
                                 class='rounded-0 card-img-top mg-responsive' width='500'>
                             <div class='card-body'>
                                 <h1 class='text-center mb-4'><a href='#Fuertes' class='badge badge-primary'>$80</a></h1>
-                                <h4 class='pt20 pb20'>Taco Ensenada</h4>
+                                <h4 class='pt20 pb20 text-light'>Taco Ensenada</h4>
                                 <p class='text-white'>Filete de pescado en tempura de garbanzo, acompañado de un
                                     guacamole rústico, con una ensalada de col morada bañada en
                                     mayonesa de chile habanero, pico de gallo contemporáneo y
@@ -356,7 +300,7 @@
                                 width='500'>
                             <div class='card-body'>
                                 <h1 class='text-center mb-4'><a href='#Botana' class='badge badge-primary'>$170</a></h1>
-                                <h4 class='pt20 pb20'>Alitas</h4>
+                                <h4 class='pt20 pb20 text-light'>Alitas</h4>
                                 <p class='text-white'>BBQ
                                     Original hot
                                     Mango habanero
@@ -373,7 +317,7 @@
                                 class='rounded-0 card-img-top mg-responsive' width='500'>
                             <div class='card-body'>
                                 <h1 class='text-center mb-4'><a href='#Botana' class='badge badge-primary'>$40</a></h1>
-                                <h4 class='pt20 pb20'>Aros de cebolla</h4>
+                                <h4 class='pt20 pb20 text-light'>Aros de cebolla</h4>
                                 <p class='text-white'>Los aros de cebolla son un aperitivo crujiente y delicioso. Se
                                     preparan cortando cebollas en rodajas, sumergiéndolas en una masa o empanizado, y
                                     luego friéndolas hasta que estén doradas. Son perfectos para acompañar hamburguesas,
@@ -388,7 +332,7 @@
                                 class='rounded-0 card-img-top mg-responsive' width='500'>
                             <div class='card-body'>
                                 <h1 class='text-center mb-4'><a href='#Botana' class='badge badge-primary'>$160</a></h1>
-                                <h4 class='pt20 pb20'>Hamburguesa de arrachera</h4>
+                                <h4 class='pt20 pb20 text-light'>Hamburguesa de arrachera</h4>
                                 <p class='text-white'>200g de arrachera marinada y cocinada a la parrilla, queso
                                     cheddar, manchego y Oaxaca, crocante tocino ahumado, lechuga italiana, jitomate,
                                     cebolla morada, pepinillos, ensalada de col morada y el aderezo de casa, cama de
@@ -403,7 +347,7 @@
                                 class='rounded-0 card-img-top mg-responsive' width='500'>
                             <div class='card-body'>
                                 <h1 class='text-center mb-4'><a href='#Botana' class='badge badge-primary'>$130</a></h1>
-                                <h4 class='pt20 pb20'>Hamburguesa texana</h4>
+                                <h4 class='pt20 pb20 text-light'>Hamburguesa texana</h4>
                                 <p class='text-white'>200g de carne de res cocinada a la parrilla, queso cheddar,
                                     manchego y Oaxaca, crocante tocino ahumado, lechuga italiana, jitomate, cebolla
                                     morada, pepinillos, ensalada de col morada y el aderezo de casa. Como guarnición
@@ -418,7 +362,7 @@
                                 class='rounded-0 card-img-top mg-responsive' width='500'>
                             <div class='card-body'>
                                 <h1 class='text-center mb-4'><a href='#Botana' class='badge badge-primary'>$49</a></h1>
-                                <h4 class='pt20 pb20'>Papas a la francesa (250g)</h4>
+                                <h4 class='pt20 pb20 text-light'>Papas a la francesa (250g)</h4>
                                 <p class='text-white'>Las papas a la francesa, también conocidas como papas fritas, son
                                     un aperitivo o acompañamiento popular. Se preparan cortando papas en tiras delgadas,
                                     que luego se fríen hasta quedar doradas y crujientes. Una porción de 250 gramos
@@ -439,7 +383,7 @@
                                 class='rounded-0 card-img-top mg-responsive' width='500'>
                             <div class='card-body'>
                                 <h1 class='text-center mb-4'><a href='#Postres' class='badge badge-primary'>$89</a></h1>
-                                <h4 class='pt20 pb20'>Strudel de manzana con helado</h4>
+                                <h4 class='pt20 pb20 text-light'>Strudel de manzana con helado</h4>
                                 <p class='text-white'>Deliciosa masa hojaldre con un relleno de manzana flameada y
                                     aromatizada con licor de ciruela, acompañado de helado.</p>
                             </div>
@@ -452,7 +396,7 @@
                                 class='rounded-0 card-img-top mg-responsive' width='500'>
                             <div class='card-body'>
                                 <h1 class='text-center mb-4'><a href='#Postres' class='badge badge-primary'>$89</a></h1>
-                                <h4 class='pt20 pb20'>Fresas que endulzan el alma</h4>
+                                <h4 class='pt20 pb20 text-light'>Fresas que endulzan el alma</h4>
                                 <p class='text-white'>Fresas cubiertas de chocolate obscuro y blanco acompañadas de
                                     colchones de plátano árabe bañados en compota de frutos rojos y crema ácida con
                                     menta.
@@ -467,7 +411,7 @@
                                 class='rounded-0 card-img-top mg-responsive' width='500'>
                             <div class='card-body'>
                                 <h1 class='text-center mb-4'><a href='#Postres' class='badge badge-primary'>$92</a></h1>
-                                <h4 class='pt20 pb20'>Pastel de queso</h4>
+                                <h4 class='pt20 pb20 text-light'>Pastel de queso</h4>
                                 <p class='text-white'>Montado sobre pasta sablée, decorado con frutos, bañado en salsa
                                     de frambuesa, acompañado de helado.
                                 </p>
@@ -481,7 +425,7 @@
                                 class='rounded-0 card-img-top mg-responsive' width='500'>
                             <div class='card-body'>
                                 <h1 class='text-center mb-4'><a href='#Postres' class='badge badge-primary'>$89</a></h1>
-                                <h4 class='pt20 pb20'>Strudel de manzana con helado</h4>
+                                <h4 class='pt20 pb20 text-light'>Strudel de manzana con helado</h4>
                                 <p class='text-white'>Deliciosa masa hojaldre con un relleno de manzana flameada y
                                     aromatizada con licor de ciruela, acompañado de helado.
                                 </p>
@@ -502,7 +446,7 @@
                             <div class='card-body'>
                                 <h1 class='text-center mb-4'><a href='#Ensaladas' class='badge badge-primary'>$85</a>
                                 </h1>
-                                <h4 class='pt20 pb20'>Ensalada parrilera</h4>
+                                <h4 class='pt20 pb20 text-light'>Ensalada parrilera</h4>
                                 <p class='text-white'>Mix de lechugas y espinaca con vegetales blanqueados, rollitos de
                                     pechuga de pollo a la parrilla, jitomates cherry, mix de nueces, crotones y aderezo.
                                 </p>
@@ -518,8 +462,157 @@
 
     </div>
 
+
+
+    <!--  gallary Section  -->
+
+
+    <div class="container-fluid gallary row" id="gallary">
+
+        <div class='col-4 col-lg-2 gallary-item wow fadeIn'>
+            <img src='uploads/Pasta.avif' alt='Pasta del día' class='gallary-img'>
+        </div>
+        <div class='col-4 col-lg-2 gallary-item wow fadeIn'>
+            <img src='uploads/taco ensenada.jpeg' alt='Taco Ensenada' class='gallary-img'>
+        </div>
+        <div class='col-4 col-lg-2 gallary-item wow fadeIn'>
+            <img src='uploads/alitas.avif' alt='Alitas' class='gallary-img'>
+        </div>
+        <div class='col-4 col-lg-2 gallary-item wow fadeIn'>
+            <img src='uploads/strudedl.png' alt='Strudel de manzana con helado' class='gallary-img'>
+        </div>
+        <div class='col-4 col-lg-2 gallary-item wow fadeIn'>
+            <img src='uploads/camarones en toritlla y queso.jpg' alt='Camarones en tortilla y queso'
+                class='gallary-img'>
+        </div>
+        <div class='col-4 col-lg-2 gallary-item wow fadeIn'>
+            <img src='uploads/Aros de cebolla.jpg' alt='Aros de cebolla' class='gallary-img'>
+        </div>
+        <div class='col-4 col-lg-2 gallary-item wow fadeIn'>
+            <img src='uploads/ensalada con pechuga.avif' alt='Ensalada parrilera' class='gallary-img'>
+        </div>
+        <div class='col-4 col-lg-2 gallary-item wow fadeIn'>
+            <img src='uploads/Filete de pescado con guacamole, y col morada.jpg' alt='Taco Ensenada'
+                class='gallary-img'>
+        </div>
+        <div class='col-4 col-lg-2 gallary-item wow fadeIn'>
+            <img src='uploads/fresas con platano y chocolate.jpg' alt='Fresas que endulzan el alma' class='gallary-img'>
+        </div>
+        <div class='col-4 col-lg-2 gallary-item wow fadeIn'>
+            <img src='uploads/gordita de carnitas (por temporada).jpg' alt='Mini gorditas michoacanas (Orden 3 pzas)'
+                class='gallary-img'>
+        </div>
+        <div class='col-4 col-lg-2 gallary-item wow fadeIn'>
+            <img src='uploads/hamburguesa de arrachera.jpg' alt='Hamburguesa de arrachera' class='gallary-img'>
+        </div>
+        <div class='col-4 col-lg-2 gallary-item wow fadeIn'>
+            <img src='uploads/Hamburguesa texana.avif' alt='Hamburguesa texana' class='gallary-img'>
+        </div>
+        <div class='col-4 col-lg-2 gallary-item wow fadeIn'>
+            <img src='uploads/papas a la francesa.webp' alt='Papas a la francesa (250g)' class='gallary-img'>
+        </div>
+        <div class='col-4 col-lg-2 gallary-item wow fadeIn'>
+            <img src='uploads/pastel de queso.avif' alt='Pastel de queso' class='gallary-img'>
+        </div>
+        <div class='col-4 col-lg-2 gallary-item wow fadeIn'>
+            <img src='uploads/Pludel de manzana con helado.jpg' alt='Strudel de manzana con helado' class='gallary-img'>
+        </div>
+        <div class='col-4 col-lg-2 gallary-item wow fadeIn'>
+            <img src='uploads/quesadilla champiñones.jpg' alt='Mini quesadil as (Orden 3 Pza)' class='gallary-img'>
+        </div>
+        <div class='col-4 col-lg-2 gallary-item wow fadeIn'>
+            <img src='uploads/sopes de tinga aumada.jpg' alt='Mini sopecitos (Orden 5 pzas)' class='gallary-img'>
+        </div>
+    </div>
+
+
+
+    <!-- book a table Section  -->
+    <div class="container-fluid has-height-xxl has-bg-overlay text-center text-light middle-items" id="book-table">
+
+        <h2 class="section-title mb-5">Reservaciones</h2>
+        <form action="controller/reservacionLogic.php" method="POST">
+            <div class="row ">
+                <div class="col-sm-6 col-md-3 my-2">
+                    <input type="text" name="name" class="form-control form-control-lg custom-form-control"
+                        placeholder="Nombre" maxlength="50" autocomplete="given-name" required>
+                </div>
+                <div class="col-sm-6 col-md-3 my-2">
+                    <input type="email" name="email" class="form-control form-control-lg custom-form-control"
+                        placeholder="Email" maxlength="30" autocomplete="family-name" required>
+                </div>
+                <div class="col-sm-6 col-md-3 my-2">
+                    <input type="number" name="cantPersonas" class="form-control form-control-lg custom-form-control"
+                        placeholder="Cantidad de invitados" max="20" min="1" required>
+                </div>
+                <div class="col-sm-6 col-md-3 my-2">
+                    <input type="datetime-local" name="fecha" class="form-control form-control-lg custom-form-control"
+                        placeholder="Fecha y Hora" required>
+                </div>
+            </div>
+
+            <input type="hidden" id="action" name="action" value="insert">
+            <input type="hidden" id="source" name="source" value="client">
+
+            <ul class="list-group">
+                <li class="list-group-item text-light">Viernes: 6:00 p.m. a 10:30 p.m.</li>
+                <li class="list-group-item text-light">Sábado: 8:00 a.m. a 10:30 p.m.</li>
+                <li class="list-group-item text-light">Domingo: 8:00 a.m. a 10:30 p.m.</li>
+            </ul>
+
+            <button type="submit" class="btn btn-lg btn-primary" id="rounded-btn">Agendar cita</button>
+        </form>
+
+
+
+
+
+
+    </div>
+
+
+
+
+
+
+
+    <!-- about -->
+
+
+    <div class="container-fluid row about  d-flex has-height-xl align-items-center" id="about">
+
+        <div class="container col-sm-12 col-md-4">
+            <div class="card">
+                <img class="card-img-top" src="assets/imgs/chef.jpg" alt="">
+                <div class="card-body">
+                    <p class="card-text text-light">Chef Aldo Buendia</p>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="col-sm-12 col-md-8 d-flex align-items-center">
+
+            <div class="text-center">
+                <div class="text-center text-light has-height-sm middle-items wow fadeIn">
+                    <h2 class="section-title">¿Quienes somos?</h2>
+                </div>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent nec tempus magna, vitae malesuada
+                    sem.
+                    Fusce ut faucibus nisl, quis imperdiet erat. Nam nibh magna, imperdiet eget sollicitudin eget,
+                    condimentum ac odio. Nullam justo libero, condimentum sed nisl eu, lobortis eleifend tellus. Quisque
+                    congue sit amet enim eget dictum. Sed vehicula est nulla, non laoreet turpis rhoncus ac. Maecenas
+                    sit
+                    amet felis eu libero varius viverra. Ut vitae bibendum nulla.
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+
     <!-- REVIEWS Section  -->
-    <div id="testmonial" class="container-fluid wow fadeIn bg-dark text-light has-height-lg middle-items">
+    <div id="testmonial" class="container-fluid wow fadeIn text-light has-height-lg middle-items">
         <h2 class="section-title my-5 text-center">Que dicen nuestros clientes</h2>
         <div class="row mt-3 mb-5">
             <div class="col-md-4 my-3 my-md-0">
@@ -554,7 +647,7 @@
     </div>
 
     <!-- CONTACT Section  -->
-    <div id="contact" class="container-fluid bg-dark text-light border-top wow fadeIn">
+    <div id="contact" class="container-fluid text-light border-top wow fadeIn">
         <div class="row">
             <div class="col-md-6 px-0">
                 <iframe
@@ -567,22 +660,20 @@
                 <p>Te invitamos a conocer nuestro restaurante, un lugar donde podrás disfrutar de una experiencia
                     gastronómica única. Nuestra misión es ofrecerte los mejores platillos con ingredientes frescos y de
                     alta calidad. Ven y disfruta de un ambiente acogedor y familiar.</p>
-                <div class="text-muted">
-                    <p><span class="ti-location-pin pr-3"></span><a
-                            href="https://maps.app.goo.gl/wYkKMsbZnxC9fTiu5">Cda. Cognahuac 9, San Pedro, 56334
-                            Chimalhuacán, Méx.</a></p>
-                    <p><span class="ti-instagram pr-3"></span><a
-                            href="https://www.instagram.com/higal_restaurante_jardin">Instagram</a></p>
-                    <p><span class="ti-facebook pr-3"></span><a
-                            href="https://www.facebook.com/p/HigAl-Restaurante-Jard%C3%ADn-100083409247341/">Facebook</a>
-                    </p>
-                </div>
+                <p><span class="ti-location-pin pr-3 "></span><a
+                        href="https://maps.app.goo.gl/wYkKMsbZnxC9fTiu5">Cda. Cognahuac 9, San Pedro, 56334
+                        Chimalhuacán, Méx.</a></p>
+                <p><span class="ti-instagram pr-3"></span><a
+                        href="https://www.instagram.com/higal_restaurante_jardin">Instagram</a></p>
+                <p><span class="ti-facebook pr-3"></span><a
+                        href="https://www.facebook.com/p/HigAl-Restaurante-Jard%C3%ADn-100083409247341/">Facebook</a>
+                </p>
             </div>
         </div>
     </div>
 
     <!-- page footer  -->
-    <div class="container-fluid bg-dark text-light has-height-md middle-items border-top text-center wow fadeIn">
+    <div class="container-fluid text-light has-height-md middle-items border-top text-center wow fadeIn">
         <div class="row">
             <div class="col-sm-4">
                 <h3>EMAIL</h3>
@@ -606,6 +697,10 @@
     <script src="assets/vendors/bootstrap/bootstrap.bundle.js"></script>
 
     <!-- bootstrap affix -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+
     <script src="assets/vendors/bootstrap/bootstrap.affix.js"></script>
 
     <!-- wow.js -->

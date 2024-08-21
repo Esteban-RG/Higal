@@ -40,9 +40,9 @@ $error = isset($_GET['error']) ? $_GET['error'] : 'Desconocido';
 
     <!-- Bootstrap + FoodHut main styles -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" href="assets/css/foodhut.css">
+    <!-- <link rel="stylesheet" href="assets/css/foodhut.css"> -->
     <link rel="stylesheet" href="assets/css/higal.css">
-    <!-- <script src="assets/js/foodhut.js"></script> -->
+    
 
 
 
@@ -54,7 +54,7 @@ $error = isset($_GET['error']) ? $_GET['error'] : 'Desconocido';
     </script>
 
     <!-- Navbar -->
-    <nav class="row custom-navbar navbar navbar-expand-lg navbar-dark fixed-top" data-spy="affix" data-offset-top="10">
+    <nav class="custom-navbar navbar navbar-expand-lg navbar-dark fixed-top" data-spy="affix" data-offset-top="10">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -132,11 +132,11 @@ $error = isset($_GET['error']) ? $_GET['error'] : 'Desconocido';
 
     <!-- BLOG Section  -->
 
-    <div id="menu" class="container-fluid bg-dark text-light py-5 text-center wow fadeIn">
+    <div id="menu" class="container-fluid text-muted py-5 text-center wow fadeIn">
 
 
 
-        <h2 class="section-title py-5">Nuestro menú</h2>
+        <h2 class="section-title text-light py-5">Nuestro menú</h2>
         <div class='row justify-content-center'>
             <div class='col-12 mb-5'>
                 <ul class='nav nav-pills nav-justified mb-3' id='pills-tab' role='tablist'>
@@ -144,7 +144,7 @@ $error = isset($_GET['error']) ? $_GET['error'] : 'Desconocido';
                     <?php
                     echo "
                     <li class='nav-item'>
-                        <a class='nav-link active text-light' id='pills-home-tab' data-toggle='pill' href='#" . $categorias[0]['nombre'] . "' role='tab'
+                        <a class='nav-link active ' id='pills-home-tab' data-toggle='pill' href='#" . $categorias[0]['nombre'] . "' role='tab'
                             aria-controls='pills-home' aria-selected='true'>" . $categorias[0]['nombre'] . "</a>
                     </li>
                 ";
@@ -152,7 +152,7 @@ $error = isset($_GET['error']) ? $_GET['error'] : 'Desconocido';
                     for ($i = 1; $i < count($categorias); $i++) {
                         echo "
                     <li class='nav-item'>
-                        <a class='nav-link text-light' id='pills-profile-tab' data-toggle='pill' href='#" . $categorias[$i]['nombre'] . "' role='tab'
+                        <a class='nav-link' id='pills-profile-tab' data-toggle='pill' href='#" . $categorias[$i]['nombre'] . "' role='tab'
                             aria-controls='pills-profile' aria-selected='false'>" . $categorias[$i]['nombre'] . "</a>
                     </li>
                     ";
@@ -315,10 +315,10 @@ $error = isset($_GET['error']) ? $_GET['error'] : 'Desconocido';
     <!-- about -->
 
 
-    <div class="container-fluid row about  d-flex has-height-xl align-items-center" id="about">
+    <div class="container-fluid row about d-flex has-height-xl align-items-center" id="about">
 
         <div class="container col-sm-12 col-md-4">
-            <div class="card">
+            <div class="card bg-transparent border">
                 <img class="card-img-top" src="assets/imgs/chef.jpg" alt="">
                 <div class="card-body">
                     <p class="card-text text-light">Chef Aldo Buendia</p>
@@ -330,7 +330,7 @@ $error = isset($_GET['error']) ? $_GET['error'] : 'Desconocido';
         <div class="col-sm-12 col-md-8 d-flex align-items-center">
 
             <div class="text-center">
-                <div class="text-center bg-dark text-light has-height-sm middle-items wow fadeIn">
+                <div class="text-center text-light has-height-sm middle-items wow fadeIn">
                     <h2 class="section-title">¿Quienes somos?</h2>
                 </div>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent nec tempus magna, vitae malesuada sem.
@@ -346,7 +346,7 @@ $error = isset($_GET['error']) ? $_GET['error'] : 'Desconocido';
     </div>
 
     <!-- REVIEWS Section  -->
-    <div id="testmonial" class="container-fluid wow fadeIn bg-dark text-light has-height-lg middle-items">
+    <div id="testmonial" class="container-fluid wow fadeIn text-light has-height-lg middle-items">
         <h2 class="section-title my-5 text-center">Que dicen nuestros clientes</h2>
         <div class="row mt-3 mb-5">
             <div class="col-md-4 my-3 my-md-0">
@@ -380,25 +380,26 @@ $error = isset($_GET['error']) ? $_GET['error'] : 'Desconocido';
     </div>
 
     <!-- CONTACT Section  -->
-    <div id="contact" class="container-fluid bg-dark text-light border-top wow fadeIn">
+    <div id="contact" class="container-fluid text-light border-top wow fadeIn">
         <div class="row">
             <div class="col-md-6 px-0">
                 <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3762.721334410449!2d-98.94986442478584!3d19.42444268185324!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1e3d71cf164d1%3A0x2a077eeb5ff8ce30!2sHigal!5e0!3m2!1ses!2smx!4v1720071426892!5m2!1ses!2smx" width="600" height="450" style="width: 100%; height: 100%; min-height: 400px; border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
             <div class="col-md-6 px-5 has-height-lg middle-items">
                 <h3>Visitanos</h3>
-                <p>Te invitamos a conocer nuestro restaurante, un lugar donde podrás disfrutar de una experiencia gastronómica única. Nuestra misión es ofrecerte los mejores platillos con ingredientes frescos y de alta calidad. Ven y disfruta de un ambiente acogedor y familiar.</p>
                 <div class="text-muted">
+                    <p>Te invitamos a conocer nuestro restaurante, un lugar donde podrás disfrutar de una experiencia gastronómica única. Nuestra misión es ofrecerte los mejores platillos con ingredientes frescos y de alta calidad. Ven y disfruta de un ambiente acogedor y familiar.</p>
                     <p><span class="ti-location-pin pr-3"></span><a href="https://maps.app.goo.gl/wYkKMsbZnxC9fTiu5">Cda. Cognahuac 9, San Pedro, 56334 Chimalhuacán, Méx.</a></p>
                     <p><span class="ti-instagram pr-3"></span><a href="https://www.instagram.com/higal_restaurante_jardin">Instagram</a></p>
                     <p><span class="ti-facebook pr-3"></span><a href="https://www.facebook.com/p/HigAl-Restaurante-Jard%C3%ADn-100083409247341/">Facebook</a></p>
+
                 </div>
             </div>
         </div>
     </div>
 
     <!-- page footer  -->
-    <div class="container-fluid bg-dark text-light has-height-md middle-items border-top text-center wow fadeIn">
+    <div class="container-fluid text-light has-height-md middle-items border-top text-center wow fadeIn">
         <div class="row">
             <div class="col-sm-4">
                 <h3>EMAIL</h3>
