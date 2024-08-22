@@ -159,6 +159,12 @@ a {
 
 /* GALLERY */
 
+.modal-img{
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+}
+
 .gallary {
     margin: 0;
     padding: 0;
@@ -170,9 +176,15 @@ a {
 }
 
 .gallary .gallary-item .gallary-img {
+    cursor: pointer;
     width: 100%;
     aspect-ratio: 1 / 1;
     object-fit: cover;
+}
+
+
+.gallary .gallary-item .gallary-img:hover {
+    filter: brightness(0.5);
 }
 
 .gallary .gallary-item .gallary-overlay {

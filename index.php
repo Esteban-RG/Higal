@@ -269,15 +269,49 @@ $error = isset($_GET['error']) ? $_GET['error'] : 'Desconocido';
             foreach ($galeria as $row) {
                 echo "
                 <div class='col-4 col-lg-2 gallary-item wow fadeIn'>
-                <img src='" . $row["imagen"] . "'alt='" . $row["nombre"] . "' class='gallary-img'>
-                </div>";
+                    <a data-bs-toggle='modal' data-bs-target='#" . $row["idPlatillo"] . "'>
+                        <img src='" . $row["imagen"] . "'alt='" . $row["nombre"] . "' class='gallary-img'>
+                    </a>
+                </div>
+        
+                <div class='modal fade' id='" . $row["idPlatillo"] . "' tabindex='-1' aria-labelledby='ModalLabel' aria-hidden='true'>
+                    <div class='modal-dialog modal-dialog-centered'>
+                        <div class='modal-content'>
+                            <div class='modal-header'>
+                                <h1 class='modal-title text-dark fs-5' id='ModalLabel'>" . $row["nombre"] . "</h1>
+                                <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
+                            </div>
+                            <div class='modal-body'>
+                                    <img src='" . $row["imagen"] . "'alt='" . $row["nombre"] . "' class='modal-img'>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                ";
             }
         } else {
             echo "<p>NO HAY PLATILLOS DISPONIBLES</p>";
         }
         ?>
 
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title text-dark fs-5" id="exampleModalLabel">Modal title</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
+
+
 
 
 

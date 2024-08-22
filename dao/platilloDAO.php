@@ -95,7 +95,7 @@ class PlatilloDAO
     public function obtenerPlatillosVisibles()
     {
         try {
-            $sql = "SELECT nombre, descripcion, precio, imagen FROM platillo WHERE visibilidad = 1";
+            $sql = "SELECT idPlatillo, nombre, descripcion, precio, imagen FROM platillo WHERE visibilidad = 1";
             $stmt = $this->pdo->prepare($sql);
             $stmt->execute();
             $datos = $stmt->fetchAll(PDO::FETCH_ASSOC);
