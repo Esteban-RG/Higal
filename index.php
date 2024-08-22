@@ -49,6 +49,7 @@ $error = isset($_GET['error']) ? $_GET['error'] : 'Desconocido';
 
 <body data-spy="scroll" data-target=".navbar" data-offset="40" id="home">
     <script>
+        new WOW().init();
         var error = <?php echo json_encode($error); ?>;
     </script>
 
@@ -131,8 +132,6 @@ $error = isset($_GET['error']) ? $_GET['error'] : 'Desconocido';
     <!-- MENU Section  -->
 
     <div id="menu" class="container-fluid text-muted py-5 text-center wow fadeIn">
-
-
 
         <h2 class="section-title  py-5">Nuestro menú</h2>
         <div class='row justify-content-center'>
@@ -315,7 +314,7 @@ $error = isset($_GET['error']) ? $_GET['error'] : 'Desconocido';
 
 
     <!-- book a table Section  -->
-    <div class="container-fluid has-height-xxl has-bg-overlay text-center  middle-items" id="book-table">
+    <div class="container-fluid has-height-xxl has-bg-overlay text-center  middle-items wow fadeIn" id="book-table">
 
         <h2 class="section-title mb-5">Reservaciones</h2>
         <form action="controller/reservacionLogic.php" method="POST">
@@ -369,7 +368,7 @@ $error = isset($_GET['error']) ? $_GET['error'] : 'Desconocido';
     <!-- about -->
 
 
-    <div class="container-fluid row about d-flex has-height-xl align-items-center" id="about">
+    <div class="container-fluid row about d-flex has-height-xl align-items-center wow fadeIn" id="about">
 
         <div class="container col-sm-12 col-md-4">
             <div class="card bg-transparent border">
