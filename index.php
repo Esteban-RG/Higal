@@ -40,9 +40,8 @@ $error = isset($_GET['error']) ? $_GET['error'] : 'Desconocido';
 
     <!-- Bootstrap + FoodHut main styles -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <!-- <link rel="stylesheet" href="assets/css/foodhut.css"> -->
     <link rel="stylesheet" href="assets/css/higal.css">
-    
+
 
 
 
@@ -138,13 +137,13 @@ $error = isset($_GET['error']) ? $_GET['error'] : 'Desconocido';
 
         <h2 class="section-title text-light py-5">Nuestro menú</h2>
         <div class='row justify-content-center'>
-            <div class='col-12 mb-5'>
+            <div class='pills col-12 mb-5'>
                 <ul class='nav nav-pills nav-justified mb-3' id='pills-tab' role='tablist'>
 
                     <?php
                     echo "
                     <li class='nav-item'>
-                        <a class='nav-link active ' id='pills-home-tab' data-toggle='pill' href='#" . $categorias[0]['nombre'] . "' role='tab'
+                        <a class='nav-link active' id='pills-home-tab' data-toggle='pill' href='#" . $categorias[0]['nombre'] . "' role='tab'
                             aria-controls='pills-home' aria-selected='true'>" . $categorias[0]['nombre'] . "</a>
                     </li>
                 ";
@@ -161,6 +160,25 @@ $error = isset($_GET['error']) ? $_GET['error'] : 'Desconocido';
                     ?>
                 </ul>
             </div>
+
+            <div class="dropdown-center text-muted mb-3">
+
+                <a class="categorias-button btn btn-primary dropdown-toggle " href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <span class="visually-hidden">Toggle Dropdown</span>
+                </a>
+
+                <ul class="dropdown-menu nav-pills" id='pills-tab' role='tablist'>
+                    <?php
+
+                    for ($i = 0; $i < count($categorias); $i++) {
+                        echo "
+                        <li><a class='dropdown-item' data-toggle='pill'  href='#" . $categorias[$i]['nombre'] . "'>" . $categorias[$i]['nombre'] . "</a></li>
+                        ";
+                    }
+                    ?>
+                </ul>
+            </div>
+
         </div>
 
         <div class="tab-content" id="pills-tabContent">
@@ -420,6 +438,7 @@ $error = isset($_GET['error']) ? $_GET['error'] : 'Desconocido';
 
     <!-- core  -->
     <script src="assets/vendors/jquery/jquery-3.4.1.js"></script>
+
     <script src="assets/vendors/bootstrap/bootstrap.bundle.js"></script>
 
     <!-- bootstrap affix -->
@@ -430,6 +449,22 @@ $error = isset($_GET['error']) ? $_GET['error'] : 'Desconocido';
     <!-- wow.js -->
     <script src="assets/vendors/wow/wow.js"></script>
 
+    <script>
+        document.querySelectorAll('.dropdown-item').forEach(item => {
+            item.addEventListener('click', function() {
+                var target = this.getAttribute('href');
+                var targetTab = document.querySelector('.nav-link[href="' + target + '"]');
+
+                document.querySelectorAll('.dropdown-item').forEach(tab => {
+                    tab.classList.remove('active');
+                });
+                document.querySelectorAll('.nav-link').forEach(tab => {
+                    tab.classList.remove('active');
+                });
+                targetTab.classList.add('active');
+            });
+        });
+    </script>
 
 
 </body>

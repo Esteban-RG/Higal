@@ -403,6 +403,23 @@ a.badge-primary.focus {
     box-shadow: 0 0 0 0.2rem rgba(255, 33, 79, 0.5);
 }
 
+.categorias-button{
+    width: 100%;
+}
+
+
+@media (min-width: 767px) {
+    .dropdown-center{
+        display: none;
+    }
+}
+
+@media (max-width: 767px) {
+    .pills{
+        display: none;
+    }
+}
+
 /* BOOK A TABLE */
 
 .has-bg-overlay {
@@ -432,6 +449,7 @@ a.badge-primary.focus {
     background: #343a40;
     z-index: -2;
 }
+
 
 /* TESTIMONIAL */
 
