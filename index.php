@@ -96,10 +96,9 @@ $error = isset($_GET['error']) ? $_GET['error'] : 'Desconocido';
     <!-- Header -->
 
     <header id="home" class="header">
-        <div class="overlay text-white text-center">
+        <div class="overlay  text-center">
             <h1 class="display-2 font-weight-bold my-3">Higal</h1>
             <h2 class="display-4 mb-5">Restaurante Jardín</h2>
-            <a class="btn btn-lg btn-primary" href="#gallary">Nuestro Menú</a>
         </div>
     </header>
 
@@ -107,7 +106,7 @@ $error = isset($_GET['error']) ? $_GET['error'] : 'Desconocido';
 
     <!-- Promotions -->
 
-    <div id="carouselExampleIndicators" class="carousel slide">
+    <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-inner">
             <div class="carousel-item active">
                 <img src="assets/imgs/blog-1.jpg" class="d-block w-100 promotion" alt="...">
@@ -119,23 +118,23 @@ $error = isset($_GET['error']) ? $_GET['error'] : 'Desconocido';
                 <img src="assets/imgs/blog-3.jpg" class="d-block w-100 promotion" alt="...">
             </div>
         </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Previous</span>
         </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Next</span>
         </button>
     </div>
 
-    <!-- BLOG Section  -->
+    <!-- MENU Section  -->
 
     <div id="menu" class="container-fluid text-muted py-5 text-center wow fadeIn">
 
 
 
-        <h2 class="section-title text-light py-5">Nuestro menú</h2>
+        <h2 class="section-title  py-5">Nuestro menú</h2>
         <div class='row justify-content-center'>
             <div class='pills col-12 mb-5'>
                 <ul class='nav nav-pills nav-justified mb-3' id='pills-tab' role='tablist'>
@@ -167,7 +166,7 @@ $error = isset($_GET['error']) ? $_GET['error'] : 'Desconocido';
                     <span class="visually-hidden">Toggle Dropdown</span>
                 </a>
 
-                <ul class="dropdown-menu nav-pills" id='pills-tab' role='tablist'>
+                <ul class="dropdown-menu nav-pills text-center" id='pills-tab' role='tablist'>
                     <?php
 
                     for ($i = 0; $i < count($categorias); $i++) {
@@ -200,8 +199,8 @@ $error = isset($_GET['error']) ? $_GET['error'] : 'Desconocido';
                             class='rounded-0 card-img-top mg-responsive' width='500'>
                         <div class='card-body'>
                             <h1 class='text-center mb-4'><a href='#" . $row["categoria"] . "' class='badge badge-primary'>$" . $row["precio"] . "</a></h1>
-                            <h4 class='pt20 pb20 text-light'>" . $row["nombre"] . "</h4>
-                            <p class='text-white'>" . $row["descripcion"] . "</p>
+                            <h4 class='pt20 pb20 '>" . $row["nombre"] . "</h4>
+                            <p class=''>" . $row["descripcion"] . "</p>
                         </div>
                     </div>
                 </div>
@@ -233,8 +232,8 @@ $error = isset($_GET['error']) ? $_GET['error'] : 'Desconocido';
                                     class='rounded-0 card-img-top mg-responsive' width='500'>
                                 <div class='card-body'>
                                     <h1 class='text-center mb-4'><a href='#" . $row["categoria"] . "' class='badge badge-primary'>$" . $row["precio"] . "</a></h1>
-                                    <h4 class='pt20 pb20 text-light'>" . $row["nombre"] . "</h4>
-                                    <p class='text-white'>" . $row["descripcion"] . "</p>
+                                    <h4 class='pt20 pb20 '>" . $row["nombre"] . "</h4>
+                                    <p class=''>" . $row["descripcion"] . "</p>
                                 </div>
                             </div>
                         </div>
@@ -303,7 +302,7 @@ $error = isset($_GET['error']) ? $_GET['error'] : 'Desconocido';
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        
+
                     </div>
                 </div>
             </div>
@@ -316,7 +315,7 @@ $error = isset($_GET['error']) ? $_GET['error'] : 'Desconocido';
 
 
     <!-- book a table Section  -->
-    <div class="container-fluid has-height-xxl has-bg-overlay text-center text-light middle-items" id="book-table">
+    <div class="container-fluid has-height-xxl has-bg-overlay text-center  middle-items" id="book-table">
 
         <h2 class="section-title mb-5">Reservaciones</h2>
         <form action="controller/reservacionLogic.php" method="POST">
@@ -343,12 +342,15 @@ $error = isset($_GET['error']) ? $_GET['error'] : 'Desconocido';
             <input type="hidden" id="source" name="source" value="client">
 
             <ul class="list-group">
-                <li class="list-group-item text-light">Viernes: 6:00 p.m. a 10:30 p.m.</li>
-                <li class="list-group-item text-light">Sábado: 8:00 a.m. a 10:30 p.m.</li>
-                <li class="list-group-item text-light">Domingo: 8:00 a.m. a 10:30 p.m.</li>
+                <li class="list-group-item "><span class="ti-time pr-3"></span>Horario</li>
+                <li class="list-group-item ">Viernes: 6:00 p.m. a 10:30 p.m.</li>
+                <li class="list-group-item ">Sábado: 8:00 a.m. a 10:30 p.m.</li>
+                <li class="list-group-item ">Domingo: 8:00 a.m. a 10:30 p.m.</li>
             </ul>
 
             <button type="submit" class="btn btn-lg btn-primary" id="rounded-btn">Agendar cita</button>
+
+
         </form>
 
 
@@ -373,7 +375,7 @@ $error = isset($_GET['error']) ? $_GET['error'] : 'Desconocido';
             <div class="card bg-transparent border">
                 <img class="card-img-top" src="assets/imgs/chef.jpg" alt="">
                 <div class="card-body">
-                    <p class="card-text text-light">Chef Aldo Buendia</p>
+                    <p class="card-text ">Chef Aldo Buendia</p>
                 </div>
 
             </div>
@@ -382,7 +384,7 @@ $error = isset($_GET['error']) ? $_GET['error'] : 'Desconocido';
         <div class="col-sm-12 col-md-8 d-flex align-items-center">
 
             <div class="text-center">
-                <div class="text-center text-light has-height-sm middle-items wow fadeIn">
+                <div class="text-center  has-height-sm middle-items wow fadeIn">
                     <h2 class="section-title">¿Quienes somos?</h2>
                 </div>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent nec tempus magna, vitae malesuada sem.
@@ -398,7 +400,7 @@ $error = isset($_GET['error']) ? $_GET['error'] : 'Desconocido';
     </div>
 
     <!-- REVIEWS Section  -->
-    <div id="testmonial" class="container-fluid wow fadeIn text-light has-height-lg middle-items">
+    <div id="testmonial" class="container-fluid wow fadeIn  has-height-lg middle-items">
         <h2 class="section-title my-5 text-center">Que dicen nuestros clientes</h2>
         <div class="row mt-3 mb-5">
             <div class="col-md-4 my-3 my-md-0">
@@ -432,7 +434,7 @@ $error = isset($_GET['error']) ? $_GET['error'] : 'Desconocido';
     </div>
 
     <!-- CONTACT Section  -->
-    <div id="contact" class="container-fluid text-light border-top wow fadeIn">
+    <div id="contact" class="container-fluid  border-top wow fadeIn">
         <div class="row">
             <div class="col-md-6 px-0">
                 <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3762.721334410449!2d-98.94986442478584!3d19.42444268185324!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1e3d71cf164d1%3A0x2a077eeb5ff8ce30!2sHigal!5e0!3m2!1ses!2smx!4v1720071426892!5m2!1ses!2smx" width="600" height="450" style="width: 100%; height: 100%; min-height: 400px; border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
@@ -451,11 +453,11 @@ $error = isset($_GET['error']) ? $_GET['error'] : 'Desconocido';
     </div>
 
     <!-- page footer  -->
-    <div class="container-fluid text-light has-height-md middle-items border-top text-center wow fadeIn">
+    <div class="container-fluid  has-height-md middle-items border-top text-center wow fadeIn">
         <div class="row">
             <div class="col-sm-4">
                 <h3>EMAIL</h3>
-                <P class="text-muted">elhigalrestaurante@gmail.com</P>
+                <a class="text-muted" href="elhigalrestaurante@gmail.com">elhigalrestaurante@gmail.com</a>
             </div>
             <div class="col-sm-4">
                 <h3>TELÉFONO</h3>
