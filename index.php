@@ -1,17 +1,21 @@
 <?php
 include 'dao/platilloDAO.php';
 include 'dao/categoriaDAO.php';
+include 'dao/galeriaDAO.php';
+
 
 
 $platilloDAO = new PlatilloDAO();
 $categoriaDAO = new CategoriaDAO();
+$galeriaDAO = new GaleriaDAO();
 
 
 
 
-$galeria = $platilloDAO->obtenerPlatillosVisibles();
+
+$galeria = $galeriaDAO->obtenerImagenes();
 $categorias = $categoriaDAO->obtenerCategorias();
-
+$platillos = $platilloDAO->obtenerPlatillosVisibles();
 
 $error = isset($_GET['error']) ? $_GET['error'] : 'Desconocido';
 
@@ -108,15 +112,28 @@ $error = isset($_GET['error']) ? $_GET['error'] : 'Desconocido';
     <!-- Promotions -->
 
     <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-inner">
+        <div class="carousel-inner ">
             <div class="carousel-item active">
-                <img src="assets/imgs/blog-1.jpg" class="d-block w-100 promotion" alt="...">
+                <img src="assets/imgs/promocion/1.png" class=" h-100 promotion" alt="...">
+                <img src="assets/imgs/promocion/1.png" class=" h-100 promotion" alt="...">
+                <img src="assets/imgs/promocion/1.png" class=" h-100 promotion" alt="...">
+                <img src="assets/imgs/promocion/1.png" class=" h-100 promotion" alt="...">
+                <img src="assets/imgs/promocion/1.png" class=" h-100 promotion" alt="...">
+                
             </div>
             <div class="carousel-item active">
-                <img src="assets/imgs/blog-2.jpg" class="d-block w-100 promotion" alt="...">
+                <img src="assets/imgs/promocion/2.png" class=" h-100 promotion" alt="...">
+                <img src="assets/imgs/promocion/2.png" class=" h-100 promotion" alt="...">
+                <img src="assets/imgs/promocion/2.png" class=" h-100 promotion" alt="...">
+                <img src="assets/imgs/promocion/2.png" class=" h-100 promotion" alt="...">
+                <img src="assets/imgs/promocion/2.png" class=" h-100 promotion" alt="...">
             </div>
-            <div class="carousel-item active">
-                <img src="assets/imgs/blog-3.jpg" class="d-block w-100 promotion" alt="...">
+            <div class="carousel-item active ">
+                <img src="assets/imgs/promocion/3.png" class=" h-100 promotion" alt="...">
+                <img src="assets/imgs/promocion/3.png" class=" h-100 promotion" alt="...">
+                <img src="assets/imgs/promocion/3.png" class=" h-100 promotion" alt="...">
+                <img src="assets/imgs/promocion/3.png" class=" h-100 promotion" alt="...">
+                <img src="assets/imgs/promocion/3.png" class=" h-100 promotion" alt="...">
             </div>
         </div>
         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
@@ -261,18 +278,16 @@ $error = isset($_GET['error']) ? $_GET['error'] : 'Desconocido';
 
     <div class="container-fluid gallary row" id="gallary">
         <?php
-
-
         if ($galeria !== false && count($galeria) > 0) {
             foreach ($galeria as $row) {
                 echo "
                 <div class='col-4 col-lg-2 gallary-item wow fadeIn'>
-                    <a data-bs-toggle='modal' data-bs-target='#" . $row["idPlatillo"] . "'>
-                        <img src='" . $row["imagen"] . "'alt='" . $row["nombre"] . "' class='gallary-img'>
+                    <a data-bs-toggle='modal' data-bs-target='#" . $row["idImagen"] . "'>
+                        <img src='" . $row["ruta"] . "'alt='" . $row["nombre"] . "' class='gallary-img'>
                     </a>
                 </div>
         
-                <div class='modal fade' id='" . $row["idPlatillo"] . "' tabindex='-1' aria-labelledby='ModalLabel' aria-hidden='true'>
+                <div class='modal fade' id='" . $row["idImagen"] . "' tabindex='-1' aria-labelledby='ModalLabel' aria-hidden='true'>
                     <div class='modal-dialog modal-dialog-centered'>
                         <div class='modal-content'>
                             <div class='modal-header'>
@@ -280,7 +295,7 @@ $error = isset($_GET['error']) ? $_GET['error'] : 'Desconocido';
                                 <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button>
                             </div>
                             <div class='modal-body'>
-                                    <img src='" . $row["imagen"] . "'alt='" . $row["nombre"] . "' class='modal-img'>
+                                    <img src='" . $row["ruta"] . "'alt='" . $row["nombre"] . "' class='modal-img'>
                             </div>
                         </div>
                     </div>
@@ -288,8 +303,6 @@ $error = isset($_GET['error']) ? $_GET['error'] : 'Desconocido';
                 
                 ";
             }
-        } else {
-            echo "<p>NO HAY PLATILLOS DISPONIBLES</p>";
         }
         ?>
 

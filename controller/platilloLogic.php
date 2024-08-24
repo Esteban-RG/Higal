@@ -20,10 +20,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $tipoArchivo = $_FILES['imagen']['type'];
             $tamanioArchivo = $_FILES['imagen']['size'];
             $tempArchivo = $_FILES['imagen']['tmp_name'];
-            $rutaSubida = 'uploads/' . basename($nombreArchivo);
+            $rutaSubida = 'assets/imgs/platillos/' . basename($nombreArchivo);
 
-            if (!file_exists('../uploads')) {
-                mkdir('../uploads', 0777, true);
+            if (!file_exists('../assets/imgs/platillos')) {
+                mkdir('../assets/imgs/platillos', 0777, true);
             }
 
             if (move_uploaded_file($tempArchivo, "../" . $rutaSubida)) {
@@ -60,11 +60,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if (isset($_FILES['imagen']) && $_FILES['imagen']['error'] === UPLOAD_ERR_OK) {
 
                 $nombreArchivo = basename($_FILES['imagen']['name']);
-                $rutaSubida = 'uploads/' . $nombreArchivo;
+                $rutaSubida = 'assets/imgs/platillos/' . $nombreArchivo;
                 $tempArchivo = $_FILES['imagen']['tmp_name'];
 
-                if (!file_exists('../uploads')) {
-                    mkdir('../uploads', 0777, true);
+                if (!file_exists('../assets/imgs/platillos')) {
+                    mkdir('../assets/imgs/platillos', 0777, true);
                 }
 
                 if (move_uploaded_file($tempArchivo, "../" . $rutaSubida)) {
