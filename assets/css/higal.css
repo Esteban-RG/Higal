@@ -576,9 +576,25 @@ a.badge-primary.focus {
 }
 
 .carousel-item{
-    aspect-ratio: 1/0.2;
+    aspect-ratio: 1/0.5;
     overflow: hidden;
     background-color: #cecdcc;
+}
+
+@media (min-width: 567px) {
+
+    
+    .carousel-item{
+        aspect-ratio: 1/0.3333333;
+    }
+}
+
+@media (min-width: 767px) {
+
+    
+    .carousel-item{
+        aspect-ratio: 1/0.2;
+    }
 }
 
 

@@ -209,7 +209,7 @@ $error = isset($_GET['error']) ? $_GET['error'] : 'Desconocido';
             if ($platillosCategoria !== false && count($platillosCategoria) > 0) {
                 foreach ($platillosCategoria as $row) {
                     echo "
-                <div class=' col-md-3'>
+                <div class='col-sm-6 col-md-6 col-lg-3'>
                     <div class='card bg-transparent border my-3 my-md-0'>
                         <img src='" . $row["imagen"] . "' alt='" . $row["nombre"] . "'
                             class='rounded-0 card-img-top mg-responsive' width='500'>
@@ -242,7 +242,7 @@ $error = isset($_GET['error']) ? $_GET['error'] : 'Desconocido';
                 if ($platillosCategoria !== false && count($platillosCategoria) > 0) {
                     foreach ($platillosCategoria as $row) {
                         echo "
-                        <div class='col-md-3'>
+                        <div class='col-sm-6 col-md-6 col-lg-3'>
                             <div class='card bg-transparent border my-3 my-md-0'>
                                 <img src='" . $row["imagen"] . "' alt='" . $row["nombre"] . "'
                                     class='rounded-0 card-img-top mg-responsive' width='500'>
