@@ -1,5 +1,5 @@
 <?php
-include 'dao/galeriaDAO.php';
+include 'dao/promocionDAO.php';
 
 $error = isset($_GET['error']) ? $_GET['error'] : 'Desconocido';
 
@@ -33,8 +33,8 @@ if (!isset($_SESSION['idAdministrador'])) {
             <h2>Tablas</h2>
             <ul>
                 <li><a href="admReservacion.php">Reservaciones</a></li>
-                <li><a href="admGaleria.php" style="color:blue;">Galeria</a></li>
-                <li><a href="admPromocion.php">Promocion</a></li>
+                <li><a href="admGaleria.php">Galeria</a></li>
+                <li><a href="admPromocion.php" style="color:blue;">Promocion</a></li>
                 <li><a href="admPlatillo.php">Platillos</a></li>
                 <li><a href="admCliente.php">Clientes</a></li>
                 <li><a href="admCategoria.php">Categorias</a></li>
@@ -44,14 +44,11 @@ if (!isset($_SESSION['idAdministrador'])) {
             </ul>
         </aside>
         <main class="content">
-            <h1>Registro de Imagenes</h1>
+            <h1>Registro de Promociones</h1>
             <button onclick="mostrarFormulario()">Nuevo</button>
             <div class="new" style="display:none;">
-                <form action="controller/galeriaLogic.php" method="post" enctype="multipart/form-data">
+                <form action="controller/promocionLogic.php" method="post" enctype="multipart/form-data">
                     <div class="row mb-5">
-                        <div class="col-sm-6 col-md-3 col-xs-12 my-2">
-                            <input type="text" name="nombre" class="form-control form-control-lg custom-form-control" placeholder="Nombre" maxlength="50" >
-                        </div>
                         <div class="col-sm-6 col-md-3 col-xs-12 my-2">
                             <input type="file" id="imagen" name="imagen" accept="image/*" required>
                         </div>
@@ -63,9 +60,8 @@ if (!isset($_SESSION['idAdministrador'])) {
             <table>
                 <thead>
                     <tr>
-                        <th>ID de Imagen</th>
-                        <th>Nombre</th>
-                        <th>Imagen</th>
+                        <th>ID de Promocion</th>
+                        <th>Promocion</th>
                         <th>Acciones</th>
                         <th></th>
                     </tr>
@@ -74,23 +70,21 @@ if (!isset($_SESSION['idAdministrador'])) {
 
                     <?php
 
-                    $galeriaDAO = new GaleriaDAO();
-                    $datos = $galeriaDAO->obtenerImagenes();
+                    $promocionDAO = new PromocionDAO();
+                    $datos = $promocionDAO->obtenerImagenes();
 
                     if ($datos !== false && count($datos) > 0) {
                         foreach ($datos as $row) {
                             echo "
                     
                     <tr>
-                        <form action='controller/galeriaLogic.php' method='post' enctype='multipart/form-data'>
-                            <td><input type='hidden' name='idImagen' value='" . htmlspecialchars($row["idImagen"]) . "'>
-                                " . htmlspecialchars($row["idImagen"]) . "
+                        <form action='controller/promocionLogic.php' method='post' enctype='multipart/form-data'>
+                            <td><input type='hidden' name='idPromocion' value='" . htmlspecialchars($row["idPromocion"]) . "'>
+                                " . htmlspecialchars($row["idPromocion"]) . "
                             </td>
-                            <td><input type='hidden' name='nombre' value='" . htmlspecialchars($row["nombre"]) . "'>" . htmlspecialchars($row["nombre"]) . "</td>
-                        
                             
                             <td>
-                                <img src='" . $row["ruta"] . "' alt='Imagen de " . $row["nombre"] . "' style='width: 100px;'>
+                                <img src='" . $row["ruta"] . "' alt='Imagen de promocion' style='width: 100px;'>
                                 <input type='hidden' name='oldImagen' value='" . $row["ruta"] . "'>
                                 <input type='file' name='imagen' accept='image/*' required>
                             </td>
@@ -101,8 +95,8 @@ if (!isset($_SESSION['idAdministrador'])) {
                             </td>
                         </form>
                         <td>
-                            <form action='controller/galeriaLogic.php' method='post'>
-                                <input type='hidden' name='idImagen' value='" . htmlspecialchars($row["idImagen"]) . "'>
+                            <form action='controller/promocionLogic.php' method='post'>
+                                <input type='hidden' name='idPromocion' value='" . htmlspecialchars($row["idPromocion"]) . "'>
                                 <input type='hidden' name='oldImagen' value='" . $row["ruta"] . "'>
                                 <input type='hidden' name='action' value='delete'>
                                 <input type='submit' style='background-color: #e22121; margin:10px; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; font-size: 16px;' value='Eliminar'>

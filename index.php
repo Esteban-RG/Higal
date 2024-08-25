@@ -2,12 +2,16 @@
 include 'dao/platilloDAO.php';
 include 'dao/categoriaDAO.php';
 include 'dao/galeriaDAO.php';
+include 'dao/promocionDAO.php';
+
 
 
 
 $platilloDAO = new PlatilloDAO();
 $categoriaDAO = new CategoriaDAO();
 $galeriaDAO = new GaleriaDAO();
+$promocionDAO = new PromocionDAO();
+
 
 
 
@@ -16,6 +20,9 @@ $galeriaDAO = new GaleriaDAO();
 $galeria = $galeriaDAO->obtenerImagenes();
 $categorias = $categoriaDAO->obtenerCategorias();
 $platillos = $platilloDAO->obtenerPlatillosVisibles();
+$promocion = $promocionDAO->obtenerImagenes();
+
+
 
 $error = isset($_GET['error']) ? $_GET['error'] : 'Desconocido';
 
@@ -110,31 +117,26 @@ $error = isset($_GET['error']) ? $_GET['error'] : 'Desconocido';
 
 
     <!-- Promotions -->
+    
 
     <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-inner ">
-            <div class="carousel-item active">
-                <img src="assets/imgs/promocion/1.png" class=" h-100 promotion" alt="...">
-                <img src="assets/imgs/promocion/1.png" class=" h-100 promotion" alt="...">
-                <img src="assets/imgs/promocion/1.png" class=" h-100 promotion" alt="...">
-                <img src="assets/imgs/promocion/1.png" class=" h-100 promotion" alt="...">
-                <img src="assets/imgs/promocion/1.png" class=" h-100 promotion" alt="...">
-                
-            </div>
-            <div class="carousel-item active">
-                <img src="assets/imgs/promocion/2.png" class=" h-100 promotion" alt="...">
-                <img src="assets/imgs/promocion/2.png" class=" h-100 promotion" alt="...">
-                <img src="assets/imgs/promocion/2.png" class=" h-100 promotion" alt="...">
-                <img src="assets/imgs/promocion/2.png" class=" h-100 promotion" alt="...">
-                <img src="assets/imgs/promocion/2.png" class=" h-100 promotion" alt="...">
-            </div>
-            <div class="carousel-item active ">
-                <img src="assets/imgs/promocion/3.png" class=" h-100 promotion" alt="...">
-                <img src="assets/imgs/promocion/3.png" class=" h-100 promotion" alt="...">
-                <img src="assets/imgs/promocion/3.png" class=" h-100 promotion" alt="...">
-                <img src="assets/imgs/promocion/3.png" class=" h-100 promotion" alt="...">
-                <img src="assets/imgs/promocion/3.png" class=" h-100 promotion" alt="...">
-            </div>
+                <?php
+                    if ($promocion !== false && count($promocion) > 0) {
+                        foreach ($promocion as $row) {
+                            echo "
+                                <div class='carousel-item active'>
+                                    <img src='" . $row['ruta'] . "' class=' h-100 promotion' alt='...'>
+                                    <img src='" . $row['ruta'] . "' class=' h-100 promotion' alt='...'>
+                                    <img src='" . $row['ruta'] . "' class=' h-100 promotion' alt='...'>
+                                    <img src='" . $row['ruta'] . "' class=' h-100 promotion' alt='...'>
+                                    <img src='" . $row['ruta'] . "' class=' h-100 promotion' alt='...'>
+                                </div>
+
+                            ";
+                        }
+                    }
+                ?>
         </div>
         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -354,10 +356,9 @@ $error = isset($_GET['error']) ? $_GET['error'] : 'Desconocido';
             <input type="hidden" id="source" name="source" value="client">
 
             <ul class="list-group">
-                <li class="list-group-item "><span class="ti-time pr-3"></span>Horario</li>
+                <li class="list-group-item ">HORARIO DE SERVICIO</li>
                 <li class="list-group-item ">Viernes: 6:00 p.m. a 10:30 p.m.</li>
-                <li class="list-group-item ">Sábado: 8:00 a.m. a 10:30 p.m.</li>
-                <li class="list-group-item ">Domingo: 8:00 a.m. a 10:30 p.m.</li>
+                <li class="list-group-item ">Sábado y Domingo: 8:00 a.m. a 10:30 p.m.</li>
             </ul>
 
             <button type="submit" class="btn btn-lg btn-primary" id="rounded-btn">Agendar cita</button>
@@ -476,7 +477,7 @@ $error = isset($_GET['error']) ? $_GET['error'] : 'Desconocido';
                 <P class="text-muted">55 2078 8985</P>
             </div>
             <div class="col-sm-4">
-                <h3>DIRECCIÓN</h3>
+                <h3>UBICACIÓN</h3>
                 <P class="text-muted">Cda. Cognahuac 9, San Pedro, 56334 Chimalhuacán, Méx.</P>
             </div>
         </div>

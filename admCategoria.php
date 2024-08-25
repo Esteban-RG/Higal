@@ -30,6 +30,8 @@ if (!isset($_SESSION['idAdministrador'])) {
             <h2>Tablas</h2>
             <ul>
                 <li><a href="admReservacion.php">Reservaciones</a></li>
+                <li><a href="admGaleria.php">Galeria</a></li>
+                <li><a href="admPromocion.php">Promocion</a></li>
                 <li><a href="admPlatillo.php">Platillos</a></li>
                 <li><a href="admCliente.php">Clientes</a></li>
                 <li><a href="admCategoria.php" style="color:blue;">Categorias</a></li>
