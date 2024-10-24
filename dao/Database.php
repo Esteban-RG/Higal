@@ -7,8 +7,8 @@ class Database
     private function __construct()
     {
         $dsn = 'mysql:host=localhost;dbname=higal';
-        $username = 'root';
-        $password = '';
+        $username = 'esteban';
+        $password = '@Hematites26';
         $options = [
             PDO::ATTR_PERSISTENT => true,
             PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
