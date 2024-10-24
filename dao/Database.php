@@ -8,7 +8,7 @@ class Database
     {
         $dsn = 'mysql:host=localhost;dbname=higal';
         $username = 'esteban';
-        $password = '@Hematites26';
+        $password = '@Database23';
         $options = [
             PDO::ATTR_PERSISTENT => true,
             PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION

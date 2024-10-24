@@ -322,7 +322,7 @@ $error = isset($_GET['error']) ? $_GET['error'] : 'Desconocido';
             </div>
         </div>
 
-    </div>
+    </div>>
 
 
 

@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 24-08-2024 a las 06:08:51
--- Versión del servidor: 10.4.28-MariaDB
--- Versión de PHP: 8.2.4
+-- Tiempo de generación: 24-10-2024 a las 00:25:55
+-- Versión del servidor: 8.0.39-0ubuntu0.22.04.1
+-- Versión de PHP: 8.1.2-1ubuntu2.19
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -28,11 +28,11 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `administrador` (
-  `idAdministrador` int(11) NOT NULL,
-  `nombre` varchar(100) DEFAULT NULL,
-  `apPaterno` varchar(100) DEFAULT NULL,
-  `apMaterno` varchar(100) DEFAULT NULL,
-  `contrasenha` varchar(255) DEFAULT NULL
+  `idAdministrador` int NOT NULL,
+  `nombre` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `apPaterno` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `apMaterno` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `contrasenha` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -49,8 +49,8 @@ INSERT INTO `administrador` (`idAdministrador`, `nombre`, `apPaterno`, `apMatern
 --
 
 CREATE TABLE `categoria` (
-  `idCategoria` int(11) NOT NULL,
-  `nombre` varchar(50) DEFAULT NULL
+  `idCategoria` int NOT NULL,
+  `nombre` varchar(50) COLLATE utf8mb4_general_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -72,9 +72,9 @@ INSERT INTO `categoria` (`idCategoria`, `nombre`) VALUES
 --
 
 CREATE TABLE `cliente` (
-  `idCliente` int(11) NOT NULL,
-  `nombre` varchar(100) DEFAULT NULL,
-  `correo` varchar(50) DEFAULT NULL
+  `idCliente` int NOT NULL,
+  `nombre` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `correo` varchar(50) COLLATE utf8mb4_general_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -84,9 +84,9 @@ CREATE TABLE `cliente` (
 --
 
 CREATE TABLE `galeria` (
-  `idImagen` int(11) NOT NULL,
-  `ruta` varchar(255) NOT NULL,
-  `nombre` varchar(50) NOT NULL
+  `idImagen` int NOT NULL,
+  `ruta` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `nombre` varchar(50) COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -108,8 +108,8 @@ INSERT INTO `galeria` (`idImagen`, `ruta`, `nombre`) VALUES
 --
 
 CREATE TABLE `mesa` (
-  `idMesa` int(11) NOT NULL,
-  `asientos` int(11) DEFAULT NULL
+  `idMesa` int NOT NULL,
+  `asientos` int DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -131,13 +131,13 @@ INSERT INTO `mesa` (`idMesa`, `asientos`) VALUES
 --
 
 CREATE TABLE `platillo` (
-  `idPlatillo` int(11) NOT NULL,
-  `nombre` varchar(100) DEFAULT NULL,
-  `descripcion` varchar(255) DEFAULT NULL,
+  `idPlatillo` int NOT NULL,
+  `nombre` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `descripcion` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `precio` float DEFAULT NULL,
-  `idCategoria` int(11) DEFAULT NULL,
-  `idAdministrador` int(11) DEFAULT NULL,
-  `imagen` varchar(200) NOT NULL,
+  `idCategoria` int DEFAULT NULL,
+  `idAdministrador` int DEFAULT NULL,
+  `imagen` varchar(200) COLLATE utf8mb4_general_ci NOT NULL,
   `visibilidad` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -167,17 +167,37 @@ INSERT INTO `platillo` (`idPlatillo`, `nombre`, `descripcion`, `precio`, `idCate
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `promocion`
+--
+
+CREATE TABLE `promocion` (
+  `idPromocion` int NOT NULL,
+  `ruta` varchar(255) COLLATE utf8mb4_general_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `promocion`
+--
+
+INSERT INTO `promocion` (`idPromocion`, `ruta`) VALUES
+(5, 'assets/imgs/promocion/1.png'),
+(6, 'assets/imgs/promocion/2.png'),
+(7, 'assets/imgs/promocion/3.png');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `reservacion`
 --
 
 CREATE TABLE `reservacion` (
-  `idReservacion` int(11) NOT NULL,
+  `idReservacion` int NOT NULL,
   `fecha` datetime DEFAULT NULL,
-  `cantPersonas` int(11) DEFAULT NULL,
-  `idMesa` int(11) DEFAULT NULL,
-  `idCliente` int(11) DEFAULT NULL,
-  `estado` varchar(15) DEFAULT NULL,
-  `idAdministrador` int(11) DEFAULT NULL
+  `cantPersonas` int DEFAULT NULL,
+  `idMesa` int DEFAULT NULL,
+  `idCliente` int DEFAULT NULL,
+  `estado` varchar(15) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `idAdministrador` int DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -223,6 +243,12 @@ ALTER TABLE `platillo`
   ADD KEY `idAdministrador` (`idAdministrador`);
 
 --
+-- Indices de la tabla `promocion`
+--
+ALTER TABLE `promocion`
+  ADD PRIMARY KEY (`idPromocion`);
+
+--
 -- Indices de la tabla `reservacion`
 --
 ALTER TABLE `reservacion`
@@ -239,43 +265,49 @@ ALTER TABLE `reservacion`
 -- AUTO_INCREMENT de la tabla `administrador`
 --
 ALTER TABLE `administrador`
-  MODIFY `idAdministrador` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `idAdministrador` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de la tabla `categoria`
 --
 ALTER TABLE `categoria`
-  MODIFY `idCategoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `idCategoria` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT de la tabla `cliente`
 --
 ALTER TABLE `cliente`
-  MODIFY `idCliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `idCliente` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT de la tabla `galeria`
 --
 ALTER TABLE `galeria`
-  MODIFY `idImagen` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `idImagen` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `mesa`
 --
 ALTER TABLE `mesa`
-  MODIFY `idMesa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `idMesa` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT de la tabla `platillo`
 --
 ALTER TABLE `platillo`
-  MODIFY `idPlatillo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+  MODIFY `idPlatillo` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+
+--
+-- AUTO_INCREMENT de la tabla `promocion`
+--
+ALTER TABLE `promocion`
+  MODIFY `idPromocion` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `reservacion`
 --
 ALTER TABLE `reservacion`
-  MODIFY `idReservacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+  MODIFY `idReservacion` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
 -- Restricciones para tablas volcadas
